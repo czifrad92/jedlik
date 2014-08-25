@@ -1,0 +1,692 @@
+﻿body
+{
+	background-image:url('../images/wp.png');
+	font-family:"Arial";
+	margin: 0px;
+	padding: 0px;
+}
+
+html, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, hgroup, menu, nav, section, menu, time, mark, audio, video {margin:0; padding:0; border:0; outline:0; font-size:100%; vertical-align:baseline; background:transparent;}                  
+article, aside, figure, footer, header, hgroup, nav, section, select { margin: 0px; padding: 0px;}
+
+
+h1 {
+	text-align: center;
+	font-size: 20px;
+	text-transform: uppercase;
+}
+
+textarea 
+{ 
+    resize: none; 
+}
+
+.menu a:hover
+{
+	color: #999999;
+}
+
+.menu a
+{
+	color: #ffffff;
+	text-decoration: none;
+	font-size: 18px;
+}
+
+/* --------------------------------------TARTALOMELEMEK-------------------------------------- */
+
+
+div.container
+{
+	width: 1100px;
+	height: 750px;
+	margin: 0px auto;
+}
+
+
+div.left
+{
+	background-color: #f8f8f8;
+	float: left;
+	width: 1100px;
+	min-height: 730px;
+
+	margin: 0px 0px 50px 0px;
+}
+
+div.leftwithslider
+{
+	background-color: #f8f8f8;
+	float: left;
+	width: 730px;
+	min-height: 512px;
+
+	margin: 0px 0px 50px 0px;
+}
+
+div.containerheaderleft
+{
+	background-color: #555555;
+	width: 730px;
+	height: 50px;
+	float: left;
+
+}
+
+div.right
+{
+	width: 350px;
+	height: 195px;
+	float: right;
+	background-color: #f8f8f8;
+	margin: 0px 0px 22px 0px;
+	-webkit-box-shadow: 0px 0px 2px 0px rgba(50, 50, 50, 0.5);
+	-moz-box-shadow:    0px 0px 2px 0px rgba(50, 50, 50, 0.5);
+	box-shadow:         0px 0px 2px 0px rgba(50, 50, 50, 0.5);
+}
+
+div.containerheaderright
+{
+	background-color: #555555;
+	width: 350px;
+	height: 50px;
+	float: right;
+	-webkit-box-shadow: 0px 0px 2px 0px rgba(50, 50, 50, 0.5);
+	-moz-box-shadow:    0px 0px 2px 0px rgba(50, 50, 50, 0.5);
+	box-shadow:         0px 0px 2px 0px rgba(50, 50, 50, 0.5);
+}
+
+p.containerheader
+{
+	color: #ffffff;
+	font-size: 40px;
+	margin: 2px 20px 0px 20px;
+	letter-spacing: 2px;
+}
+
+div.slider
+{
+	background-color: #f8f8f8;
+	float: left;
+	width: 730px;
+	height: 246px;
+	margin: 0px 0px 22px 0px;
+	-webkit-box-shadow: 0px 0px 2px 0px rgba(50, 50, 50, 0.5);
+	-moz-box-shadow:    0px 0px 2px 0px rgba(50, 50, 50, 0.5);
+	box-shadow:         0px 0px 2px 0px rgba(50, 50, 50, 0.5);
+}
+
+div.page
+{
+	width: 400px;
+	height: 50px;
+	text-align: center;
+	margin: 25px 0px 0px 150px;
+	float: left;
+}
+
+a.oldal 
+{
+	color: #555555;
+	font-size: 20px;
+}
+
+a.ajanlocim
+{
+	text-decoration: none;
+}
+
+.ajanlocim:hover
+{
+	text-decoration: underline;
+}
+
+a.currentoldal 
+{
+	color: #555555;
+	font-weight: bold;
+	font-size: 20px;
+	text-decoration: none;
+}
+
+
+
+/* --------------------------------------HEADER-------------------------------------- */
+
+div.header
+{
+	background-color: #f8f8f8;
+	width: 1100px;
+	height: 100px;
+	margin: 0px auto 0px;
+	-webkit-box-shadow: 0px 0px 2px 0px rgba(50, 50, 50, 0.5);
+	-moz-box-shadow:    0px 0px 2px 0px rgba(50, 50, 50, 0.5);
+	box-shadow:         0px 0px 2px 0px rgba(50, 50, 50, 0.5);
+}
+
+div.logo
+{
+	width: 200px;
+	height: 100px;
+	background-color: #ffffff;
+	float: left;
+}
+
+div.kereso
+{
+	width: 550px;
+	height: 50px;
+	float: left;
+}
+
+div.menu
+{
+	width: 1100px;
+	height: 50px;
+	float: left;
+	background-color: #555555;
+}
+
+ul.menu
+{
+	list-style-type:none;
+}
+
+li.menu
+{
+	font-size: 23px;
+	margin: 12px 32px 0px 20px;
+	float: left;
+	color: #ffffff;
+	letter-spacing: 1px;
+}
+
+li.menu2
+{
+	font-size: 23px;
+	margin: 12px 10px 0px 10px;
+	float: left;
+	color: #ffffff;
+	letter-spacing: 1px;
+}
+
+li.menu3
+{
+	font-size: 23px;
+	margin: 12px 0px 0px 30px;
+	float: left;
+	color: #ffffff;
+	letter-spacing: 1px;
+}
+
+li.menu4
+{
+	font-size: 23px;
+	margin: 12px 17px 0px 0px;
+	float: right;
+	color: #ffffff;
+	letter-spacing: 1px;
+}
+
+li.menu5
+{
+	font-size: 23px;
+	margin: 12px 0px 0px 38px;
+	float: left;
+	color: #ffffff;
+	letter-spacing: 1px;
+}
+
+
+
+
+div.mainlogin
+{
+	width: 350px;
+	height: 50px;
+	float: right;
+}
+
+div.auth
+{
+	background-color: #555555;
+	width: 350px;
+	height: 50px;
+	float: right;
+}
+
+.loginuser
+{
+	line-height: 24px;
+	margin: 10px 0px 0px 10px;
+	padding-left: 5px;
+}
+
+.loginpassword
+{
+	line-height: 24px;
+	margin: 10px 0px 0px 10px;
+	padding-left: 5px;
+}
+
+.loginbutton
+{
+	margin: 10px 0px 0px 10px;
+	line-height: 24px;
+	font-size: 15px;
+	padding: 4px 5px 4px 5px;
+	color: #555555;
+}
+
+.logoutbutton
+{
+	margin: 10px 10px 0px 10px;
+	line-height: 24px;
+	font-size: 15px;
+	padding: 4px 3px 4px 5px;
+	color: #555555;
+	float: right;
+}
+
+p.loggedas
+{
+	font-size: 23px;
+	margin: 12px 0px 0px 10px;
+	float: left;
+	color: #555555;
+	letter-spacing: 1px;
+}
+
+
+
+/* --------------------------------------REGISZTRÁCIÓ-------------------------------------- */
+
+div.registerdiv
+{
+	margin: 20px auto;
+	width:	600px;
+	height: 400px;
+	text-align: left;
+}
+
+div.regright
+{
+	float: left;
+	width:	250px;
+	height: 240px;
+	text-align: left;
+}
+
+div.regleft
+{
+	width:	250px;
+	height: 240px;
+	text-align: right;
+	float: left;
+	padding-top: 4px;
+}
+
+div.error
+{
+	float: left;
+	width:	500px;
+	height: 100px;
+	text-align: center;
+	padding: 0px 100px 0px 0px;
+	line-height: 25px;
+}
+
+p.regerror
+{
+	color: #ff0000;
+	font-size: 17px;
+}
+
+
+label.register
+{
+	padding: 0px 5px 0px;
+	font-size: 17px;
+	font-family: Arial;
+	line-height: 40px;
+	color: #555555;
+}
+
+
+.registerform
+{
+	line-height: 24px;
+	height: 24px;
+	margin: 10px 0px 0px 15px;
+	padding-left: 5px;
+	width: 230px;
+}
+
+.registerbutton
+{
+	margin: 30px 0px 0px 15px;
+	line-height: 24px;
+	font-size: 15px;
+	padding: 4px 5px 4px 5px;
+	color: #555555;
+}
+
+p.rule
+{
+	padding: 0px 5px 0px;
+	font-size: 12px;
+	font-family: Arial;
+	color: #555555;	
+	margin-top: 20px;
+}
+
+.rule a:hover
+{
+	color: #ff0000;
+	text-decoration: underline;
+}
+
+.rule a
+{
+	color: #555555;
+	text-decoration: underline;
+}
+
+.check
+{
+	margin: 0px 0px 0px 14px;
+}
+
+/* --------------------------------------AKTIVÁLÁS-------------------------------------- */
+
+div.aktivalas
+{
+	margin: 50px auto;
+	width:	500px;
+	height: 400px;
+	text-align: center;
+	padding: 0px 20px 20px 20px;
+}
+
+p.aktivalas
+{
+	line-height: 25px;
+	padding: 10px 0px 0px 0px;
+	color: #555555;
+}
+
+.aktivalokod
+{
+	line-height: 24px;
+	margin: 0px 0px 0px 120px;
+	padding-left: 5px;
+	width: 150px;
+}
+
+.activatebutton
+{
+	margin: 0px 80px 0px 15px;
+	line-height: 24px;
+	font-size: 15px;
+	padding: 4px 5px 4px 5px;
+	color: #555555;
+}
+
+div.notlogged
+{
+	margin: 30px auto;
+	width:	600px;
+	height: 400px;
+	text-align: center;
+	padding: 0px 20px 20px 20px;
+}
+
+p.notlogged
+{
+	color: #ff0000;
+}
+
+
+/* --------------------------------------HIBÁSLOGIN-------------------------------------- */
+
+div.rossz
+{
+	margin: 50px auto;
+	width:	500px;
+	height: 400px;
+	text-align: center;
+	padding: 0px 20px 20px 20px;
+}
+
+.rossz a:hover
+{
+	color: #ff0000;
+	text-decoration: underline;
+}
+
+.rossz a
+{
+	color: #555555;
+	text-decoration: underline;
+}
+
+p.rossz
+{
+	padding: 0px 5px 0px;
+	font-family: Arial;
+	color: #555555;	
+	margin-top: 20px;
+}
+
+/* --------------------------------------ELFELEJTETTJELSZÓ-------------------------------------- */
+
+div.elfelejtett
+{
+	margin: 50px auto;
+	width:	500px;
+	height: 400px;
+	text-align: center;
+	padding: 0px 20px 20px 20px;
+}
+
+p.elfelejtett
+{
+	line-height: 25px;
+	padding: 10px 0px 0px 0px;
+	color: #555555;
+}
+
+.elfelejtett
+{
+	line-height: 24px;
+	margin: 0px 0px 0px 120px;
+	padding-left: 5px;
+	width: 150px;
+}
+
+.elfelejtettbutton
+{
+	margin: 0px 80px 0px 15px;
+	line-height: 24px;
+	font-size: 15px;
+	padding: 4px 5px 4px 5px;
+	color: #555555;
+}
+
+div.notlogged
+{
+	margin: 30px auto;
+	width:	600px;
+	height: 400px;
+	text-align: center;
+	padding: 0px 20px 20px 20px;
+}
+
+p.notlogged
+{
+	color: #ff0000;
+	font-size: 25px;
+}
+
+/* --------------------------------------JELSZÓCSERE-------------------------------------- */
+
+div.jelszoreset
+{
+	margin: 50px auto;
+	width:	500px;
+	height: 400px;
+	text-align: center;
+	padding: 0px 20px 20px 20px;
+}
+
+p.jelszoreset
+{
+	line-height: 25px;
+	padding: 10px 0px 0px 0px;
+	color: #555555;
+}
+
+.aktivalokod
+{
+	line-height: 24px;
+	margin: 0px 0px 0px 120px;
+	padding-left: 5px;
+	width: 150px;
+}
+
+.activatebutton
+{
+	margin: 0px 80px 0px 15px;
+	line-height: 24px;
+	font-size: 15px;
+	padding: 4px 5px 4px 5px;
+	color: #555555;
+}
+
+div.notlogged
+{
+	margin: 30px auto;
+	width:	600px;
+	height: 400px;
+	text-align: center;
+	padding: 0px 20px 20px 20px;
+}
+
+p.notlogged
+{
+	color: #ff0000;
+	font-size: 25px;
+}
+
+div.error2
+{
+	float: left;
+	width:	500px;
+	height: 100px;
+	text-align: center;
+	padding: 0px 100px 0px 0px;
+	line-height: 25px;
+}
+
+div.resetleft
+{
+	width:	200px;
+	height: 150px;
+	text-align: right;
+	float: left;
+	padding-top: 4px;
+	padding-right: 15px;
+}
+
+div.resetright
+{
+	float: left;
+	width:	250px;
+	height: 150px;
+	text-align: left;
+}
+
+
+/* --------------------------------------ADMIN-------------------------------------- */
+
+div.adminlogin {
+	width: 500px;
+	height: 200px;
+	margin: 0px auto;
+}
+
+.adminuser
+{
+	line-height: 24px;
+	margin: 10px 0px 0px 34px;
+	padding-left: 5px;
+}
+
+.adminpassword
+{
+	line-height: 24px;
+	margin: 10px 0px 0px 10px;
+	padding-left: 5px;
+}
+
+.adminbutton
+{
+	margin: 10px 0px 0px 10px;
+	line-height: 24px;
+	font-size: 15px;
+	padding: 4px 5px 4px 5px;
+	color: #555555;
+}
+
+.adminlogout
+{
+	margin: 10px 10px 0px 10px;
+	line-height: 24px;
+	font-size: 15px;
+	padding: 4px 3px 4px 5px;
+	color: #555555;
+	float: left;
+}
+
+
+/* --------------------------------------NAPTÁR-------------------------------------- */
+
+
+/**** month and year header at top of calendar ****/
+.date_header			{ font-size:16px; font-family:arial, helvetica; font-weight:bold }
+
+/**** color and size of calendar cells.  ****/
+.day_cell				{ background-color:#FFFFFF; height:100px; width: 115px; border: 1px solid black;}
+.empty_day_cell			{ background-color:#EEEEEE; height:100px; width: 115px; border: 1px solid black;}
+.today_cell				{ background-color:#FFFF99; height:100px; width: 115px; border: 1px solid black;}
+
+/**** day number in upper left corner of each cell ****/
+.day_number { 
+	font-size: 10px;
+	font-family: verdana, arial, helvetica;
+	color: #000;
+	display: block;
+	height: 21px;
+	line-height: 20px;
+	width: 22px;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+	text-align: center;
+}
+
+/**** title_txt is the text for each post on main page ****/
+.title_txt				{ font-size:10px; font-family:verdana, arial, helvetica; color:#000 }
+.title_txt A:link		{ color:#00F; text-decoration:underline }
+.title_txt A:active		{ color:#00F; text-decoration:underline }
+.title_txt A:visited	{ color:#00F; text-decoration:underline }
+.title_txt A:hover		{ color:#00F; text-decoration:underline }
+
+/**** time line under title text when event time given ****/
+.time_str				{ font-size:9px; font-family:arial, helvetica }
+
+/**** column headers or days of the week ****/
+.column_header			{ background-color:#2663E2; font-size:12px; font-family:arial, helvetica; color:#FFFFFF; font-weight:bold; border-bottom: 1px solid black;}
+
+/**** footprint text ****/
+.footprint				{ font-size:10px; font-family:verdana, arial, helvetica; color:#000; font-weight:bold; }
+.footprint A			{ font-size:10px; font-family:verdana, arial, helvetica; color:#00F; font-weight:bold; }
