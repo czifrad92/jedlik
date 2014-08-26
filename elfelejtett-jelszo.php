@@ -8,7 +8,7 @@ include 'header.php';
 				<div class="left">
 			<div class="elfelejtett">
 					<p class="aktivalas">Elfelejtett jelszó esetén írd be az e-mail címed az alábbi mezőbe, majd kövesd a kiküldött email-ben levő utasításokat!</p>
-					<form action="elfelejtettjelszo.php" name="elfelejtett" id="elfelejtett" method="post">
+					<form action="elfelejtettjelszo" name="elfelejtett" id="elfelejtett" method="post">
 						<input class="elfelejtett" type="text" name="email" id="email" placeholder="E-mail cím">
 						<input class="elfelejtettbutton" type="submit" name="elfelejtett" id="elfelejtett" value="Küldés!">
 					</form>
@@ -59,7 +59,7 @@ include 'header.php';
 						
 							mysqli_query($connect,"UPDATE felhasznalok SET code='$code' WHERE email='$email';");
 							include 'mailer/forgottenemail.php';
-							header("location: jelszoreset.php");
+							header("location: jelszoreset");
 						}
 					}
 					?>

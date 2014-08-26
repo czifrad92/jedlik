@@ -26,11 +26,11 @@ ob_start();
 								$_SESSION["admin"] = $row["admin"];
 								$_SESSION["id"] = $row["felhasznaloid"];
 								$_SESSION["currentuser"] = $myusername;
-								header("location: admin.php");
+								header("location: admin");
 		}
 		else
 		{
-			header("location: admin.php");
+			header("location: admin");
 		}
 	}
 	?> 

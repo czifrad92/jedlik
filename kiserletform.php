@@ -14,7 +14,6 @@
 	<tr>
 		<td>Tantárgy:</td>
 		<td><select name="tantargy">
-				<option value="Fizika">Fizika</option>
 				<option value="Kémia">Kémia</option>
 			</select></td>
 	</tr>
@@ -22,8 +21,8 @@
 		<td>Évfolyam:</td>
 		<td><select name="evfolyam">
 				<option value="7-8">7-8</option>
-				<option value="9-10">9-10</option>
 				<option value="11-12">11-12</option>
+				<option value="9-10">9-10</option>
 			</select></td>
 	</tr>
 	<tr>

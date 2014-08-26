@@ -94,8 +94,6 @@ function amPmPullDown($pm, $namepre)
 	echo "</select>\n\n";
 }
 
-# ###################################################################
-
 function javaScript()
 {
 ?>
@@ -103,7 +101,7 @@ function javaScript()
 	function submitMonthYear() {
 		document.monthYear.method = "post";
 		document.monthYear.action = 
-			"?month=" + document.monthYear.month.value + 
+			"idopontfoglalas.php?month=" + document.monthYear.month.value + 
 			"&year=" + document.monthYear.year.value;
 		document.monthYear.submit();
 	}
@@ -135,6 +133,8 @@ function javaScript()
 }
 
 
+
+
 # ###################################################################
 
 function scrollArrows($m, $y)
@@ -145,11 +145,11 @@ function scrollArrows($m, $y)
 	$prevmonth = ($m == 1)  ? 12 : $m - 1;
 	$nextmonth = ($m == 12) ? 1  : $m + 1;
 
-	return "
+	return "<div style='display: none;'>
 	<a href=\"?month=" . $prevmonth . "&year=" . $prevyear . "\">
 	<img src=\"images/leftArrow.gif\" border=\"0\"></a>
 	<a href=\"?month=" . $nextmonth . "&year=" . $nextyear . "\">
-	<img src=\"images/rightArrow.gif\" border=\"0\"></a>
+	<img src=\"images/rightArrow.gif\" border=\"0\"></a></div>
 	";
 }
 
@@ -187,22 +187,26 @@ function writeCalendar($month, $year)
 	# month ($wPos).  It writes the days, then fills the last row with empty 
 	# cells after last day
 	while($day <= $days) {
-		$str .="<tr>\n";
-		
+
 		# write row
 		for($i=0;$i < 7; $i++) {
+
 			# if cell is a day of month
 			if($day > 0 && $day <= $days) {
 				# set css class today if cell represents current date
 				$class = (isset($today["$year-$month-$day"])) ? 'today' : 'day';
 
-				$str .= "
-				<td class=\"{$class}_cell\" valign=\"top\">
-				<span class=\"day_number\">\n";
-				
+				if ($i == 0){
+					$str .= "<div class=\"calendar-day-cell-first\"> 
+							<div class=\"calendar-day-number\">\n"; $str .= "$day";	$str .= "</div>";
+				}
+				else {
+					$str .= "<div class=\"calendar-day-cell\"> 
+							<div class=\"calendar-day-number\">\n"; $str .= "$day";	$str .= "</div>";
+				}
 
-				$str .= "$day";		
-				$str .= "</span><br>";
+
+				
 				
 				if (isset($eventdata[$day]["title"])) {
 					// enforce title limit
@@ -215,27 +219,28 @@ function writeCalendar($month, $year)
 					// write title link if day's postings 
 					for($j=0;$j < $eventcount;$j++) {
 						$str .= "
-						<span class=\"title_txt\">"
-						. $eventdata[$day]["title"][$j] . "</span>"
+						<div class=\"calendar-event-title\">#"
+						. $eventdata[$day]["id"][$j] . " foglalás</div>"
 						. $eventdata[$day]["timestr"][$j];
 					}
 				}
 
-				$str .= "</td>\n";
+				$str .= "</div>\n";
 				$day++;
 			} elseif($day == 0)  {
-     			$str .= "
-				<td class=\"empty_day_cell\" valign=\"top\">&nbsp;</td>\n";
+				if ($i == 0){
+					$str .= "<div class=\"calendar-first\" >&nbsp;</div>\n";
+				}
+
+     			else $str .= "<div class=\"calendar-day-cell-empty\" >&nbsp;</div>\n";
 				$weekpos--;
 				if ($weekpos == 0) $day++;
      		} else {
 				$str .= "
-				<td class=\"empty_day_cell\" valign=\"top\">&nbsp;</td>\n";
+				<div class=\"calendar-day-cell-empty\" >&nbsp;</div>\n";
 			}
      	}
-		$str .= "</tr>\n\n";
 	}
-	$str .= "</table>\n\n";
 	return $str;
 }
 
@@ -253,13 +258,13 @@ function getDayNameHeader()
 		}
 	}
 
-	$s = "<table cellpadding=\"1\" cellspacing=\"1\" border=\"0\">\n<tr>\n";
+	$s = "<div>";
 
 	foreach($lang['abrvdays'] as $day) {
-		$s .= "\t<td class=\"column_header\">&nbsp;$day</td>\n";
+		$s .= "<div class='calendar-day-name'>$day</div>";
 	}
 
-	$s .= "</tr>\n\n";
+	$s .= "</div>";
 	return $s;
 }
 
@@ -269,7 +274,7 @@ function getEventDataArray($month, $year)
 {
 	$eventdata = null;
 	
-	$sql = "SELECT id, d, title, start_time, end_time, ";
+	$sql = "SELECT id, elfogadva, d, title, start_time, end_time, ";
 	
 	if (TIME_DISPLAY_FORMAT == "12hr") {
 		$sql .= "TIME_FORMAT(start_time, '%l:%i%p') AS stime, ";
@@ -282,7 +287,7 @@ function getEventDataArray($month, $year)
 	}
 	
 	$sql .= "
-		FROM jelentkezesek WHERE m = $month AND y = $year
+		FROM jelentkezesek WHERE m = $month AND y = $year AND elfogadva = '1'
 		ORDER BY start_time";
 	
 	$result = mysql_query($sql) or die(mysql_error());
@@ -306,8 +311,8 @@ function getEventDataArray($month, $year)
 				= ($row["end_time"] == "55:55:55") ? "- -" : $row["etime"];
 			
 			$timestr = "
-			<div align=\"right\" class=\"time_str\">
-			($starttime - $endtime)&nbsp;</div>\n";
+			<div class=\"calendar-event-time\">
+			($starttime - $endtime)</div>\n";
 		} else {
 			$timestr = "<br />";
 		}
