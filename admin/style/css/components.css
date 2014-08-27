@@ -3308,7 +3308,6 @@ Portlets
 .portlet.box > .portlet-body {
   background-color: #fff;
   padding: 10px;
-  height: 500px;
 }
 
 /* Light Portlet */
@@ -7508,7 +7507,6 @@ Red Sunglo
 }
 .portlet.box.red-sunglo > .portlet-title {
   background-color: #4b8df8;
-  cursor: pointer;
 }
 .portlet.box.red-sunglo > .portlet-title > .caption {
   color: white;

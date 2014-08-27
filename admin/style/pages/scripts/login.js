@@ -20,10 +20,10 @@ var Login = function () {
 
 	            messages: {
 	                username: {
-	                    required: "Username is required."
+	                    required: "A felhasználónevet kötelező megadni."
 	                },
 	                password: {
-	                    required: "Password is required."
+	                    required: "A jelszót kötelező megadni."
 	                }
 	            },
 
@@ -75,7 +75,7 @@ var Login = function () {
 
 	            messages: {
 	                email: {
-	                    required: "Email is required."
+	                    required: "Az email címet kötelező megadni."
 	                }
 	            },
 

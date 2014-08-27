@@ -4,7 +4,7 @@ include 'statikus_fuggvenyek.php';
 
 fejlec_letrehozas("Projektismertető");
 
-statikus_oldal_letrehozas("projektismerteto");
+statikus_oldal_letrehozas("projektismerteto", "Projektismertető");
 
 lablec_letrehozas();
 ?>

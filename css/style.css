@@ -2617,3 +2617,80 @@ blockquote .author-name {
 .calendar-event-time {
 	text-align: center;
 }
+
+.idopontfoglalas-container {
+	width: 875px;
+	height: 800px;
+	background-color: #FFFFFF;
+	margin: 0px auto;
+}
+
+.idopontfoglalas-container-label {
+	width: 150px;
+	padding-left: 20px;
+	float: left;
+}
+
+.idopontfoglalas-container-form {
+	float: left;
+	width: 700px;
+}
+
+.idopontfoglalas-container-label label {
+	height: 38px;
+	line-height: 34px;
+	margin-bottom: 18px;
+}
+
+.idopontfoglalas-container-form input {
+	height: 40px;
+}
+
+.idopontfoglalas-container-form select {
+	height: 40px;
+	margin-bottom: 15px;
+}
+
+.idopontfoglalas-eszkozok {
+	height: 100px;
+	width: 500px;
+	margin-bottom: 15px;
+}
+
+.idopontfoglalas-kiserletek {
+	width: 600px;
+}
+
+label[for=ido] {
+	margin-top: 60px;
+}
+
+label[for=ig] {
+	margin-right: 15px;
+}
+
+.static-container {
+	width: 95%;
+	margin: 0px auto;
+	line-height: 27px;
+	font-size: 15px;
+}
+
+
+#mettol {
+	width: 50px;
+	margin-left: 10px;
+}
+
+#meddig {
+	width: 50px;
+	margin-left: 10px;
+}
+
+label[for=mettol] {
+	margin-left: 20px;
+}
+
+label[for=meddig] {
+	margin-left: 20px;
+}

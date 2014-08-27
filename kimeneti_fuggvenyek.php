@@ -33,6 +33,7 @@ function fejlec_letrehozas($title) {
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
 
 
+
 	<link href="css/responsive.css" rel="stylesheet" type="text/css" />
 	<!-- Color Panel -->
     <link href="css/color_panel.css" rel="stylesheet" type="text/css" /> 
@@ -247,6 +248,7 @@ function lablec_letrehozas() {
 	<!-- Color -->
 	<script type="text/javascript" src="js/color-panel.js"></script>
 	<!-- Script Ends -->
+	<script src="core/datetimepicker-master/jquery.datetimepicker.js"></script>
 </body>
 </html>
 

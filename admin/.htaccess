@@ -1,3 +1,7 @@
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+DirectoryIndex kezdolap.php
+
+RedirectMatch 301 admin/hirek/uj-hirek* http://jedlik.piarsoft.hu/admin/uj-hirek.php
