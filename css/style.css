@@ -310,7 +310,7 @@ a.expand {
 	right: 0;
 	top: 0;
 	padding: 10px 13px 10px;
-	z-index: 99;
+	z-index: 9999;
 	background-color: #3498db !important;
 }
 .site-logo a {
@@ -780,7 +780,8 @@ a.expand {
 .about-us .about-right p, #infograph .left-part p{
 	color:#737a7f;
 	font-size:15px;
-	line-height:26px;
+	line-height:33px;
+	text-align: justify;
 }
 /* =========================== INFOGRAPH SECTION ============================== */
 .container.infograph-inner {
@@ -1191,12 +1192,29 @@ a.expand {
 /* =========================== FOOTER SECTION ============================== */
 .footer{
 	background-color:#233342;
-	margin-top: 40px;
+	margin-top: 15px;
 }
 .container.footer-inner {
-	padding-top: 55px;
-	padding-bottom: 43px;	
+	padding-top: 25px;
+	padding-bottom: 25px;
 }
+
+.footerbox {
+	width: 410px;
+	float: left;
+}
+
+.footerbox a {
+	font-size: 15px;
+	line-height: 26px;
+	color: #FFFFFF;
+}
+
+.footerbox a:hover {
+	color: #CECECE;
+}
+
+
 .footer .footer-about{
 	padding-right:25px;
 }
@@ -1206,16 +1224,17 @@ a.expand {
 .footer .footer-categories-top ul{
 	padding-left:0px;
 }
-.footer h3{
+.footer h3 {
 	color:#b4c3d2;
 	font-size:22px;
 	padding-bottom:13px;
 	font-weight:400;
 }
-.footer p{	
+.footer p {	
 	color:#7c90a2;
 	font-size:15px;
 	line-height:26px;
+	margin: 0px;
 }
 .footer-categories li{
 	list-style-type:none;
@@ -2472,11 +2491,8 @@ blockquote .author-name {
 }
 
 .fooldal-icon {
-	font-size: 150px;
-}
-
-.fooldal-icon:hover {
-	color: #3498db;
+	font-size: 60px;
+	color: #FFFFFF;
 }
 
 .fomenu {
@@ -2693,4 +2709,25 @@ label[for=mettol] {
 
 label[for=meddig] {
 	margin-left: 20px;
+}
+
+.slidecenter {
+	text-align: center;
+}
+
+.iconholder {
+	background: url('../images/szurkelogo.png') no-repeat;
+	width: 161px;
+	margin: 0px auto;
+	height: 215px;
+	padding-top: 55px;
+}
+
+.feature-box:hover .iconholder{
+	background: url('../images/keklogo.png') no-repeat;
+}
+
+.szechenyikepek {
+	text-align: center;
+	margin-top: 20px;
 }

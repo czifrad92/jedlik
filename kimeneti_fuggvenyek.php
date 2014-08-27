@@ -52,15 +52,15 @@ function fejlec_letrehozas($title) {
 	<div id="header" class="header-section">
 		<!-- Background Slider Begins -->
 			
-			<!-- Top Section Begins -->
-			<div id="sticky-section" class="sticky-navigation">
-				<div id="top-section" class="top-container absolute container">
+			<!-- Top Section Begins --> 
+			<div class="sticky-navigation" style="position: fixed; top: 0;">
+				<div class="top-container absolute container">
 					<div class="row">
 						<div class="col-md-12">
 							<!-- Logo Begins -->
 							<a href="index" class="logolink">
 								<div id="logo" class="site-logo no-padding logo-main">
-									<img src="images/logo.png" class="logoimg"><a title="Logo" href="">Természettudományos Labor</a>
+									<img src="images/logo.png" class="logoimg"><a title="Logo" href="index">Természettudományos Labor</a>
 								</div><!-- Logo Ends -->
 							</a>
 							<!-- Navigation Menu Begins -->
@@ -131,86 +131,35 @@ function lablec_letrehozas() {
 	// Lábléc,footer
 ?>
 	<!-- Footer Section Begins -->
+	<section class="szechenyikepek">
+		<img src="images/szechenyi.png"><img src="images/eu.png">
+	</section>
+
+
 	<section id="footer" class="footer">
 		<!-- Footer Inner Begins -->
 		<div class="container footer-inner">
-			<div class="row">
-				<!-- Footer About Us -->
-				<div class="col-md-3 col-sm-6 footer-about">
-					<!-- Title -->
-					<h3>About Us</h3>
-					<!-- Description -->
-					<p>Lorem ipsum dolor sit amet, conse-ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure</p>
-				</div>
-				<!-- Footer Categories -->
-				<div class="col-md-2 col-sm-6 footer-categories-top">
-					<!-- Title -->
-					<h3>All Categories</h3>
-					<!-- Caegories -->
-					<ul class="footer-categories">
-						<li><a href="#">Website Project</a></li>
-						<li><a href="#">UX Design</a></li>
-						<li><a href="#">UI Design</a></li>
-						<li><a href="#">PHP Development</a></li>
-						<li><a href="#">Website Project</a></li>
-						<li><a href="#">UX Design</a></li>
-						<li><a href="#">UI Design</a></li>
-					</ul>
-				</div>
-				<!-- Footer Posts -->
-				<div class="col-md-4 col-sm-6 footer-post">
-					<h3>Recent Blog Post</h3>
-					<!-- Post 1 -->
-					<div class="client1">
-						<img src="images/footer/f1.png" width="40" height="40" alt="" />
-						<p class="client1-para">New WP plugin has been released!</p>
-						<h5>by Masum Rana on January 06 2014.</h5>
-					</div>
-					<!-- Post 2 -->
-					<div class="client2">
-						<img src="images/footer/f2.png" width="40" height="40" alt="" />
-						<p>New WP plugin has been released!</p>
-						<h5>by Masum Rana on January 06 2014.</h5>
-					</div>
-				</div>
-				<!-- Footer Subscription -->
-				<div class="col-md-3 col-sm-6 footer-form-section">		
-					<!-- Title -->
-					<h3>Email Subscription</h3>
-					<p>Subscribe to our email newsletter for useful tips and resources.</p>					
-					<!-- Form Begins -->
-					<form id="contactform1" role="form" name="contactform1" class="form-horizontal" method="post" action="subscription.php">
-						<p class="form-message1" style="display: none;"></p>	
-						<div class="input-email form-group">
-							<input class="input-email form-control" type="email" name="contact_email" placeholder="@yourmail.com">
-							<button class="btn btn-default" type="submit"><i class="fa fa-1x fa-check"></i></button>									
-						</div>
-					</form><!-- Form Ends -->		
-					<!-- Footer Social Icons -->
-					<div class="footer-social-icon">
-						<a href="#" class="text">Socials:</a>
-						<a href="#"><i class="fa fa-flickr"></i></a>
-						<a href="#"><i class="fa fa-vimeo-square"></i></a>
-						<a href="#"><i class="fa fa-twitter"></i></a>
-						<a href="#"><i class="fa fa-google-plus"></i></a>
-					</div>
-				</div>
-			</div><!-- Row Ends -->
-		</div><!-- Footer Inner Ends -->
-	</section><!-- Footer Section Ends -->
-	
-	
-	<!-- Copyright Section Begins -->
-	<section id="copyright" class="copyright">
-		<div class="container">
-			<div class="row">
-				<!-- Copyright Title -->
-				<div class="col-md-12 text-center">
-					<h4>Copyright 2014, One Touch</h4> 
-				</div>
+			<div class="footerbox">
+				<p>Jedlik Ányos Gimnázium</p>
+				<p><i>1212 Budapest, Táncsics Mihály u. 92-96.</i></p><br>
+				<p>Telefon: +36 1 276-11-33</p>
+				<p>Fax: +36 1 276-01-61</p>
+				<p>Központi e-mail: jedlik@jedlik.hu</p><br>
+				<p>OM azonosító: 035255</p>
+				<p>KIK azonosító: 206004</p>
 			</div>
-		</div>
-	</section><!-- Copyright Section Ends -->
+
+			<div class="footerbox">
+				<p>Külső szervezetek</p>
+				<a href="http://csepel.hu/">Budapest XXI. kerület Csepel Önkormányzata</a><br>
+				<a href="http://palyazat.gov.hu/">Új Széchenyi Terv</a><br>
+				<a href="http://palyazat.gov.hu/">Európai Szociális Alap</a>
+				<img src="images/piarsoft-logo.png" style="width: 220px; margin: 77px 0px 0px 203px;">
+			</div>
+		</div><!-- Footer Inner Ends -->
+
+
+	</section><!-- Footer Section Ends -->
 
 	
 		

@@ -2,7 +2,7 @@
 include 'kimeneti_fuggvenyek.php';
 fejlec_letrehozas();
    /* BEGIN CONTENT */
-   uj_hirek_megjelenites();
+   feltoltes_megjelenites();
    /* END CONTENT */
 
 /* BEGIN FOOTER */

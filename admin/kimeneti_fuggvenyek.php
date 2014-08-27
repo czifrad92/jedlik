@@ -33,6 +33,9 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="style/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="style/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
 <link href="style/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="style/plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min.css" rel="stylesheet"/>
+<link href="style/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet"/>
+<link href="style/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet"/>
 <link href="style/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 <link href="style/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
 <!-- END GLOBAL MANDATORY STYLES -->
@@ -196,6 +199,83 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="../../assets/global/plugins/respond.min.js"></script>
 <script src="../../assets/global/plugins/excanvas.min.js"></script> 
 <![endif]-->
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td>
+            <span class="preview"></span>
+        </td>
+        <td>
+            <p class="name">{%=file.name%}</p>
+            <strong class="error text-danger label label-danger"></strong>
+        </td>
+        <td>
+            <p class="size">Processing...</p>
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+            </div>
+        </td>
+        <td>
+            {% if (!i && !o.options.autoUpload) { %}
+                <button class="btn blue start" disabled>
+                    <i class="fa fa-upload"></i>
+                    <span>Feltölt</span>
+                </button>
+            {% } %}
+            {% if (!i) { %}
+                <button class="btn red cancel">
+                    <i class="fa fa-ban"></i>
+                    <span>Mégse</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+        {% for (var i=0, file; file=o.files[i]; i++) { %}
+            <tr class="template-download fade">
+                <td>
+                    <span class="preview">
+                        {% if (file.thumbnailUrl) { %}
+                            <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                        {% } %}
+                    </span>
+                </td>
+                <td>
+                    <p class="name">
+                        {% if (file.url) { %}
+                            <img src="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" style="width:70px; height:70px;">
+                        {% } else { %}
+
+                            <span>{%=file.name%}</span>
+                        {% } %}
+                    </p>
+                    {% if (file.error) { %}
+                        <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+                    {% } %}
+                </td>
+                <td>
+                    <span class="size">{%=o.formatFileSize(file.size)%}</span>
+                </td>
+                <td>
+                    {% if (file.deleteUrl) { %}
+                        <button class="btn red delete btn-sm" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                            <i class="fa fa-trash-o"></i>
+                            <span>Törlés</span>
+                        </button>
+                        <input type="checkbox" name="delete" value="1" class="toggle">
+                    {% } else { %}
+                        <button class="btn yellow cancel btn-sm">
+                            <i class="fa fa-ban"></i>
+                            <span>Vissza</span>
+                        </button>
+                    {% } %}
+                </td>
+            </tr>
+        {% } %}
+</script>
 <script src="style/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
 <script src="style/plugins/advanced.js"></script>
 <script src="style/plugins/wysihtml5-0.3.0.js"></script>
@@ -236,6 +316,32 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="style/layout/scripts/demo.js" type="text/javascript"></script>
 <script src="style/pages/scripts/index.js" type="text/javascript"></script>
 <script src="style/scripts/tasks.js" type="text/javascript"></script>
+<script src="style/scripts/form-fileupload.js"></script>
+<script src="style/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<!-- The Templates plugin is included to render the upload/download listings -->
+<script src="style/plugins/jquery-file-upload/js/vendor/tmpl.min.js"></script>
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="style/plugins/jquery-file-upload/js/vendor/load-image.min.js"></script>
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="style/plugins/jquery-file-upload/js/vendor/canvas-to-blob.min.js"></script>
+<!-- blueimp Gallery script -->
+<script src="style/plugins/jquery-file-upload/blueimp-gallery/jquery.blueimp-gallery.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="style/plugins/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="style/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="style/plugins/jquery-file-upload/js/jquery.fileupload-process.js"></script>
+<!-- The File Upload image preview & resize plugin -->
+<script src="style/plugins/jquery-file-upload/js/jquery.fileupload-image.js"></script>
+<!-- The File Upload audio preview plugin -->
+<script src="style/plugins/jquery-file-upload/js/jquery.fileupload-audio.js"></script>
+<!-- The File Upload video preview plugin -->
+<script src="style/plugins/jquery-file-upload/js/jquery.fileupload-video.js"></script>
+<!-- The File Upload validation plugin -->
+<script src="style/plugins/jquery-file-upload/js/jquery.fileupload-validate.js"></script>
+<!-- The File Upload user interface plugin -->
+<script src="style/plugins/jquery-file-upload/js/jquery.fileupload-ui.js"></script>
 <script>
       var editor = new wysihtml5.Editor("wysihtml5-editor", {
         toolbar:     "wysihtml5-editor-toolbar",
@@ -247,6 +353,17 @@ License: You must have a valid license purchased only from themeforest(the above
         var composer = editor.composer;
         composer.selection.selectNode(editor.composer.element.querySelector("h1"));
       });
+</script>
+<script>
+        jQuery(document).ready(function() {
+        // initiate layout and plugins
+        Metronic.init(); // init metronic core components
+Layout.init(); // init current layout
+QuickSidebar.init(); // init quick sidebar
+Demo.init(); // init demo features
+        FormFileUpload.init();
+        });
+
 </script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
@@ -270,7 +387,7 @@ jQuery(document).ready(function() {
 </body>
 <!-- END BODY -->
 </html>
-<?php 
+<?php
 }
 function statikus_megjelenites() {
 ?>
@@ -485,9 +602,230 @@ if(isset($_POST["save"])) {
    mysqli_query($connect,"UPDATE static SET tartalom='$content' WHERE id='$id'");
 }
 }
-function hirek_megjelenites() {
+function uj_hirek_megjelenites() {
+include '../core/connect.php';
+ob_start();
 ?>
    <div class="page-content-wrapper">
+      <div class="page-content">
+         <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+         <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                     <h4 class="modal-title">Modal title</h4>
+                  </div>
+                  <div class="modal-body">
+                      Widget settings form goes here
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn blue">Save changes</button>
+                     <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                  </div>
+               </div>
+               <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+         </div>
+         <!-- /.modal -->
+         <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+         <!-- BEGIN STYLE CUSTOMIZER -->
+         <div class="theme-panel hidden-xs hidden-sm">
+            <div class="toggler-close">
+            </div>
+            <div class="theme-options">
+               <div class="theme-option theme-colors clearfix">
+                  <span>
+                  THEME COLOR </span>
+                  <ul>
+                     <li class="color-default current tooltips" data-style="default" data-container="body" data-original-title="Default">
+                     </li>
+                     <li class="color-darkblue tooltips" data-style="darkblue" data-container="body" data-original-title="Dark Blue">
+                     </li>
+                     <li class="color-blue tooltips" data-style="blue" data-container="body" data-original-title="Blue">
+                     </li>
+                     <li class="color-grey tooltips" data-style="grey" data-container="body" data-original-title="Grey">
+                     </li>
+                     <li class="color-light tooltips" data-style="light" data-container="body" data-original-title="Light">
+                     </li>
+                     <li class="color-light2 tooltips" data-style="light2" data-container="body" data-html="true" data-original-title="Light 2">
+                     </li>
+                  </ul>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Layout </span>
+                  <select class="layout-option form-control input-small">
+                     <option value="fluid" selected="selected">Fluid</option>
+                     <option value="boxed">Boxed</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Header </span>
+                  <select class="page-header-option form-control input-small">
+                     <option value="fixed" selected="selected">Fixed</option>
+                     <option value="default">Default</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Sidebar Mode</span>
+                  <select class="sidebar-option form-control input-small">
+                     <option value="fixed">Fixed</option>
+                     <option value="default" selected="selected">Default</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Sidebar Menu </span>
+                  <select class="sidebar-menu-option form-control input-small">
+                     <option value="accordion" selected="selected">Accordion</option>
+                     <option value="hover">Hover</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Sidebar Style </span>
+                  <select class="sidebar-style-option form-control input-small">
+                     <option value="default" selected="selected">Default</option>
+                     <option value="light">Light</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Sidebar Position </span>
+                  <select class="sidebar-pos-option form-control input-small">
+                     <option value="left" selected="selected">Left</option>
+                     <option value="right">Right</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Footer </span>
+                  <select class="page-footer-option form-control input-small">
+                     <option value="fixed">Fixed</option>
+                     <option value="default" selected="selected">Default</option>
+                  </select>
+               </div>
+            </div>
+         </div>
+         <!-- END STYLE CUSTOMIZER -->
+         <!-- BEGIN PAGE HEADER-->
+         <h3 class="page-title">
+         Új hír beküldése
+         </h3>
+                   <div class="tab-content">
+                     <div class="tab-pane active" id="tab_0">
+                        <div class="portlet box green">
+                           <div class="portlet-body form">
+                              <!-- BEGIN FORM-->
+                              <form action="" method="post" class="form-horizontal">
+                                 <div class="form-body" style="border-top:1px solid #4bc75e;">
+                                    <div class="form-group">
+                                       <label class="col-md-3 control-label">Cím</label>
+                                       <div class="col-md-4">
+                                          <input type="text" name="cim" class="form-control input-circle" placeholder="Ide írjon...">
+                                       </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Leírás</label>
+                                       <div class="col-md-4">
+                                          <input type="text" name="leiras" class="form-control input-circle" placeholder="Ide írjon...">
+                                       </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Tartalom:</label>
+                                       <div class="col-md-8">
+                                               <div id="wysihtml5-editor-toolbar">
+                                                <header>
+                                                  <ul class="commands">
+                                                    <li data-wysihtml5-command="bold" class="command"></li>
+                                                    <li data-wysihtml5-command="italic"  class="command"></li>
+                                                    <li data-wysihtml5-command="insertUnorderedList"  class="command"></li>
+                                                    <li data-wysihtml5-command="insertOrderedList"  class="command"></li>
+                                                    <li data-wysihtml5-command="createLink" class="command"></li>
+                                                    <li data-wysihtml5-command="insertImage" class="command"></li>
+                                                    <li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" class="command"></li>
+                                                    <li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" class="command"></li>
+                                                    <li data-wysihtml5-command-group="foreColor" class="fore-color" class="command">
+                                                      <ul>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="silver"></li>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="gray"></li>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="maroon"></li>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="red"></li>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="purple"></li>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="green"></li>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="olive"></li>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="navy"></li>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="blue"></li>
+                                                      </ul>
+                                                    </li>
+                                                    <li data-wysihtml5-command="insertSpeech" class="command"></li>
+                                                    <li data-wysihtml5-action="change_view" style="display: none;"></li>
+                                                  </ul>
+                                                </header>
+                                                <div data-wysihtml5-dialog="createLink" style="display: none;">
+                                                  <label>
+                                                    Link:
+                                                    <input data-wysihtml5-dialog-field="href" value="http://">
+                                                  </label>
+                                                  <a data-wysihtml5-dialog-action="save">Ok</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Vissza</a>
+                                                </div>
+
+                                                <div data-wysihtml5-dialog="insertImage" style="display: none;">
+                                                  <label>
+                                                    Kép:
+                                                    <input data-wysihtml5-dialog-field="src" value="http://">
+                                                  </label>
+                                                  <a data-wysihtml5-dialog-action="save">Ok</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Vissza</a>
+                                                </div>
+                                              </div>
+                                              <section>
+                                                <form action="" method="post">
+                                                <textarea id="wysihtml5-editor" name="content" spellcheck="false" wrap="off">
+                                                </textarea>
+                                             </section>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="form-actions">
+                                    <div class="row">
+                                       <div class="col-md-offset-3 col-md-9">
+                                          <button type="submit" name="hireksubmit" class="btn btn-circle blue">Küldés</button>
+                                          <a href="hirek"><button type="button" class="btn btn-circle default">Vissza</button></a>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </form>
+                              <!-- END FORM-->
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+         <!-- END PAGE CONTENT-->
+      </div>
+   </div>
+<?php
+   if(isset($_POST["hireksubmit"])) {
+      if(!empty($_POST["cim"]) && !empty($_POST["leiras"]) && !empty($_POST["content"])) {
+         $cim = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["cim"]));
+         $leiras = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["leiras"]));
+         $content = mysqli_real_escape_string($connect,$_POST["content"]);
+         $sql = "INSERT INTO  `hirek` (`id` ,`cim` ,`leiras`,`tartalom`)
+            VALUES (NULL ,'$cim', '$leiras','$content')";
+         mysqli_query($connect,$sql);
+      }
+  }
+
+}
+function hirek_megjelenites() {
+include '../core/connect.php';
+$sql = "SELECT * FROM hirek";
+$res = mysqli_query($connect,$sql);
+?>
+<div class="page-content-wrapper">
       <div class="page-content">
          <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
          <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -599,103 +937,204 @@ function hirek_megjelenites() {
          </h3>
          <div class="note note-success">
             <div class="actions">
-                        <a href="hirek/uj-hir" class="btn btn-default btn-sm">
+                        <a href="uj-hir" class="btn btn-default btn-sm">
                         <i class="fa fa-plus"></i> Új hír hozzáadása </a>
             </div>
          </div>
-                           <div class="tab-content">
-                     <div class="tab-pane active" id="tab_0">
-                        <div class="portlet box green">
-                           <div class="portlet-body form">
-                              <!-- BEGIN FORM-->
-                              <form action="#" class="form-horizontal">
-                                 <div class="form-body" style="border-top:1px solid #4bc75e;">
-                                    <div class="form-group">
-                                       <label class="col-md-3 control-label">Cím</label>
-                                       <div class="col-md-4">
-                                          <input type="text" class="form-control input-circle" placeholder="Ide írjon...">
-                                       </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label">Leírás</label>
-                                       <div class="col-md-4">
-                                          <input type="text" class="form-control input-circle" placeholder="Ide írjon...">
-                                       </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label">Tartalom:</label>
-                                       <div class="col-md-8">
-                                               <div id="wysihtml5-editor-toolbar">
-                                                <header>
-                                                  <ul class="commands">
-                                                    <li data-wysihtml5-command="bold" class="command"></li>
-                                                    <li data-wysihtml5-command="italic"  class="command"></li>
-                                                    <li data-wysihtml5-command="insertUnorderedList"  class="command"></li>
-                                                    <li data-wysihtml5-command="insertOrderedList"  class="command"></li>
-                                                    <li data-wysihtml5-command="createLink" class="command"></li>
-                                                    <li data-wysihtml5-command="insertImage" class="command"></li>
-                                                    <li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" class="command"></li>
-                                                    <li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" class="command"></li>
-                                                    <li data-wysihtml5-command-group="foreColor" class="fore-color" class="command">
-                                                      <ul>
-                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="silver"></li>
-                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="gray"></li>
-                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="maroon"></li>
-                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="red"></li>
-                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="purple"></li>
-                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="green"></li>
-                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="olive"></li>
-                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="navy"></li>
-                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="blue"></li>
-                                                      </ul>
-                                                    </li>
-                                                    <li data-wysihtml5-command="insertSpeech" class="command"></li>
-                                                    <li data-wysihtml5-action="change_view" class="action"></li>
-                                                  </ul>
-                                                </header>
-                                                <div data-wysihtml5-dialog="createLink" style="display: none;">
-                                                  <label>
-                                                    Link:
-                                                    <input data-wysihtml5-dialog-field="href" value="http://">
-                                                  </label>
-                                                  <a data-wysihtml5-dialog-action="save">Ok</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Vissza</a>
-                                                </div>
-
-                                                <div data-wysihtml5-dialog="insertImage" style="display: none;">
-                                                  <label>
-                                                    Kép:
-                                                    <input data-wysihtml5-dialog-field="src" value="http://">
-                                                  </label>
-                                                  <a data-wysihtml5-dialog-action="save">Ok</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Vissza</a>
-                                                </div>
-                                              </div>
-                                              <section>
-                                                <form action="" method="post">
-                                                <textarea id="wysihtml5-editor" name="content" spellcheck="false" wrap="off">
-                                                </textarea>
-                                             </section>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="form-actions">
-                                    <div class="row">
-                                       <div class="col-md-offset-3 col-md-9">
-                                          <button type="submit" class="btn btn-circle blue">Küldés</button>
-                                          <button type="button" class="btn btn-circle default">Vissza</button>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </form>
-                              <!-- END FORM-->
+         <?php 
+            while($a = mysqli_fetch_assoc($res)) {
+         ?>
+               <!-- BEGIN Portlet PORTLET-->
+               <div class="portlet box blue-hoki">
+                  <div class="portlet-title">
+                     <div class="caption">
+                        <?php echo $a["cim"]; ?>
+                     </div>
+                     <div class="actions">
+                        <a href="#" class="btn btn-default btn-sm">
+                        <i class="fa fa-pencil"></i> Szerkesztés </a>
+                        <a href="#" class="btn btn-default btn-sm">
+                        <i class="fa fa-times"></i> Törlés </a>
+                     </div>
+                  </div>
+                  <div class="portlet-body">
+                     <div class="scroller" style="height:200px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
+                        <?php echo $a["tartalom"]; ?>
+                     </div>
+                  </div>
+               </div>
+               <!-- END Portlet PORTLET-->
+         <?php } ?>
+         <!-- END PAGE CONTENT-->
+      </div>
+</div>
+<?php
+}
+function feltoltes_megjelenites() {
+?>
+   <div class="page-content-wrapper">
+      <div class="page-content">
+         <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+         <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                     <h4 class="modal-title">Modal title</h4>
+                  </div>
+                  <div class="modal-body">
+                      Widget settings form goes here
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn blue">Save changes</button>
+                     <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                  </div>
+               </div>
+               <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+         </div>
+         <!-- /.modal -->
+         <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+         <!-- BEGIN STYLE CUSTOMIZER -->
+         <div class="theme-panel hidden-xs hidden-sm">
+            <div class="toggler-close">
+            </div>
+            <div class="theme-options">
+               <div class="theme-option theme-colors clearfix">
+                  <span>
+                  THEME COLOR </span>
+                  <ul>
+                     <li class="color-default current tooltips" data-style="default" data-container="body" data-original-title="Default">
+                     </li>
+                     <li class="color-darkblue tooltips" data-style="darkblue" data-container="body" data-original-title="Dark Blue">
+                     </li>
+                     <li class="color-blue tooltips" data-style="blue" data-container="body" data-original-title="Blue">
+                     </li>
+                     <li class="color-grey tooltips" data-style="grey" data-container="body" data-original-title="Grey">
+                     </li>
+                     <li class="color-light tooltips" data-style="light" data-container="body" data-original-title="Light">
+                     </li>
+                     <li class="color-light2 tooltips" data-style="light2" data-container="body" data-html="true" data-original-title="Light 2">
+                     </li>
+                  </ul>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Layout </span>
+                  <select class="layout-option form-control input-small">
+                     <option value="fluid" selected="selected">Fluid</option>
+                     <option value="boxed">Boxed</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Header </span>
+                  <select class="page-header-option form-control input-small">
+                     <option value="fixed" selected="selected">Fixed</option>
+                     <option value="default">Default</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Sidebar Mode</span>
+                  <select class="sidebar-option form-control input-small">
+                     <option value="fixed">Fixed</option>
+                     <option value="default" selected="selected">Default</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Sidebar Menu </span>
+                  <select class="sidebar-menu-option form-control input-small">
+                     <option value="accordion" selected="selected">Accordion</option>
+                     <option value="hover">Hover</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Sidebar Style </span>
+                  <select class="sidebar-style-option form-control input-small">
+                     <option value="default" selected="selected">Default</option>
+                     <option value="light">Light</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Sidebar Position </span>
+                  <select class="sidebar-pos-option form-control input-small">
+                     <option value="left" selected="selected">Left</option>
+                     <option value="right">Right</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Footer </span>
+                  <select class="page-footer-option form-control input-small">
+                     <option value="fixed">Fixed</option>
+                     <option value="default" selected="selected">Default</option>
+                  </select>
+               </div>
+            </div>
+         </div>
+         <!-- END STYLE CUSTOMIZER -->
+         <!-- BEGIN PAGE HEADER-->
+         <h3 class="page-title">
+         Galéria
+         </h3>
+         <!-- END PAGE HEADER-->
+         <!-- BEGIN PAGE CONTENT-->
+         <div class="row">
+            <div class="col-md-12">
+               <form id="fileupload" action="style/plugins/jquery-file-upload/server/php/index.php" method="POST" enctype="multipart/form-data">
+                  <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                  <div class="row fileupload-buttonbar">
+                     <div class="col-lg-7">
+                        <!-- The fileinput-button span is used to style the file input field as button -->
+                        <span class="btn green fileinput-button">
+                        <i class="fa fa-plus"></i>
+                        <span>
+                        Fájl tallózás... </span>
+                        <input type="file" name="files[]" multiple="">
+                        </span>
+                        <button type="submit" class="btn blue start">
+                        <i class="fa fa-upload"></i>
+                        <span>
+                        Feltöltés indítása</span>
+                        </button>
+                        <button type="reset" class="btn warning cancel">
+                        <i class="fa fa-ban-circle"></i>
+                        <span>
+                        Mégse </span>
+                        </button>
+                        <span class="fileupload-process">
+                        </span>
+                     </div>
+                     <!-- The global progress information -->
+                     <div class="col-lg-5 fileupload-progress fade">
+                        <!-- The global progress bar -->
+                        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                           <div class="progress-bar progress-bar-success" style="width:0%;">
                            </div>
+                        </div>
+                        <!-- The extended global progress information -->
+                        <div class="progress-extended">
+                            &nbsp;
                         </div>
                      </div>
                   </div>
+                  <!-- The table listing the files available for upload/download -->
+                  <table role="presentation" class="table table-striped clearfix">
+                  <tbody class="files">
+                  </tbody>
+                  </table>
+               </form>
+            </div>
+         </div>
          <!-- END PAGE CONTENT-->
       </div>
    </div>
 <?php
 }
 ?>
-
 

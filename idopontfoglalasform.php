@@ -157,8 +157,8 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 			</select>
 			<br>
 			<select name="terem" class="idopontfoglalas-terem" id="terem">
-				<option>Terem 1</option>
-				<option>Terem 2</option>
+				<option value="Labor I.">Labor I.</option>
+				<option value="Labor II.">Labor II.</option>
 			</select>
 		</div>
 
@@ -174,14 +174,15 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 		$evfolyam = $_POST["evfolyam"];
 		$kiserlet = $_POST["kiserletek"];
 		$eszkozok = $_POST["eszkozok"];
+		$terem = $_POST["terem"];
 		$ev = $_POST["ev"];
 		$honap = $_POST["honap"];
 		$nap = $_POST["nap"];
 		$felhasznaloid = "0";
 		$elfogadva = "0";
 
-		$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletid, eszkozok, iskolaid)
-		VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$kiserlet', '$eszkozok', '$iskola')";
+		$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletid, eszkozok, iskolaid, terem, tantargy)
+		VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$kiserlet', '$eszkozok', '$iskola', '$terem', '$tantargy')";
 		mysqli_query($connect,$sql);
 	}
 ?>

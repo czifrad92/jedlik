@@ -12,11 +12,10 @@ fejlec_letrehozas("");
 		
 			<!-- Title & Desc Row Begins -->
 			<div class="row">
+				<div class="slidecenter"><img src="images/slide.jpg"></div>
 				<div class="col-md-12 header text-center">
 					<!-- Title --> 
 					<h2 class="title capitalize">Szolgáltatások</h2>
-					<!-- Description --> 
-					<p class="desc white">We ensure quality & support. People love us & we love them. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 				</div>
 			</div><!-- Title & Desc Row Ends -->
 			
@@ -26,12 +25,12 @@ fejlec_letrehozas("");
 				<div class="col-md-4 col-sm-4 animated" data-animation="fadeInLeft" data-animation-delay="500">
 					<div class="feature-box feature-icon1">
 						<!-- Feature icon -->
-						<i class="icon-beaker fooldal-icon"></i>
+						<div class="iconholder">
+							<i class="icon-beaker fooldal-icon"></i>
+						</div>
 						<!-- Title -->
 						<h4 class="title-inner">Kísérletek</h4>
-						<!-- Description -->
-						<p class="desc-inner">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</p>
-						<div class="read-more"><a href="#">Learn More <i class="flaticon-arrow209"></i></a></div>
+						<div class="read-more"><a href="kiserletek">Tovább >></a></div>
 					</div>
 					<hr class="features-border">
 				</div>
@@ -41,12 +40,12 @@ fejlec_letrehozas("");
 				<div class="col-md-4 col-sm-4 animated" data-animation="fadeInUp" data-animation-delay="500">
 					<div class="feature-box feature-icon2 middle-border">
 						<!-- Feature icon -->
-						<i class="icon-calendar fooldal-icon"></i>
+						<div class="iconholder">
+							<i class="icon-calendar fooldal-icon"></i>
+						</div>
 						<!-- Title -->
 						<h4 class="title-inner">Időpontfoglalás</h4>
-						<!-- Description -->
-						<p class="desc-inner">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</p>
-						<div class="read-more"><a href="#">Learn More <i class="flaticon-arrow209"></i></a></div>
+						<div class="read-more"><a href="idopontfoglalasform">Tovább >></a></div>
 					</div>
 					<hr class="features-border">
 				</div>
@@ -56,12 +55,12 @@ fejlec_letrehozas("");
 				<div class="col-md-4 col-sm-4 animated" data-animation="fadeInRight" data-animation-delay="500">
 					<div class="feature-box feature-icon3">
 						<!-- Feature icon -->
-						<i class="icon-youtube-play fooldal-icon"></i>
+						<div class="iconholder">
+							<i class="icon-youtube-play fooldal-icon"></i>
+						</div>
 						<!-- Title -->
 						<h4 class="title-inner">Videók</h4>
-						<!-- Description -->
-						<p class="desc-inner">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</p>
-						<div class="read-more"><a href="#">Learn More <i class="flaticon-arrow209"></i></a></div>
+						<div class="read-more"><a href="videok">Tovább >></a></div>
 					</div>
 					<hr class="features-border">
 				</div>
@@ -70,198 +69,49 @@ fejlec_letrehozas("");
 			<!-- First Row Ends -->
 		</div>
 	</section><!-- Features Section Ends -->
-	
-	<!-- Product Gallery Begins -->
-	<section id="portfolio" class="work">
-		<div class="portfolio"></div>
-		<div class="container work-inner">
-			<!-- Title & Desc Row Begins -->
-			<div class="row">
-				<div class="col-md-12 header text-center">
-					<!-- Title --> 
-					<h2 class="title capitalize">Product Gallery</h2>
-					<!-- Description --> 
-					<p class="desc">We ensure quality & support. People love us & we love them. Here goes some simple dummy text.</p>
-				</div>
-			</div><!-- Title & Desc Row Ends -->
-		</div>
-		
-		<!-- Expander -->
-		<div class="item-expander relative">
-			<div id="item-expander">
-				<p class="cls-btn"><a class="close">X</a></p>
-				<div class="expander-inner"></div>
-			</div>
-		</div>
-		
-		<!-- Filters -->
-		<div id="options" class="filter-menu fullwidth">
-			<ul class="option-set relative normal filter-tabs">
-				<li data-filter="all" class="filter active">View All</li>
-				<li data-filter=".design" class="filter">Web Design</li>
-				<li data-filter=".illustration" class="filter">Illustration and Art</li>
-				<li data-filter=".photography" class="filter">Photography</li>
-			</ul>
-		</div>
-			
-		<!-- Portfolio Item Begins -->
-		<div id="portfolio-wrapper" class="portfolio-items">
-			
-				<!-- Work 1 -->
-				<div class="mix work five all photography illustration">
-					<div class="work-inner effects clearfix effect5">
-						<!-- Image -->
-						<div class="work-image img">
-							<img src="images/Business_Portfolio/1.jpg" alt="Portfolio" />						
-							<!-- Overlay Gallery -->										
-							<div class="overlay">
-								<a href="images/Business_Portfolio/1-m.jpg" data-rel="prettyPhoto[gallery2]" class="expand"><i class="fa fa-arrows-alt"></i></a>
-								<a href="projects/project-1.html" class="close-overlay expander"><i class="fa fa-arrow-up"></i></a>							</div>
-						</div>						
-					</div><!-- Work Inner Ends -->
-				</div><!-- Work Ends -->
-			
-				<!-- Work 2 -->
-				<div class="mix work five-big all photography">
-					<div class="work-inner-big effects clearfix effect5">
-						<!-- Image -->
-						<div class="work-image img">
-							<img src="images/Business_Portfolio/2.jpg" alt="Portfolio" />						
-							<!-- Overlay Gallery -->										
-							<div class="overlay">
-								<a href="images/Business_Portfolio/2-m.jpg" data-rel="prettyPhoto[gallery2]" class="expand"><i class="fa fa-arrows-alt"></i></a>
-								<a href="projects/project-2.html" class="close-overlay expander"><i class="fa fa-arrow-up"></i></a>							</div>
-						</div>	
-					</div><!-- Work Inner Ends -->
-				</div><!-- End Work 2 -->
-			
-				<!-- Work 3 -->
-				<div class="mix work five all design photography">
-					<div class="work-inner effects clearfix effect5">
-						<!-- Image -->
-						<div class="work-image img">
-							<img src="images/Business_Portfolio/3.jpg" alt="Portfolio" />						
-							<!-- Overlay Gallery -->										
-							<div class="overlay">
-								<a href="images/Business_Portfolio/3-m.jpg" data-rel="prettyPhoto[gallery2]" class="expand"><i class="fa fa-arrows-alt"></i></a>
-								<a href="projects/project-3.html" class="close-overlay expander"><i class="fa fa-arrow-up"></i></a>							</div>
-						</div>						
-					</div><!-- Work Inner Ends -->
-				</div><!-- End Work -->
-			
-				<!-- Work 4 -->
-				<div class="mix work five all design photography illustration">
-					<div class="work-inner effects clearfix effect5">
-						<!-- Image -->
-						<div class="work-image img">
-							<img src="images/Business_Portfolio/4.jpg" alt="Portfolio" />						
-							<!-- Overlay Gallery -->										
-							<div class="overlay">
-								<a href="images/Business_Portfolio/4-m.jpg" data-rel="prettyPhoto[gallery2]" class="expand"><i class="fa fa-arrows-alt"></i></a>
-								<a href="projects/project-4.html" class="close-overlay expander"><i class="fa fa-arrow-up"></i></a>							</div>
-						</div>						
-					</div><!-- Work Inner Ends -->
-				</div><!-- End Work -->
-			
-				<!-- Work 5 -->
-				<div class="mix work five all design photography">
-					<div class="work-inner effects clearfix effect5">
-						<!-- Image -->
-						<div class="work-image img">
-							<img src="images/Business_Portfolio/5.jpg" alt="Portfolio" />						
-							<!-- Overlay Gallery -->										
-							<div class="overlay">
-								<a href="images/Business_Portfolio/5-m.jpg" data-rel="prettyPhoto[gallery2]" class="expand"><i class="fa fa-arrows-alt"></i></a>
-								<a href="projects/project-5.html" class="close-overlay expander"><i class="fa fa-arrow-up"></i></a>							</div>
-						</div>						
-					</div><!-- Work Inner Ends -->
-				</div><!-- End Work -->
-			
-				<!-- Work 6 -->
-				<div class="mix work five all design">
-					<div class="work-inner effects clearfix effect5">
-						<!-- Image -->
-						<div class="work-image img">
-							<img src="images/Business_Portfolio/6.jpg" alt="Portfolio" />						
-							<!-- Overlay Gallery -->										
-							<div class="overlay">
-								<a href="images/Business_Portfolio/6-m.jpg" data-rel="prettyPhoto[gallery2]" class="expand"><i class="fa fa-arrows-alt"></i></a>
-								<a href="projects/project-6.html" class="close-overlay expander"><i class="fa fa-arrow-up"></i></a>							</div>
-						</div>						
-					</div><!-- Work Inner Ends -->
-				</div><!-- End Work -->
-				
-				<!-- Work 7 -->
-				<div class="mix work five all art photography illustration">
-					<div class="work-inner effects clearfix effect5">
-						<!-- Image -->
-						<div class="work-image img">
-							<img src="images/Business_Portfolio/7.jpg" alt="Portfolio" />						
-							<!-- Overlay Gallery -->										
-							<div class="overlay">
-								<a href="images/Business_Portfolio/7-m.jpg" data-rel="prettyPhoto[gallery2]" class="expand"><i class="fa fa-arrows-alt"></i></a>
-								<a href="projects/project-2.html" class="close-overlay expander"><i class="fa fa-arrow-up"></i></a>							</div>
-						</div>						
-					</div><!-- Work Inner Ends -->
-				</div><!-- End Work -->
-				
-				<!-- Work 8 -->
-				<div class="mix work five-big all art design">
-					<div class="work-inner-big effects clearfix effect5">
-						<!-- Image -->
-						<div class="work-image img">
-							<img src="images/Business_Portfolio/8.jpg" alt="Portfolio" />						
-							<!-- Overlay Gallery -->										
-							<div class="overlay">
-								<a href="images/Business_Portfolio/8-m.jpg" data-rel="prettyPhoto[gallery2]" class="expand"><i class="fa fa-arrows-alt"></i></a>
-								<a href="projects/project-4.html" class="close-overlay expander"><i class="fa fa-arrow-up"></i></a>							</div>
-						</div>						
-					</div><!-- Work Inner Ends -->
-				</div><!-- End Work -->
-			
-				<!-- Clear -->
-				<div class="clear"></div>
-			</div>				
-	</section><!-- Product Gallery Ends -->
 
-	
-	
 	<!-- About Our Company Begins -->	
 	<section id="about-us" class="about-us">
 		<div class="container about-us-inner">
 			<!-- Title & Desc Row Begins -->
 			<div class="row">
 				<div class="col-md-12 header text-center">
-					<!-- Title --> 
-					<h2 class="title capitalize">About Our Company</h2>
-					<!-- Description --> 
-					<p class="desc">We ensure quality & support. People love us & we love them. Here goes some simple dummy text.</p>
+					<h2 class="title capitalize">A projektről</h2>
 				</div>
 			</div><!-- Title & Desc Row Ends -->
 			
 			<!-- About Us Row Begins -->
 			<div class="row">
-			
-				<!-- Left Part Begins -->
-				<div class="col-md-6 text-center animated" data-animation="fadeInLeft" data-animation-delay="500">
-					<img src="images/about.png" width="650" height="550" alt="" class="img-responsive">
-				</div><!-- Left Part Ends -->
 				
 				<!-- Right Part Begins -->
-				<div class="col-md-6">
+				<div class="static-container">
 					<div class="about-right text-left">
-						<!-- Title -->
-						<h3>Most Popular Management System</h3>
-						<!-- Desc -->
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-						<!-- Lists -->
-						<ul>
-							<li><i class="fa fa-2x fa-comment-o"></i><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore aliqua.</p></li>
-							<li><i class="flaticon-users2"></i><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore aliqua.</p></li>
-							<li><i class="flaticon-share26"></i><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore aliqua.</p></li>
-							<li><i class="flaticon-pencil84"></i><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore aliqua.</p></li>
-						</ul>
-					</div>
+<p>
+	Az Európai Unió támogatásával magas színvonalú természettudományos laboratórium kialakítása kezdődött a csepeli Jedlik Ányos Gimnáziumban.
+	Budapest XXI. kerület Csepel Önkormányzata konzorciumban a Klebelsberg Intézményfenntartó Központtal támogatást nyert az Új Széchenyi Terv Társadalmi Megújulás 
+	Operatív Program „A természettudományos oktatás módszertanának és eszközrendszerének megújítása a közoktatásban (Öveges Program)” című felhívásra benyújtott 
+	„A természettudományos oktatás módszertanának és eszközrendszerének megújítása a csepeli Jedlik Ányos Gimnáziumban” TÁMOP-3.1.3-11/1-2012-0008 azonosító számú projektre.
+	A sikeres pályázatnak köszönhetően az Öveges Program keretében megújul a csepeli Jedlik Ányos Gimnázium harmadik emeletén lévő természettudományi labor. 
+	A több mint 300 millió forintnyi uniós támogatással megújuló és kibővülő laborral és az ahhoz tartozó megújult kiegészítő helyiségekkel a gimnázium modern 
+	természettudományos oktatási és módszertani központtá válik. Mindez lehetőséget biztosít a projektben együttműködő 10 kerületi általános iskolának is a korszerű 
+	természettudományos kísérletek és programok elvégzésére, hiszen az új laborban ők is tanórákat hallgatnak a közeljövőben.
+	A labor megnyitása óriási változást hoz a gimnázium életébe, mert nemcsak más intézményekben tanuló gyerekek járnak majd ide órára, hanem ezen kívül a Jedlik 
+	tanárai, valamint a természettudományos tantárgyakat oktató kerületi tanárok is többféle módszertani képzésen vehetnek részt. A program során tananyag- és 
+	digitális szertár fejlesztésére, a kísérletek elektronikus dokumentálására és laborbeosztást kezelő modul kialakítására is sor kerül. A felújítással az iskola új 
+	bútorok​​kal, informatikai eszközökkel gazdagodik, a labor pedig a kísérletekhez elengedhetetlen anyagokkal, 
+	vegyszerekkel, fizika-kémia-biológia tantárgyakhoz szükséges bemutató eszközökkel bővül.
+	A laboratórium a 2014-es évben a kerületi szakmai együttműködés megerősítése, valamint a párhuzamos regionális fejlesztések elkerülése 
+	érdekében a többi régiós projektnyertessel, valamint a kerületi iskolákkal együttműködve szakmai napoknak és disszeminációs műhelykonferenciának ad otthon.
+	<br>
+		<b>
+			<br>Az elnyert támogatás összege: 303.252.485,- Ft <br>
+			A projekt megvalósítás időszaka: 2013.06.03-2014.09.30. <br>
+			Kedvezményezettek: Budapest XXI. kerület Csepel Önkormányzata <br>
+			Klebelsberg Intézményfenntartó Központ Budapesti XXI. Tankerülete <br>
+			Pályázati azonosító: TÁMOP-3.1.3-11/1-2012-0008​
+		</b>
+
+</p>
 				</div><!-- Right Part Ends -->				
 			</div><!-- About Us Row Ends -->
 		</div><!-- Container Ends -->
@@ -275,9 +125,7 @@ fejlec_letrehozas("");
 			<div class="row">
 				<div class="col-md-12 header text-center">
 					<!-- Title --> 
-					<h2 class="title capitalize">Team Member</h2>
-					<!-- Description --> 
-					<p class="desc">We ensure quality & support. People love us & we love them. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+					<h2 class="title capitalize">Videók</h2>
 				</div>
 			</div><!-- Title & Desc Row Ends -->
 			
@@ -601,92 +449,6 @@ fejlec_letrehozas("");
 		</div><!-- Container Ends -->
 	</section><!-- Recent Blog Ends -->
 	
-	
-	<!-- Client Section Begins -->
-	<section id="clients" class="clients">
-		<div class="container client-inner">
-			<div class="row">
-				<!-- Left Part -->
-				<div class="col-md-4">
-					<h3>Customers Feedback</h3>
-					<!-- Feedback 1 -->
-					<div class="client1">
-						<p>"Simply Dummy Text dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore dolore magna aliqua. Ut enim ad minim."</p>
-						<h5 class="italic"> - Masum Rana <span>of BiriOala.</span></h5>
-					</div>
-					<!-- Feedback 2 -->
-					<div class="client2">
-						<p>"Simply Dummy Text dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor"</p>
-						<h5 class="italic">- Tanveer Junayed<span> of Boideshi.</span></h5>
-					</div>
-				</div>
-				<!-- Right Part -->
-				<div class="col-md-8">
-					<!-- Client Logos -->
-					<div class="client-logo">
-						<div class="divider">
-							<img src="images/client/divider.png" width="30" height="360" alt="">
-						</div>
-						<!-- Title -->
-						<h3>Some Of Our Best Clients</h3>
-						<div class="logo-top animated" data-animation="fadeInDown" data-animation-delay="400">
-							<img src="images/client/1.png" width="100" height="100" alt="">
-							<img src="images/client/2.png" width="100" height="100" alt="">
-							<img src="images/client/3.png" width="100" height="100" alt="">
-							<img src="images/client/4.png" width="100" height="100" alt="">
-						</div>
-						<div class="logo-bottom animated" data-animation="fadeInDown" data-animation-delay="600">
-							<img src="images/client/5.png" width="100" height="100" alt="">
-							<img src="images/client/6.png" width="100" height="100" alt="">
-							<img src="images/client/7.png" width="100" height="100" alt="">					
-						</div>
-					</div>
-				</div><!-- Right Part Ends -->
-			</div><!-- Row Ends -->
-		</div><!-- Container Ends -->
-	</section><!-- Client Section Ends -->
-	
-	
-	<!-- Contact Section Begins -->
-	<section id="contact" class="contact">
-		<div class="container contact-inner">
-			<!-- Title & Desc Row Begins -->
-			<div class="row">
-				<div class="col-md-12 header text-center">
-					<!-- Title --> 
-					<h2 class="title capitalize">Contact Us</h2>
-					<!-- Description --> 
-					<p class="desc">We ensure quality & support. People love us & we love them. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-				</div>
-			</div><!-- Title & Desc Row Ends -->
-			
-			<!-- Contact Row Begins -->
-			<div class="row">
-				<div class="col-md-6 col-md-offset-3 animated" data-animation="fadeInUp" data-animation-delay="300">
-				<p class="form-message" style="display: none;"></p>	
-					<div class="contact-form">
-						<!-- Form Begins -->
-						<form role="form" name="contactform" class="form-horizontal" id="contactform" method="post" action="process.php">						
-							<!-- Field 1 -->		
-							<div class="input-text form-group">
-								<input type="text" name="contact_name" class="input-name form-control" placeholder="Full Name" />
-							</div>	
-							<!-- Field 2 -->
-							<div class="input-email form-group">
-								<input type="email" name="contact_email" class="input-email form-control" placeholder="Email"/>
-							</div>				
-							<!-- Field 3 -->
-							<div class="textarea-message form-group">
-								<textarea name="contact_message" class="textarea-message form-control" placeholder="Message" rows="4" ></textarea>
-							</div>	
-							<!-- Button -->
-							<button class="btn btn-default" type="submit">Send Now<i class="flaticon-arrow209"></i></button>			
-						</form><!-- Form Ends -->
-					</div>
-				</div>
-			</div><!-- Contact Row Ends -->
-		</div>	
-	</section><!-- Contact Section Ends -->
 <?php
 lablec_letrehozas();	
 
