@@ -1193,6 +1193,8 @@ a.expand {
 .footer{
 	background-color:#233342;
 	margin-top: 15px;
+	width: 100%;
+	float: left;
 }
 .container.footer-inner {
 	padding-top: 25px;
@@ -1355,14 +1357,14 @@ a.expand {
 /* =========================== PAGES ============================== */
 /* ------------- Blog ------------- */
 .blog-outer{
-	margin:20px 0 0;
-	padding:45px 0 15px;
+	margin: 0px 0 0;
+	padding: 0px 0 15px;
 }
 #blog-outer a{
 	text-decoration:none !important;
 }
 .blog-outer .blog-inner{
-	margin:30px 0px 45px;
+	margin: 0px 0px 35px;
 	border:1px solid #CCCCCC;
 	border-radius:3px;
 	-moz-border-radius: 3px;
@@ -1392,11 +1394,13 @@ a.expand {
 	padding:10px 0px;
 }
 .blog-outer .blog-status .blog-date .span-inner{
-	font-size:16px;
+	font-size: 14px;
 }
 .blog-outer .blog-status .blog-title{
 	font-size:24px;
 	border-left:1px solid #CCCCCC;
+	padding: 0px 0px 0px 20px;
+	margin-top: 3px;
 }
 .blog-outer .blog-status li{
 	display:inline;
@@ -2730,4 +2734,39 @@ label[for=meddig] {
 .szechenyikepek {
 	text-align: center;
 	margin-top: 20px;
+	float: left;
+	width: 100%;
+}
+
+.kiserletlista {
+	width: 400px;
+	float: left;
+	padding: 0px 0px 0px 20px;
+	margin: 0px 25px 0px 0px;
+}
+
+.kiserlet {
+	width: 100%;
+	float: left;
+	margin-bottom: 13px;
+	line-height: 19px;
+}
+
+.hirtitle {
+	width: 500px;
+	float: left;
+}
+
+.hirdatum {
+	width: 110px;
+	float: left;
+}
+
+.hirszoveg {
+	text-align: justify;
+}
+
+.hircontainer {
+	width: 95%;
+	margin: 0px auto;
 }

@@ -83,7 +83,7 @@ function fejlec_letrehozas($title) {
 										<li><a href="hirek" class="scroll">Hírek</a></li>
 
 										<li class="dropdown">
-											<a href="projektismerteto" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10">
+											<a href="" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10">
 												A projektről<i class="fa fa-angle-down"></i> 
 											</a>
 											<!-- DropDown Menu Begins -->
@@ -96,15 +96,15 @@ function fejlec_letrehozas($title) {
 										</li>
 
 										<li class="dropdown">
-											<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10">
+											<a href="" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10">
 												Kísérletek<i class="fa fa-angle-down"></i> 
 											</a>
 											<!-- DropDown Menu Begins -->
 											<ul class="menulist dropdown-menu">
-												<li><a href="blog-left-sidebar.html">Biológia</a></li>
-												<li><a href="blog-right-sidebar.html">Fizika</a></li>
-												<li><a href="blog-single.html">Kémia</a></li>
-												<li><a href="blog-grid.html">Videók</a></li>
+												<li><a href="biologia">Biológia</a></li>
+												<li><a href="fizika">Fizika</a></li>
+												<li><a href="kemia">Kémia</a></li>
+												<li><a href="videok">Videók</a></li>
 											</ul><!-- DropDown Menu Ends -->
 										</li>
 										<li><a href="idopontfoglalas" class="scroll">Időpontfoglalás</a></li>

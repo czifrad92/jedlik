@@ -150,6 +150,12 @@ License: You must have a valid license purchased only from themeforest(the above
                </a>
             </li>
             <li>
+               <a href="rolunk-irtak">
+               <i class="icon-pencil"></i>
+               <span class="title" title="Hírek szerkesztése">Rólunk írták szerkesztése</span>
+               </a>
+            </li>
+            <li>
                <a href="galeria">
                <i class="icon-folder"></i>
                <span class="title" title="Galéria szerkesztése">Galéria szerkesztése</span>
