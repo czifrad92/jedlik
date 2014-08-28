@@ -7,7 +7,7 @@ function fejlec_letrehozas($title) {
 <head>
 
 	<!-- Title and Meta Tags Begins -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="viewport" content="width=1190" />
 	<meta charset="utf-8">
 	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 	<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
@@ -154,7 +154,7 @@ function lablec_letrehozas() {
 				<a href="http://csepel.hu/">Budapest XXI. kerület Csepel Önkormányzata</a><br>
 				<a href="http://palyazat.gov.hu/">Új Széchenyi Terv</a><br>
 				<a href="http://palyazat.gov.hu/">Európai Szociális Alap</a>
-				<img src="images/piarsoft-logo.png" style="width: 220px; margin: 77px 0px 0px 203px;">
+				<img src="images/piarsoft-logo.png" style="width: 220px; margin: 77px 0px 0px 140px;">
 			</div>
 		</div><!-- Footer Inner Ends -->
 

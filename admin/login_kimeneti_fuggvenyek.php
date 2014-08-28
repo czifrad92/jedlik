@@ -1,4 +1,5 @@
 <?php
+ob_start();
 function login_fejlec() {
 ?>
 <!DOCTYPE html>
@@ -113,25 +114,25 @@ function login_content() {
 <!-- BEGIN LOGIN -->
 <div class="content">
    <!-- BEGIN LOGIN FORM -->
-   <form class="login-form" action="kezdolap" method="post">
+   <form class="login-form" action="admin-auth" method="post">
       <h3 class="form-title">Bejelentkezés</h3>
       <div class="form-group">
          <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
          <label class="control-label visible-ie8 visible-ie9">Felhasználónév</label>
          <div class="input-icon">
             <i class="fa fa-user"></i>
-            <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Felhasználónév" name="username" required>
+            <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Felhasználónév" name="adminuser" required>
          </div>
       </div>
       <div class="form-group">
          <label class="control-label visible-ie8 visible-ie9">Jelszó</label>
          <div class="input-icon">
             <i class="fa fa-lock"></i>
-            <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Jelszó" name="password" required>
+            <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Jelszó" name="adminpassword" required>
          </div>
       </div>
       <div class="form-actions">
-         <button type="submit" class="btn green pull-right">
+         <button type="submit" name="adminlogin" class="btn green pull-right">
          Bejelentkezés <i class="m-icon-swapright m-icon-white"></i>
          </button>
       </div>

@@ -120,7 +120,7 @@ var FormEditable = function () {
 
         $('#firstname').editable({
             validate: function (value) {
-                if ($.trim(value) == '') return 'This field is required';
+                if ($.trim(value) == '') return 'A mező kitöltése kötelező.';
             }
         });
 

@@ -312,6 +312,7 @@ a.expand {
 	padding: 10px 13px 10px;
 	z-index: 9999;
 	background-color: #3498db !important;
+	position: fixed;
 }
 .site-logo a {
 	font-family: 'Roboto';
@@ -2631,7 +2632,8 @@ blockquote .author-name {
 .calendar-event-title {
 	text-align: center;
 	font-weight: bold;
-	height: 14px;
+	height: 22px;
+	line-height: 13px;
 }
 
 .calendar-event-time {
@@ -2753,7 +2755,7 @@ label[for=meddig] {
 }
 
 .hirtitle {
-	width: 500px;
+	width: 80%;
 	float: left;
 }
 

@@ -220,7 +220,7 @@ function writeCalendar($month, $year)
 					for($j=0;$j < $eventcount;$j++) {
 						$str .= "
 						<div class=\"calendar-event-title\">#"
-						. $eventdata[$day]["id"][$j] . " foglalás</div>"
+						. $eventdata[$day]["id"][$j] . " foglalás <br>" . $eventdata[$day]["terem"] . "</div>"
 						. $eventdata[$day]["timestr"][$j];
 					}
 				}
@@ -274,7 +274,7 @@ function getEventDataArray($month, $year)
 {
 	$eventdata = null;
 	
-	$sql = "SELECT id, elfogadva, d, title, start_time, end_time, ";
+	$sql = "SELECT id, elfogadva, terem, d, title, start_time, end_time, ";
 	
 	if (TIME_DISPLAY_FORMAT == "12hr") {
 		$sql .= "TIME_FORMAT(start_time, '%l:%i%p') AS stime, ";
@@ -295,6 +295,8 @@ function getEventDataArray($month, $year)
 	while($row = mysql_fetch_assoc($result)) {
 		$day = $row["d"];
 		$eventdata[$day]["id"][] = $row["id"];
+		$eventdata[$day]["terem"] = $row["terem"];
+
 
 		# set title string; limit char length and append ellipsis if necessary
 		$title = stripslashes($row["title"]);

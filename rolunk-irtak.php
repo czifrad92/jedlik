@@ -9,17 +9,17 @@ fejlec_letrehozas("");
 
 if (isset($_GET['id'])){
 	$id = $_GET['id'];
-	$hirreszletes = "SELECT * FROM hirek where id = '$id'";
+	$hirreszletes = "SELECT * FROM rolunk where id = '$id'";
 	$res = mysqli_query($connect, $hirreszletes);
 ?>
 <section id="blog-outer" class="blog-outer blog-single">
-	 	<div class="container">			
+	 	<div class="container">
 			
 			<!-- Title & Desc Row Begins -->
 			<div class="row title-row">
 				<div class="col-md-12 header text-center">
 					<!-- Title --> 
-					<h2 class="title capitalize">Hírek</h2>
+					<h2 class="title capitalize">Rólunk írták</h2>
 				</div>
 			</div><!-- Title & Desc Row Ends -->
 			
@@ -68,7 +68,7 @@ else
 			<div class="row title-row">
 				<div class="col-md-12 header text-center">
 					<!-- Title --> 
-					<h2 class="title capitalize">Hírek</h2>
+					<h2 class="title capitalize">Rólunk írták</h2>
 				</div>
 			</div><!-- Title & Desc Row Ends -->
 			
@@ -77,7 +77,7 @@ else
 
 
 			<?php 
-				$hirsql = "SELECT * FROM hirek ORDER BY date DESC";
+				$hirsql = "SELECT * FROM rolunk ORDER BY date DESC";
 				$res = mysqli_query($connect, $hirsql);
 				while ($a = mysqli_fetch_assoc($res)) {
 			?>

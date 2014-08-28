@@ -164,27 +164,48 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 
 		<input type="submit" name="bekuld">
 		<?php 
-		
+			
 
-	if(isset($_POST["bekuld"])) {
-		$meddig = $_POST["meddig1"] . $_POST["meddig2"];
-		$mettol = $_POST["mettol1"] . $_POST["mettol2"];
-		$iskola = $_POST["iskola"];
-		$tantargy = $_POST["tantargy"];
-		$evfolyam = $_POST["evfolyam"];
-		$kiserlet = $_POST["kiserletek"];
-		$eszkozok = $_POST["eszkozok"];
-		$terem = $_POST["terem"];
-		$ev = $_POST["ev"];
-		$honap = $_POST["honap"];
-		$nap = $_POST["nap"];
-		$felhasznaloid = "0";
-		$elfogadva = "0";
+			if (isset($_POST["bekuld"])) {
+				$meddig = $_POST["meddig1"] . $_POST["meddig2"];
+				$mettol = $_POST["mettol1"] . $_POST["mettol2"];
+				$iskola = $_POST["iskola"];
+				$tantargy = $_POST["tantargy"];
+				$evfolyam = $_POST["evfolyam"];
+				$kiserlet = $_POST["kiserletek"];
+				$eszkozok = $_POST["eszkozok"];
+				$terem = $_POST["terem"];
+				$ev = $_POST["ev"];
+				$honap = $_POST["honap"];
+				$nap = $_POST["nap"];
+				$felhasznaloid = "0";
+				$elfogadva = "0";
 
-		$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletid, eszkozok, iskolaid, terem, tantargy)
-		VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$kiserlet', '$eszkozok', '$iskola', '$terem', '$tantargy')";
-		mysqli_query($connect,$sql);
-	}
+				$check = "SELECT * FROM jelentkezesek WHERE y = '$ev' AND m = '$honap' AND d = '$nap' AND elfogadva = '1' AND terem = 'Labor I.' ";
+				//$check2 =
+
+				$talalt = false;
+
+				$res = mysqli_query($connect, $check);
+						while ($a = mysqli_fetch_assoc($res)){
+						if ( (strtotime($a['start_time']) < strtotime($mettol)) && (strtotime($a['start_time']) < strtotime($meddig))){
+							$talalt = true;
+						}
+					}
+
+				if ($talalt == false){
+					echo "Sikeres foglalás";
+				}
+				else{
+					echo "Foglalt";
+				}
+
+
+
+				/*$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletid, eszkozok, iskolaid, terem, tantargy)
+				VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$kiserlet', '$eszkozok', '$iskola', '$terem', '$tantargy')";
+				mysqli_query($connect,$sql);*/
+			}
 ?>
 
 	</form>

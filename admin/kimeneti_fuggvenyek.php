@@ -1,5 +1,10 @@
 <?php
 function fejlec_letrehozas() {
+  session_start();
+  if($_SESSION["belepve"] != 1 || empty($_SESSION["admin"])) { 
+    header("Location: login");
+    die();
+  }
 ?>
 <!DOCTYPE html>
 <!-- 
@@ -92,7 +97,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <li class="dropdown dropdown-user">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                <span class="username username-hide-on-mobile">
-               Teszt Jedlik </span>
+               <?php echo $_SESSION["currentuser"]; ?></span>
                <i class="fa fa-angle-down"></i>
                </a>
                <ul class="dropdown-menu">
@@ -101,7 +106,7 @@ License: You must have a valid license purchased only from themeforest(the above
                      <i class="icon-user"></i> Profil </a>
                   </li>
                   <li>
-                     <a href="login.html">
+                     <a href="kijelentkezes">
                      <i class="icon-key"></i> Kijelentkezés </a>
                   </li>
                </ul>
@@ -124,13 +129,6 @@ License: You must have a valid license purchased only from themeforest(the above
       <div class="page-sidebar navbar-collapse collapse">
          <!-- BEGIN SIDEBAR MENU -->
          <ul class="page-sidebar-menu" data-auto-scroll="true" data-slide-speed="200">
-            <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
-            <li class="sidebar-toggler-wrapper">
-               <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-               <div class="sidebar-toggler" title="Elrejt/Megjelenít">
-               </div>
-               <!-- END SIDEBAR TOGGLER BUTTON -->
-            </li>
             <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
             <li class="sidebar-search-wrapper">
                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
@@ -144,7 +142,7 @@ License: You must have a valid license purchased only from themeforest(the above
                <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
             <li>
-               <a href="hirek">
+               <a href="hirek" style="border-top:0px;">
                <i class="icon-speech"></i>
                <span class="title" title="Hírek szerkesztése">Hírek szerkesztése</span>
                </a>
@@ -732,13 +730,13 @@ ob_start();
                                     <div class="form-group">
                                        <label class="col-md-3 control-label">Cím</label>
                                        <div class="col-md-4">
-                                          <input type="text" name="cim" class="form-control input-circle" placeholder="Ide írjon...">
+                                          <input type="text" name="cim" class="form-control input-circle" placeholder="Ide írjon..." required>
                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-3 control-label">Leírás</label>
                                        <div class="col-md-4">
-                                          <input type="text" name="leiras" class="form-control input-circle" placeholder="Ide írjon...">
+                                          <input type="text" name="leiras" class="form-control input-circle" placeholder="Ide írjon..." required>
                                        </div>
                                     </div>
                                     <div class="form-group">
@@ -1142,5 +1140,372 @@ function feltoltes_megjelenites() {
    </div>
 <?php
 }
+function rolunk_megjelenites() {
+include '../core/connect.php';
+$sql = "SELECT * FROM rolunk";
+$res = mysqli_query($connect,$sql);
 ?>
+<div class="page-content-wrapper">
+      <div class="page-content">
+         <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+         <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                     <h4 class="modal-title">Modal title</h4>
+                  </div>
+                  <div class="modal-body">
+                      Widget settings form goes here
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn blue">Save changes</button>
+                     <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                  </div>
+               </div>
+               <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+         </div>
+         <!-- /.modal -->
+         <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+         <!-- BEGIN STYLE CUSTOMIZER -->
+         <div class="theme-panel hidden-xs hidden-sm">
+            <div class="toggler-close">
+            </div>
+            <div class="theme-options">
+               <div class="theme-option theme-colors clearfix">
+                  <span>
+                  THEME COLOR </span>
+                  <ul>
+                     <li class="color-default current tooltips" data-style="default" data-container="body" data-original-title="Default">
+                     </li>
+                     <li class="color-darkblue tooltips" data-style="darkblue" data-container="body" data-original-title="Dark Blue">
+                     </li>
+                     <li class="color-blue tooltips" data-style="blue" data-container="body" data-original-title="Blue">
+                     </li>
+                     <li class="color-grey tooltips" data-style="grey" data-container="body" data-original-title="Grey">
+                     </li>
+                     <li class="color-light tooltips" data-style="light" data-container="body" data-original-title="Light">
+                     </li>
+                     <li class="color-light2 tooltips" data-style="light2" data-container="body" data-html="true" data-original-title="Light 2">
+                     </li>
+                  </ul>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Layout </span>
+                  <select class="layout-option form-control input-small">
+                     <option value="fluid" selected="selected">Fluid</option>
+                     <option value="boxed">Boxed</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Header </span>
+                  <select class="page-header-option form-control input-small">
+                     <option value="fixed" selected="selected">Fixed</option>
+                     <option value="default">Default</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Sidebar Mode</span>
+                  <select class="sidebar-option form-control input-small">
+                     <option value="fixed">Fixed</option>
+                     <option value="default" selected="selected">Default</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Sidebar Menu </span>
+                  <select class="sidebar-menu-option form-control input-small">
+                     <option value="accordion" selected="selected">Accordion</option>
+                     <option value="hover">Hover</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Sidebar Style </span>
+                  <select class="sidebar-style-option form-control input-small">
+                     <option value="default" selected="selected">Default</option>
+                     <option value="light">Light</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Sidebar Position </span>
+                  <select class="sidebar-pos-option form-control input-small">
+                     <option value="left" selected="selected">Left</option>
+                     <option value="right">Right</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Footer </span>
+                  <select class="page-footer-option form-control input-small">
+                     <option value="fixed">Fixed</option>
+                     <option value="default" selected="selected">Default</option>
+                  </select>
+               </div>
+            </div>
+         </div>
+         <!-- END STYLE CUSTOMIZER -->
+         <!-- BEGIN PAGE HEADER-->
+         <h3 class="page-title">
+         Hírek szerkesztése
+         </h3>
+         <div class="note note-success">
+            <div class="actions">
+                        <a href="uj-rolunk" class="btn btn-default btn-sm">
+                        <i class="fa fa-plus"></i> Rólunk hozzáadása </a>
+            </div>
+         </div>
+         <?php 
+            while($a = mysqli_fetch_assoc($res)) {
+         ?>
+               <!-- BEGIN Portlet PORTLET-->
+               <div class="portlet box blue-hoki">
+                  <div class="portlet-title">
+                     <div class="caption">
+                        <?php echo $a["cim"]; ?>
+                     </div>
+                     <div class="actions">
+                        <a href="#" class="btn btn-default btn-sm">
+                        <i class="fa fa-pencil"></i> Szerkesztés </a>
+                        <a href="#" class="btn btn-default btn-sm">
+                        <i class="fa fa-times"></i> Törlés </a>
+                     </div>
+                  </div>
+                  <div class="portlet-body">
+                     <div class="scroller" style="height:200px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
+                        <?php echo $a["tartalom"]; ?>
+                     </div>
+                  </div>
+               </div>
+               <!-- END Portlet PORTLET-->
+         <?php } ?>
+         <!-- END PAGE CONTENT-->
+      </div>
+</div>
+<?php
+}
+function uj_rolunk_megjelenites() {
+include '../core/connect.php';
+ob_start();
+?>
+   <div class="page-content-wrapper">
+      <div class="page-content">
+         <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+         <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                     <h4 class="modal-title">Modal title</h4>
+                  </div>
+                  <div class="modal-body">
+                      Widget settings form goes here
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn blue">Save changes</button>
+                     <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                  </div>
+               </div>
+               <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+         </div>
+         <!-- /.modal -->
+         <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+         <!-- BEGIN STYLE CUSTOMIZER -->
+         <div class="theme-panel hidden-xs hidden-sm">
+            <div class="toggler-close">
+            </div>
+            <div class="theme-options">
+               <div class="theme-option theme-colors clearfix">
+                  <span>
+                  THEME COLOR </span>
+                  <ul>
+                     <li class="color-default current tooltips" data-style="default" data-container="body" data-original-title="Default">
+                     </li>
+                     <li class="color-darkblue tooltips" data-style="darkblue" data-container="body" data-original-title="Dark Blue">
+                     </li>
+                     <li class="color-blue tooltips" data-style="blue" data-container="body" data-original-title="Blue">
+                     </li>
+                     <li class="color-grey tooltips" data-style="grey" data-container="body" data-original-title="Grey">
+                     </li>
+                     <li class="color-light tooltips" data-style="light" data-container="body" data-original-title="Light">
+                     </li>
+                     <li class="color-light2 tooltips" data-style="light2" data-container="body" data-html="true" data-original-title="Light 2">
+                     </li>
+                  </ul>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Layout </span>
+                  <select class="layout-option form-control input-small">
+                     <option value="fluid" selected="selected">Fluid</option>
+                     <option value="boxed">Boxed</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Header </span>
+                  <select class="page-header-option form-control input-small">
+                     <option value="fixed" selected="selected">Fixed</option>
+                     <option value="default">Default</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Sidebar Mode</span>
+                  <select class="sidebar-option form-control input-small">
+                     <option value="fixed">Fixed</option>
+                     <option value="default" selected="selected">Default</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Sidebar Menu </span>
+                  <select class="sidebar-menu-option form-control input-small">
+                     <option value="accordion" selected="selected">Accordion</option>
+                     <option value="hover">Hover</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Sidebar Style </span>
+                  <select class="sidebar-style-option form-control input-small">
+                     <option value="default" selected="selected">Default</option>
+                     <option value="light">Light</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Sidebar Position </span>
+                  <select class="sidebar-pos-option form-control input-small">
+                     <option value="left" selected="selected">Left</option>
+                     <option value="right">Right</option>
+                  </select>
+               </div>
+               <div class="theme-option">
+                  <span>
+                  Footer </span>
+                  <select class="page-footer-option form-control input-small">
+                     <option value="fixed">Fixed</option>
+                     <option value="default" selected="selected">Default</option>
+                  </select>
+               </div>
+            </div>
+         </div>
+         <!-- END STYLE CUSTOMIZER -->
+         <!-- BEGIN PAGE HEADER-->
+         <h3 class="page-title">
+         Új hír beküldése
+         </h3>
+                   <div class="tab-content">
+                     <div class="tab-pane active" id="tab_0">
+                        <div class="portlet box green">
+                           <div class="portlet-body form">
+                              <!-- BEGIN FORM-->
+                              <form action="" method="post" class="form-horizontal">
+                                 <div class="form-body" style="border-top:1px solid #4bc75e;">
+                                    <div class="form-group">
+                                       <label class="col-md-3 control-label">Cím</label>
+                                       <div class="col-md-4">
+                                          <input type="text" name="cim" class="form-control input-circle" placeholder="Ide írjon..." required>
+                                       </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Leírás</label>
+                                       <div class="col-md-4">
+                                          <input type="text" name="leiras" class="form-control input-circle" placeholder="Ide írjon..." required>
+                                       </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Tartalom:</label>
+                                       <div class="col-md-8">
+                                               <div id="wysihtml5-editor-toolbar">
+                                                <header>
+                                                  <ul class="commands">
+                                                    <li data-wysihtml5-command="bold" class="command"></li>
+                                                    <li data-wysihtml5-command="italic"  class="command"></li>
+                                                    <li data-wysihtml5-command="insertUnorderedList"  class="command"></li>
+                                                    <li data-wysihtml5-command="insertOrderedList"  class="command"></li>
+                                                    <li data-wysihtml5-command="createLink" class="command"></li>
+                                                    <li data-wysihtml5-command="insertImage" class="command"></li>
+                                                    <li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" class="command"></li>
+                                                    <li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" class="command"></li>
+                                                    <li data-wysihtml5-command-group="foreColor" class="fore-color" class="command">
+                                                      <ul>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="silver"></li>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="gray"></li>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="maroon"></li>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="red"></li>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="purple"></li>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="green"></li>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="olive"></li>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="navy"></li>
+                                                        <li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="blue"></li>
+                                                      </ul>
+                                                    </li>
+                                                    <li data-wysihtml5-command="insertSpeech" class="command"></li>
+                                                    <li data-wysihtml5-action="change_view" style="display: none;"></li>
+                                                  </ul>
+                                                </header>
+                                                <div data-wysihtml5-dialog="createLink" style="display: none;">
+                                                  <label>
+                                                    Link:
+                                                    <input data-wysihtml5-dialog-field="href" value="http://">
+                                                  </label>
+                                                  <a data-wysihtml5-dialog-action="save">Ok</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Vissza</a>
+                                                </div>
 
+                                                <div data-wysihtml5-dialog="insertImage" style="display: none;">
+                                                  <label>
+                                                    Kép:
+                                                    <input data-wysihtml5-dialog-field="src" value="http://">
+                                                  </label>
+                                                  <a data-wysihtml5-dialog-action="save">Ok</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Vissza</a>
+                                                </div>
+                                              </div>
+                                              <section>
+                                                <form action="" method="post">
+                                                <textarea id="wysihtml5-editor" name="content" spellcheck="false" wrap="off">
+                                                </textarea>
+                                             </section>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="form-actions">
+                                    <div class="row">
+                                       <div class="col-md-offset-3 col-md-9">
+                                          <button type="submit" name="hireksubmit" class="btn btn-circle blue">Küldés</button>
+                                          <a href="hirek"><button type="button" class="btn btn-circle default">Vissza</button></a>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </form>
+                              <!-- END FORM-->
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+         <!-- END PAGE CONTENT-->
+      </div>
+   </div>
+<?php
+   if(isset($_POST["hireksubmit"])) {
+      if(!empty($_POST["cim"]) && !empty($_POST["leiras"]) && !empty($_POST["content"])) {
+         $cim = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["cim"]));
+         $leiras = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["leiras"]));
+         $content = mysqli_real_escape_string($connect,$_POST["content"]);
+         $sql = "INSERT INTO  `rolunk` (`id` ,`cim` ,`leiras`,`tartalom`)
+            VALUES (NULL ,'$cim', '$leiras','$content')";
+         mysqli_query($connect,$sql);
+      }
+  }
+
+}
+?>
