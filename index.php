@@ -12,7 +12,15 @@ fejlec_letrehozas("");
 		
 			<!-- Title & Desc Row Begins -->
 			<div class="row">
-				<div class="slidecenter"><img src="images/slide.jpg"></div>
+				<div class="slidecenter">
+					
+					<div class="szechenyilogo">
+						<img src="images/szechenyilogo.jpg">
+					</div>
+					<div class="slideimage">
+						<img src="images/slide.jpg">
+					</div>
+				</div>
 				<div class="col-md-12 header text-center">
 					<!-- Title --> 
 					<h2 class="title capitalize">Szolgáltatások</h2>

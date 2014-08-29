@@ -1,6 +1,7 @@
 <?php
 function fejlec_letrehozas() {
   session_start();
+  ob_start();
   if($_SESSION["belepve"] != 1 || empty($_SESSION["admin"])) { 
     header("Location: login");
     die();
@@ -150,7 +151,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <li>
                <a href="rolunk-irtak">
                <i class="icon-pencil"></i>
-               <span class="title" title="Hírek szerkesztése">Rólunk írták szerkesztése</span>
+               <span class="title" title="Rólunk írták szerkesztése">Rólunk írták szerkesztése</span>
                </a>
             </li>
             <li>
@@ -175,6 +176,12 @@ License: You must have a valid license purchased only from themeforest(the above
                <a href="iskola">
                <i class="icon-pointer"></i>
                <span class="title" title="Iskola hozzáadása">Iskola hozzáadása</span>
+               </a>
+            </li>
+            <li>
+               <a href="video-feltoltes">
+               <i class="icon-link"></i> 
+               <span class="title" title="Videó feltöltés">Videó feltöltés</span>
                </a>
             </li>
             <li>
@@ -608,7 +615,6 @@ if(isset($_POST["save"])) {
 }
 function uj_hirek_megjelenites() {
 include '../core/connect.php';
-ob_start();
 ?>
    <div class="page-content-wrapper">
       <div class="page-content">
@@ -1253,7 +1259,7 @@ $res = mysqli_query($connect,$sql);
          <!-- END STYLE CUSTOMIZER -->
          <!-- BEGIN PAGE HEADER-->
          <h3 class="page-title">
-         Hírek szerkesztése
+         Rólunk írták szerkesztése
          </h3>
          <div class="note note-success">
             <div class="actions">
@@ -1292,117 +1298,11 @@ $res = mysqli_query($connect,$sql);
 }
 function uj_rolunk_megjelenites() {
 include '../core/connect.php';
-ob_start();
 ?>
    <div class="page-content-wrapper">
       <div class="page-content">
-         <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-         <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-               <div class="modal-content">
-                  <div class="modal-header">
-                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                     <h4 class="modal-title">Modal title</h4>
-                  </div>
-                  <div class="modal-body">
-                      Widget settings form goes here
-                  </div>
-                  <div class="modal-footer">
-                     <button type="button" class="btn blue">Save changes</button>
-                     <button type="button" class="btn default" data-dismiss="modal">Close</button>
-                  </div>
-               </div>
-               <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-         </div>
-         <!-- /.modal -->
-         <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-         <!-- BEGIN STYLE CUSTOMIZER -->
-         <div class="theme-panel hidden-xs hidden-sm">
-            <div class="toggler-close">
-            </div>
-            <div class="theme-options">
-               <div class="theme-option theme-colors clearfix">
-                  <span>
-                  THEME COLOR </span>
-                  <ul>
-                     <li class="color-default current tooltips" data-style="default" data-container="body" data-original-title="Default">
-                     </li>
-                     <li class="color-darkblue tooltips" data-style="darkblue" data-container="body" data-original-title="Dark Blue">
-                     </li>
-                     <li class="color-blue tooltips" data-style="blue" data-container="body" data-original-title="Blue">
-                     </li>
-                     <li class="color-grey tooltips" data-style="grey" data-container="body" data-original-title="Grey">
-                     </li>
-                     <li class="color-light tooltips" data-style="light" data-container="body" data-original-title="Light">
-                     </li>
-                     <li class="color-light2 tooltips" data-style="light2" data-container="body" data-html="true" data-original-title="Light 2">
-                     </li>
-                  </ul>
-               </div>
-               <div class="theme-option">
-                  <span>
-                  Layout </span>
-                  <select class="layout-option form-control input-small">
-                     <option value="fluid" selected="selected">Fluid</option>
-                     <option value="boxed">Boxed</option>
-                  </select>
-               </div>
-               <div class="theme-option">
-                  <span>
-                  Header </span>
-                  <select class="page-header-option form-control input-small">
-                     <option value="fixed" selected="selected">Fixed</option>
-                     <option value="default">Default</option>
-                  </select>
-               </div>
-               <div class="theme-option">
-                  <span>
-                  Sidebar Mode</span>
-                  <select class="sidebar-option form-control input-small">
-                     <option value="fixed">Fixed</option>
-                     <option value="default" selected="selected">Default</option>
-                  </select>
-               </div>
-               <div class="theme-option">
-                  <span>
-                  Sidebar Menu </span>
-                  <select class="sidebar-menu-option form-control input-small">
-                     <option value="accordion" selected="selected">Accordion</option>
-                     <option value="hover">Hover</option>
-                  </select>
-               </div>
-               <div class="theme-option">
-                  <span>
-                  Sidebar Style </span>
-                  <select class="sidebar-style-option form-control input-small">
-                     <option value="default" selected="selected">Default</option>
-                     <option value="light">Light</option>
-                  </select>
-               </div>
-               <div class="theme-option">
-                  <span>
-                  Sidebar Position </span>
-                  <select class="sidebar-pos-option form-control input-small">
-                     <option value="left" selected="selected">Left</option>
-                     <option value="right">Right</option>
-                  </select>
-               </div>
-               <div class="theme-option">
-                  <span>
-                  Footer </span>
-                  <select class="page-footer-option form-control input-small">
-                     <option value="fixed">Fixed</option>
-                     <option value="default" selected="selected">Default</option>
-                  </select>
-               </div>
-            </div>
-         </div>
-         <!-- END STYLE CUSTOMIZER -->
-         <!-- BEGIN PAGE HEADER-->
          <h3 class="page-title">
-         Új hír beküldése
+         Új rólunk beküldése
          </h3>
                    <div class="tab-content">
                      <div class="tab-pane active" id="tab_0">
@@ -1482,7 +1382,7 @@ ob_start();
                                     <div class="row">
                                        <div class="col-md-offset-3 col-md-9">
                                           <button type="submit" name="hireksubmit" class="btn btn-circle blue">Küldés</button>
-                                          <a href="hirek"><button type="button" class="btn btn-circle default">Vissza</button></a>
+                                          <a href="rolunk-irtak"><button type="button" class="btn btn-circle default">Vissza</button></a>
                                        </div>
                                     </div>
                                  </div>
@@ -1503,6 +1403,268 @@ ob_start();
          $content = mysqli_real_escape_string($connect,$_POST["content"]);
          $sql = "INSERT INTO  `rolunk` (`id` ,`cim` ,`leiras`,`tartalom`)
             VALUES (NULL ,'$cim', '$leiras','$content')";
+         mysqli_query($connect,$sql);
+      }
+  }
+
+}
+function felhasznalok_megjelenites() {
+include '../core/connect.php';
+?>
+   <div class="page-content-wrapper">
+      <div class="page-content">
+         <h3 class="page-title">
+         Felhasználó létrehozás
+         </h3>
+                   <div class="tab-content">
+                     <div class="tab-pane active" id="tab_0">
+                                      <div class="portlet light bordered">
+                  <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form action="" class="horizontal-form" method="post">
+                      <div class="form-body">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Felhasználónév</label>
+                              <input type="text" id="felasznalonev" name="felhasznalonev" class="form-control" required>
+                            </div>
+                          </div>
+                          <!--/span-->
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Jelszó</label>
+                              <input type="password" id="password" name="password" class="form-control" required>
+                            </div>
+                          </div>
+                          <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                          <!--/span-->
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Email cím</label>
+                              <input type="email" name="email" class="form-control" required>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Jogosultság</label>
+                              <select class="form-control" name="jogosultsag">
+                                <option value="0">Felhasználó</option>
+                                <option value="1">Laboráns</option>
+                                <option value="2">Laborvezető</option>
+                                <option value="3">Admin</option>
+                              </select>
+                            </div>
+                          </div>
+                          <!--/span-->
+                        </div>
+                        <!--/row-->
+                      </div>
+                      <div class="form-actions right">
+                        <button type="submit" name="regsubmit" class="btn blue"><i class="fa fa-check"></i> Felvitel</button>
+                      </div>
+                    </form>
+                    <!-- END FORM-->
+                  </div>
+                </div>
+                     </div>
+                  </div>
+         <!-- END PAGE CONTENT-->
+      </div>
+   </div>
+<?php
+   if(isset($_POST["regsubmit"])) {
+      if(!empty($_POST["felhasznalonev"]) && !empty($_POST["password"]) && !empty($_POST["email"]) && !empty($_POST["jogosultsag"])) {
+         $username = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["felhasznalonev"]));
+         $pass = htmlspecialchars(mysqli_real_escape_string($connect,md5($_POST["password"])));
+         $email = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["email"]));
+         $jogosultsag = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["jogosultsag"]));
+
+         $sql = "INSERT INTO  `felhasznalok` (`id` ,`felhasznalo` ,`password`,`email`,`admin`)
+            VALUES (NULL ,'$username', '$pass','$email','$jogosultsag')";
+         mysqli_query($connect,$sql);
+      }
+  }
+}
+function iskola_megjelenites() {
+include '../core/connect.php';
+?>
+   <div class="page-content-wrapper">
+      <div class="page-content">
+         <h3 class="page-title">
+         Iskola hozzáadása
+         </h3>
+                   <div class="tab-content">
+                     <div class="tab-pane active" id="tab_0">
+                                      <div class="portlet light bordered">
+                  <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form action="" class="horizontal-form" method="post">
+                      <div class="form-body">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Iskola neve</label>
+                              <input type="text" id="iskolanev" name="iskolanev" class="form-control" required>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-actions right">
+                        <button type="submit" name="iskolasubmit" class="btn blue"><i class="fa fa-check"></i> Felvitel</button>
+                      </div>
+                    </form>
+                    <!-- END FORM-->
+                  </div>
+                </div>
+                     </div>
+                  </div>
+         <!-- END PAGE CONTENT-->
+      </div>
+   </div>
+<?php
+   if(isset($_POST["iskolasubmit"])) {
+      if(!empty($_POST["iskolanev"])) {
+         $iskolanev = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["iskolanev"]));
+
+         $sql = "INSERT INTO  `iskolak` (`id` ,`iskolanev`)
+            VALUES (NULL ,'$iskolanev')";
+         mysqli_query($connect,$sql);
+      }
+  }
+
+}
+function video_feltoltes_megjelenites() {
+include '../core/connect.php';
+$sql = "SELECT nev,tantargy FROM kiserletek order by id ASC";
+$sql2 = "SELECT iskolanev FROM iskolak ORDER BY iskolanev ASC";
+$res = mysqli_query($connect,$sql);
+$res2 = mysqli_query($connect,$sql2);
+?>
+   <div class="page-content-wrapper">
+      <div class="page-content">
+         <h3 class="page-title">
+         Videó feltöltése
+         </h3>
+                   <div class="tab-content">
+                     <div class="tab-pane active" id="tab_0">
+                                      <div class="portlet light bordered">
+                  <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form action="" class="horizontal-form" method="post">
+                      <div class="form-body">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Youtube link</label>
+                              <input type="text" id="felasznalonev" name="felhasznalonev" class="form-control" required>
+                            </div>
+                          </div>
+                          <!--/span-->
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Cím</label>
+                              <input type="text" id="password" name="cim" class="form-control" required>
+                            </div>
+                          </div>
+                          <!--/span-->
+                        </div>
+                        <div class="row">
+                          <!--/span-->
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Címke</label>
+                              <input type="text" id="password" name="cimke" class="form-control" placeholder="címke 1,címke 2, ..." required>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-actions right"></div>
+                         <div class="row">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="control-label">Kisérlet - Biológia</label>
+                               <select class="form-control" name="jogosultsag">    
+                                <?php while($biosz = mysqli_fetch_assoc($res)) { 
+                                  if($biosz["tantargy"] == "Biológia") { ?>
+                                <option value="<?php echo $biosz["nev"]; ?>"><?php echo $biosz["nev"]; ?></option>
+                                <?php
+                                   } 
+                                  } 
+                                ?>
+                              </select>
+                            </div>
+                          </div>
+                          <!--/span-->
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="control-label">Kisérlet - Fizika</label>
+                               <select class="form-control" name="jogosultsag">  
+                                <?php while($a = mysqli_fetch_assoc($res)) { 
+                                  if($a["tantargy"] == "Fizika") { ?>
+                                <option value="<?php echo $a["nev"]; ?>"><?php echo $a["nev"]; ?></option>
+                                <?php
+                                   } 
+                                  } 
+                                ?>
+                              </select>
+                            </div>
+                          </div>
+                           <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="control-label">Kisérlet - Kémia</label>
+                              <select class="form-control" name="jogosultsag">
+                                <option value=""></option>
+                              </select>
+                            </div>
+                          </div>
+                          <!--/span-->
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Iskola</label>
+                              <select class="form-control" name="jogosultsag">
+                               
+                                <option value=""></option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Terem</label>
+                              <select class="form-control" name="terem">
+                                <option value="Labor I.">Labor I.</option>
+                                <option value="Labor II.">Labor II.</option>
+                              </select>
+                            </div>
+                          </div>
+                          <!--/span-->
+                        </div>
+                        <!--/row-->
+                      </div>
+                      <div class="form-actions right">
+                        <button type="submit" name="regsubmit" class="btn blue"><i class="fa fa-check"></i> Felvitel</button>
+                      </div>
+                    </form>
+                    <!-- END FORM-->
+                  </div>
+                </div>
+                     </div>
+                  </div>
+         <!-- END PAGE CONTENT-->
+      </div>
+   </div>
+<?php
+
+   if(isset($_POST["iskolasubmit"])) {
+      if(!empty($_POST["iskolanev"])) {
+         $iskolanev = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["iskolanev"]));
+
+         $sql = "INSERT INTO  `iskolak` (`id` ,`iskolanev`)
+            VALUES (NULL ,'$iskolanev')";
          mysqli_query($connect,$sql);
       }
   }

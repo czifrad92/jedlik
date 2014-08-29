@@ -162,10 +162,10 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 			</select>
 		</div>
 
-		<input type="submit" name="bekuld">
+		<input type="submit" name="bekuld"><br><br>
 		<?php 
 			
-
+		#formból küldött változók elmentése
 			if (isset($_POST["bekuld"])) {
 				$meddig = $_POST["meddig1"] . $_POST["meddig2"];
 				$mettol = $_POST["mettol1"] . $_POST["mettol2"];
@@ -181,31 +181,64 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 				$felhasznaloid = "0";
 				$elfogadva = "0";
 
-				$check = "SELECT * FROM jelentkezesek WHERE y = '$ev' AND m = '$honap' AND d = '$nap' AND elfogadva = '1' AND terem = 'Labor I.' ";
-				//$check2 =
 
-				$talalt = false;
+
+				# a kiválasztott nap elmentése tömbbe (időrend szerint növekvő, azaz a tömb 0. eleme a legkorábbi esemény)
+
+
+				$check = "SELECT * FROM jelentkezesek WHERE y = '$ev' AND m = '$honap' AND d = '$nap' AND elfogadva = '1' AND terem = '$terem' 
+				ORDER BY start_time ";
+
+				$foglalasok = array();
 
 				$res = mysqli_query($connect, $check);
 						while ($a = mysqli_fetch_assoc($res)){
-						if ( (strtotime($a['start_time']) < strtotime($mettol)) && (strtotime($a['start_time']) < strtotime($meddig))){
-							$talalt = true;
-						}
+						$foglalasok[] = $a;
 					}
+					
+				#foglalások tömb hosszának deklarálása
+				$count = count($foglalasok);
+				$done = false;
 
-				if ($talalt == false){
-					echo "Sikeres foglalás";
+
+			#első foglalás a napon
+
+			if ($done == false){
+				//echo "1. ciklus";
+				if ( (strtotime($meddig) < strtotime($foglalasok[0]['start_time'])) || (!$foglalasok[0]['start_time']) ) {
+					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletid, eszkozok, iskolaid, terem, tantargy, elfogadva)
+					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$kiserlet', '$eszkozok', '$iskola', '$terem', '$tantargy' , '1')";
+					mysqli_query($connect,$sql);
+					$done = true;
+					echo "done1";
 				}
-				else{
-					echo "Foglalt";
-				}
-
-
-
-				/*$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletid, eszkozok, iskolaid, terem, tantargy)
-				VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$kiserlet', '$eszkozok', '$iskola', '$terem', '$tantargy')";
-				mysqli_query($connect,$sql);*/
 			}
+
+			#ha az első esemény vége korábban van mint az új felvitt esemény kezdete
+
+			if ($done == false){
+				if ((strtotime($foglalasok[0]['end_time']) < strtotime($mettol)) && ($count == 1)){
+					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletid, eszkozok, iskolaid, terem, tantargy, elfogadva)
+					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$kiserlet', '$eszkozok', '$iskola', '$terem', '$tantargy' , '1')";
+					mysqli_query($connect,$sql);
+					$done = true;
+					echo "done2";
+				}
+			}
+
+			/*
+			if ($done == false){
+				if (strtotime($foglalasok[$count]['end_time']) < strtotime($mettol) ) {
+					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletid, eszkozok, iskolaid, terem, tantargy, elfogadva)
+					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$kiserlet', '$eszkozok', '$iskola', '$terem', '$tantargy' , '1')";
+					mysqli_query($connect,$sql);
+					$done = true;
+				}
+			}*/
+
+
+				
+			} #gomblenyomás vége
 ?>
 
 	</form>

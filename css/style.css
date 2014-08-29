@@ -47,7 +47,6 @@ body {
 	padding: 0;
 	font-family: 'Roboto', sans-serif;
 	-webkit-font-smoothing: antialiased !important;
-	background: #f2f6fa;
 	margin-top: 100px;
 }
 a, a:hover, a:focus, .btn:focus{
@@ -2717,9 +2716,6 @@ label[for=meddig] {
 	margin-left: 20px;
 }
 
-.slidecenter {
-	text-align: center;
-}
 
 .iconholder {
 	background: url('../images/szurkelogo.png') no-repeat;
@@ -2771,4 +2767,30 @@ label[for=meddig] {
 .hircontainer {
 	width: 95%;
 	margin: 0px auto;
+}
+
+
+.slidecenter {
+	width: 100%;
+	height: 435px;
+	float: left;
+}
+
+.slideimage {
+	float: right;
+	width: 82%;
+}
+
+.slideimage img {
+	width: 100%;
+}
+
+.szechenyilogo {
+	float: right;
+	width: 17%;
+	height: 36%;
+}
+
+.szechenyilogo img {
+	height: 100%;
 }
