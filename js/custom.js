@@ -44,7 +44,7 @@ jQuery(document).ready(function($) {
 	$(".load-posts").click(function() {
 		if($(this).hasClass('disable')) return false;
 		
-			$(this).html('<i class="fa fa-spin fa-spinner"></i> Loading');
+			$(this).html('<i class="fa fa-spin fa-spinner"></i> Töltés');
 			
 			var $hidden = loadtext.filter(':hidden:first').delay(600);  
    
@@ -53,7 +53,7 @@ jQuery(document).ready(function($) {
 				$(this).addClass('disable');
 				$(this).fadeTo("slow", 0.23)/*.delay(600)*/
 				.queue(function(n) {
-				 $(this).html('All Posts Loaded');
+				 $(this).html('Összes hír betöltve.');
 				 n();
 				}).fadeTo("slow", 1);
 			
@@ -61,7 +61,7 @@ jQuery(document).ready(function($) {
 				$hidden.fadeIn(500);
 				$(this).fadeTo("slow", 0.23)/*.delay(600)*/
 				.queue(function(g) {
-				 $(this).html('Load More Post <i class="flaticon-arrow209">');
+				 $(this).html('További hírek >>');
 				 g();
 				}).fadeTo("slow", 1);			
 		   	}

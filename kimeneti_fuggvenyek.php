@@ -11,16 +11,18 @@ function fejlec_letrehozas($title) {
 	<meta charset="utf-8">
 	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 	<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
-	<title><?php if (!empty($title)) echo $title . ' - '; ?>Természettudományos Labor</title>    	
+	<title><?php if (!empty($title)) echo $title . ' - '; ?>Természettudományi Labor</title>    	
 	<!-- Title and Meta Tags Ends -->
 	
 	<!-- Google Font Begins -->	
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700italic,700,900,900italic' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Armata' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 	<!-- Google Font Ends -->		
 	
 	<!-- CSS Begins-->	
 	<link href='http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'/>
+
 	<link href="css/flaticon.css" rel="stylesheet" type="text/css" />
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="css/portfolio.css" rel="stylesheet" type="text/css" />
@@ -31,6 +33,7 @@ function fejlec_letrehozas($title) {
 	<link href="css/tweet-carousel.css" rel="stylesheet" type="text/css" />
 	<!-- Main Style -->
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
+
 
 
 
@@ -60,54 +63,45 @@ function fejlec_letrehozas($title) {
 							<!-- Logo Begins -->
 							<a href="index" class="logolink">
 								<div id="logo" class="site-logo no-padding logo-main">
-									<img src="images/logo.png" class="logoimg"><a title="Logo" href="index">Természettudományos Labor</a>
+									<img src="images/logo.png" class="logoimg"><a title="Logo" href="index">Természettudományi Labor</a>
 								</div><!-- Logo Ends -->
 							</a>
 							<!-- Navigation Menu Begins -->
-							<div id="navigation" class="no-padding navbar top-navbar fomenuholder">	
-							
-								<!-- Mobile Nav Toggle Begins -->
-								<div class="navbar-header nav-respons">
-									<button data-target=".bs-navbar-collapse" data-toggle="collapse" type="button" class="navbar-toggle">
-										<span class="sr-only">Toggle navigation</span>
-										<span class="icon-bar"></span>
-										<span class="icon-bar"></span>
-										<span class="icon-bar"></span>
-									</button>
-								</div><!-- Mobile Nav Toggle Ends -->
-								
+							<div id="navigation" class="no-padding navbar top-navbar fomenuholder">								
 								<!-- Menu Begins -->
 								<nav id="topnav" role="navigation" class="collapse navbar-collapse bs-navbar-collapse no-padding fomenu">
 									<ul class="nav navbar-nav navbar-right uppercase">
-										<li><a href="index" class="scroll">Főoldal</a></li>
-										<li><a href="hirek" class="scroll">Hírek</a></li>
+										<li><a href="index" title="Főoldal" class="scroll">Főoldal</a></li>
+										<li><a href="hirek" title="Hírek" class="scroll">Hírek</a></li>
 
 										<li class="dropdown">
-											<a href="" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10">
+											<a href="" class="dropdown-toggle" title="A projektekről" data-toggle="dropdown" data-hover="dropdown" data-delay="10">
 												A projektről<i class="fa fa-angle-down"></i> 
 											</a>
 											<!-- DropDown Menu Begins -->
 											<ul class="menulist dropdown-menu">
-												<li><a href="projektismerteto">Projektismertető</a></li>
-												<li><a href="partner-iskolak">Partner iskolák</a></li>
-												<li><a href="rolunk-irtak">Rólunk írták</a></li>
-												<li><a href="kapcsolat">Kapcsolat</a></li>
+												<li><a title="Projektismertető" href="projektismerteto">Projektismertető</a></li>
+												<li><a title="Partner iskolák" href="partner-iskolak">Partner iskolák</a></li>
+												<li><a title="Rólunk írták" href="rolunk-irtak">Rólunk írták</a></li>
+												<li><a title="Kapcsolat" href="kapcsolat">Kapcsolat</a></li>
 											</ul><!-- DropDown Menu Ends -->
 										</li>
 
 										<li class="dropdown">
-											<a href="" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10">
+											<a href="" title="Kísérletek" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="10">
 												Kísérletek<i class="fa fa-angle-down"></i> 
 											</a>
 											<!-- DropDown Menu Begins -->
 											<ul class="menulist dropdown-menu">
-												<li><a href="biologia">Biológia</a></li>
-												<li><a href="fizika">Fizika</a></li>
-												<li><a href="kemia">Kémia</a></li>
-												<li><a href="videok">Videók</a></li>
+												<li><a title="Biológia" href="biologia">Biológia</a></li>
+												<li><a title="Fizika" href="fizika">Fizika</a></li>
+												<li><a title="Kémia" href="kemia">Kémia</a></li>
+												<li><a title="Videók" href="videok">Videók</a></li>
+												<li><a title="Galéria" href="galeria">Galéria</a></li>
 											</ul><!-- DropDown Menu Ends -->
 										</li>
-										<li><a href="idopontfoglalas" class="scroll">Időpontfoglalás</a></li>
+										<li><a href="/admin" title="Időpontfoglalás" class="scroll">Időpontfoglalás</a></li>
+										<li><a href="/gyengenlato" class="scroll" title="Akadálymentesített nézet"><img src="images/vakbarat.png"></a></li>
 									</ul>
 								</nav><!-- Menu Ends -->						
 							</div><!-- Navigation Menu Ends -->
@@ -130,10 +124,6 @@ function fejlec_letrehozas($title) {
 function lablec_letrehozas() {
 	// Lábléc,footer
 ?>
-	<!-- Footer Section Begins -->
-	<section class="szechenyikepek">
-		<img src="images/szechenyi.png"><img src="images/eu.png">
-	</section>
 
 
 	<section id="footer" class="footer">

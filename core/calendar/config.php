@@ -17,9 +17,9 @@
 *******************************************************/
 
 	$db_host = "localhost";
-	$db_user = "piarso01_jedlik";
-	$db_pass = "gd4Hq)f=@Ps{";
-	$db = "piarso01_jedlik";
+	$db_user = "labor";
+	$db_pass = "4Ag1b^943S";
+	$db = "laborjedlikhu";
 
 // Prefix added to table names.  Do not change after
 // initial installation.

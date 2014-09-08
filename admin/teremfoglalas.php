@@ -3,7 +3,7 @@
 session_start();
 // munkamenet indítása
 include 'kimeneti_fuggvenyek.php';
-include 'core/connect.php';
+include '../core/connect.php';
 
 fejlec_letrehozas("Időpontfoglalás küldése");
 
@@ -11,9 +11,9 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 	####################################################################
 
 
-	require("core/calendar/config.php");
-	require("core/calendar/lang/lang." . LANGUAGE_CODE . ".php");
-	require("core/calendar/functions.php");
+	require("../core/calendar/config.php");
+	require("../core/calendar/lang/lang." . LANGUAGE_CODE . ".php");
+	require("../core/calendar/functions.php");
 
 
 	$month = 
@@ -24,7 +24,7 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 	$m = (!$month) ? date("n") : $month;
 	$y = (!$year)  ? date("Y") : $year;
 
-	require("core/calendar/templates/" . TEMPLATE_NAME . ".php");
+	require("../core/calendar/templates/" . TEMPLATE_NAME . ".php");
 
 	####################################################################
 
@@ -38,7 +38,6 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 <div class="idopontfoglalas-container">
 	<form method="POST" action="">
 		<div class="idopontfoglalas-container-label">
-			<label for="iskola">Iskola</label><br>
 			<label for="tantargy">Tantárgy</label><br>
 			<label for="evfolyam">Évfolyam</label><br>
 			<label for="kiserletek">Kísérletek</label><br>
@@ -49,16 +48,6 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 
 
 		<div class="idopontfoglalas-container-form">
-			<select name="iskola" class="idopontfoglalas-iskola" id="iskola">
-					<?php 
-					$lekerdezes = "SELECT * FROM iskolak";
-					$res = mysqli_query($connect, $lekerdezes);
-					while ($i = mysqli_fetch_assoc($res)) { ?>
-						<option value="<?php echo $i["id"] ?>"><?php echo $i["iskolanev"]; ?></option>
-					<?php } ?>
-
-
-			</select><br>
 
 			<select name="tantargy" class="idopontfoglalas-tantargy" id="tantargy">
 				<option value="Biológia">Biológia</option>
@@ -169,7 +158,7 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 			if (isset($_POST["bekuld"])) {
 				$meddig = $_POST["meddig1"] . $_POST["meddig2"];
 				$mettol = $_POST["mettol1"] . $_POST["mettol2"];
-				$iskola = $_POST["iskola"];
+				$iskola = $_SESSION["iskola"];
 				$tantargy = $_POST["tantargy"];
 				$evfolyam = $_POST["evfolyam"];
 				$kiserlet = $_POST["kiserletek"];
@@ -202,10 +191,24 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 				
 				$done = false;
 
+			/*if ($count > 0){
 				for ($i = 0; $i <= $count; $i++){
 				echo $foglalasok[$i]['start_time'] . " " . $foglalasok[$i]['end_time'] . "<br";
 				echo $i . "<br>";
 				echo $count;
+			}*/
+		}
+
+
+
+			#legelső foglalás a rendszerben
+
+			if (($done == false) && ($count == 0)){
+					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletid, eszkozok, iskola, title, terem, tantargy, elfogadva)
+					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$kiserlet', '$eszkozok', '$iskola', 'title', '$terem', '$tantargy' , '0')";
+					mysqli_query($connect,$sql);
+					$done = true;
+					//echo "done0";
 			}
 
 
@@ -214,8 +217,8 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 			if ($done == false){
 				//echo "1. ciklus";
 				if ( (strtotime($meddig) < strtotime($foglalasok[0]['start_time'])) || (!$foglalasok[0]['start_time']) ) {
-					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletid, eszkozok, iskolaid, terem, tantargy, elfogadva)
-					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$kiserlet', '$eszkozok', '$iskola', '$terem', '$tantargy' , '1')";
+					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletid, eszkozok, iskola, title, terem, tantargy, elfogadva)
+					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$kiserlet', '$eszkozok', '$iskola', 'title', '$terem', '$tantargy' , '0')";
 					mysqli_query($connect,$sql);
 					$done = true;
 					echo "done1";
@@ -228,9 +231,9 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 				$foglalasok[$count]['start_time'] = "24:00:00";
 				for ($i = 0; $i <= $count; $i++){
 					if (($foglalasok[$i]['end_time'] < $mettol) && ($foglalasok[$i+1]['start_time'] > $meddig)){
-						$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletid, eszkozok, iskolaid, terem, tantargy, elfogadva)
-						VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$kiserlet', '$eszkozok', '$iskola', '$terem', '$tantargy' , '1')";
-						mysqli_query($connect,$sql);
+					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletid, eszkozok, iskola, title, terem, tantargy, elfogadva)
+					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$kiserlet', '$eszkozok', '$iskola', NULL, '$terem', '$tantargy' , '0')";
+					mysqli_query($connect,$sql);
 						$done = true;
 						echo "done2";
 						break;

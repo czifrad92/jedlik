@@ -1,7 +1,7 @@
 <?php javaScript() ?>
 
 <div class="calendar-container">
-		<?php echo $scrollarrows ?>
+		<?php //echo $scrollarrows ?>
 		<div class="date-header"><?php echo $lang['months'][$m-1]; ?>&nbsp;<?php echo $y; ?></div>
 
 	<div class="calendar-form-holder">

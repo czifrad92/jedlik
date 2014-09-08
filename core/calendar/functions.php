@@ -101,7 +101,7 @@ function javaScript()
 	function submitMonthYear() {
 		document.monthYear.method = "post";
 		document.monthYear.action = 
-			"idopontfoglalas.php?month=" + document.monthYear.month.value + 
+			"teremfoglalas.php?month=" + document.monthYear.month.value + 
 			"&year=" + document.monthYear.year.value;
 		document.monthYear.submit();
 	}
@@ -169,13 +169,13 @@ function writeCalendar($month, $year)
 		: false;
 
 	# get number of days in month
-	$days = date("t", mktime(0,0,0,$month,1,$year));
+	$days = date("t", time(0,0,0,$month,1,$year));
 
 	# initialize day variable to zero, unless $weekpos is zero
 	if ($weekpos == 0) $day = 1; else $day = 0;
 	
 	# initialize today's date variables for color change
-	$timestamp = mktime() + CURR_TIME_OFFSET * 3600;
+	$timestamp = time() + CURR_TIME_OFFSET * 3600;
 	$d = date('j', $timestamp); 
 	$m = date('n', $timestamp); 
 	$y = date('Y', $timestamp);
@@ -327,7 +327,7 @@ function getEventDataArray($month, $year)
 
 function getFirstDayOfMonthPosition($month, $year)
 {
-	$weekpos = date("w", mktime(0,0,0,$month,1,$year));
+	$weekpos = date("w", time(0,0,0,$month,1,$year));
 
 	// adjust position if weekstart not Sunday
 	if (WEEK_START != 0) {

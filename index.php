@@ -3,6 +3,7 @@
 session_start();
 // munkamenet indítása
 include 'kimeneti_fuggvenyek.php';
+include 'core/connect.php';
 
 fejlec_letrehozas("");
 ?>
@@ -14,11 +15,12 @@ fejlec_letrehozas("");
 			<div class="row">
 				<div class="slidecenter">
 					
-					<div class="szechenyilogo">
-						<img src="images/szechenyilogo.jpg">
-					</div>
+
 					<div class="slideimage">
-						<img src="images/slide.jpg">
+						<div class="szechenyilogo">
+							<img src="images/szechenyilogo.png">
+						</div>
+						
 					</div>
 				</div>
 				<div class="col-md-12 header text-center">
@@ -53,7 +55,7 @@ fejlec_letrehozas("");
 						</div>
 						<!-- Title -->
 						<h4 class="title-inner">Időpontfoglalás</h4>
-						<div class="read-more"><a href="idopontfoglalasform">Tovább >></a></div>
+						<div class="read-more"><a href="/admin">Tovább >></a></div>
 					</div>
 					<hr class="features-border">
 				</div>
@@ -126,35 +128,25 @@ fejlec_letrehozas("");
 	</section><!-- About Our Company Ends -->
 	
 	
-	<!-- Team Section Begins -->
-	<section id="team" class="team">
+	<!--<section id="team" class="team">
 		<div class="container team-inner">
-			<!-- Title & Desc Row Begins -->
 			<div class="row">
 				<div class="col-md-12 header text-center">
-					<!-- Title --> 
 					<h2 class="title capitalize">Videók</h2>
 				</div>
-			</div><!-- Title & Desc Row Ends -->
+			</div>
 			
-			<!-- Team Row Begins -->
 			<div class="row">
-				<!-- Team 1 Begins -->
 				<div class="col-md-3 col-sm-6 animated" data-animation="fadeInLeft" data-animation-delay="400">
 					<div class="team-box">
-						<!-- Team Box Inner Begins --> 
 						<div class="team-box-inner">
-							<!-- Thumbnail -->
 							<div class="team-thumbnail">
 								<img src="images/team/1.jpg" width="715" height="515" alt="team" class="img-responsive" />
 							</div>
-							<!-- Title -->
 							<h3 class="team-title text-center normal">Masum Rana</h3>
 							<h4 class="role1 text-center">UI/UX Expert</h4>
-							<!-- Description -->
 							<p class="text-center">Ut enim ad minim veniam, quis nos-trud exercitation ullamco laboris</p>
-						</div><!-- Team Box Inner Ends -->
-						<!-- Social Icons -->
+						</div>
 						<div class="social-icon">
 							<a href="#"><i class="fa fa-flickr"></i></a>
 							<a href="#"><i class="fa fa-vimeo-square"></i></a>
@@ -162,24 +154,18 @@ fejlec_letrehozas("");
 							<a href="#"><i class="fa fa-google-plus"></i></a>
 						</div>
 					</div>
-				</div><!-- Team 1 Ends -->
+				</div>
 				
-				<!-- Team 2 Begins --> 
 				<div class="col-md-3 col-sm-6 animated" data-animation="fadeInUp" data-animation-delay="400">
 					<div class="team-box">
-						<!-- Team Box Inner Begins --> 
 						<div class="team-box-inner">
-							<!-- Thumbnail -->
 							<div class="team-thumbnail">
 								<img src="images/team/2.jpg" width="715" height="515" alt="team" class="img-responsive" />
 							</div>							
-							<!-- Title -->
 							<h3 class="team-title text-center normal">Mahfuz Riad</h3>
 							<h4 class="role2 text-center">PHP Developer</h4>
-							<!-- Description -->
 							<p class="text-center">Ut enim ad minim veniam, quis nos-trud exercitation ullamco laboris</p>							
-						</div><!-- Team Box Inner Ends -->
-						<!-- Social Icons -->
+						</div>
 						<div class="social-icon">
 							<a href="#"><i class="fa fa-flickr"></i></a>
 							<a href="#"><i class="fa fa-vimeo-square"></i></a>
@@ -187,24 +173,18 @@ fejlec_letrehozas("");
 							<a href="#"><i class="fa fa-google-plus"></i></a>
 						</div>
 					</div>
-				</div><!-- Team 2 Ends -->
+				</div>
 				
-				<!-- Team 3 Begins --> 
 				<div class="col-md-3 col-sm-6 animated" data-animation="fadeInUp" data-animation-delay="400">
 					<div class="team-box">
-						<!-- Team Box Inner Begins --> 
 						<div class="team-box-inner">
-							<!-- Thumbnail -->
 							<div class="team-thumbnail">
 								<img src="images/team/3.jpg" width="715" height="515" alt="team" class="img-responsive" />
 							</div>							
-							<!-- Title -->
 							<h3 class="team-title text-center normal">Nasir Ovodro</h3>
 							<h4 class="role3 text-center">Frontend Dev</h4>
-							<!-- Description -->
 							<p class="text-center">Ut enim ad minim veniam, quis nos-trud exercitation ullamco laboris</p>							
-						</div><!-- Team Box Inner Ends -->
-						<!-- Social Icons -->
+						</div>
 						<div class="social-icon">
 							<a href="#"><i class="fa fa-flickr"></i></a>
 							<a href="#"><i class="fa fa-vimeo-square"></i></a>
@@ -212,24 +192,18 @@ fejlec_letrehozas("");
 							<a href="#"><i class="fa fa-google-plus"></i></a>
 						</div>
 					</div>
-				</div><!-- Product 3 Ends -->
+				</div>
 				
-				<!-- Team 4 Begins --> 
 				<div class="col-md-3 col-sm-6 animated" data-animation="fadeInRight" data-animation-delay="400">
 					<div class="team-box">
-						<!-- Team Box Inner Begins --> 
 						<div class="team-box-inner">
-							<!-- Thumbnail -->
 							<div class="team-thumbnail">
 								<img src="images/team/4.jpg" width="715" height="515" alt="team" class="img-responsive" />
 							</div>							
-							<!-- Title -->
 							<h3 class="team-title text-center normal">Rashed Chotta</h3>
 							<h4 class="role4 text-center">SEO Marketer</h4>
-							<!-- Description -->
 							<p class="text-center">Ut enim ad minim veniam, quis nos-trud exercitation ullamco laboris</p>							
-						</div><!-- Team Box Inner Ends -->
-						<!-- Social Icons -->
+						</div>
 						<div class="social-icon">
 							<a href="#"><i class="fa fa-flickr"></i></a>
 							<a href="#"><i class="fa fa-vimeo-square"></i></a>
@@ -237,11 +211,11 @@ fejlec_letrehozas("");
 							<a href="#"><i class="fa fa-google-plus"></i></a>
 						</div>
 					</div>
-				</div><!-- Team 4 Ends -->
+				</div>
 				
-			</div><!-- Team Row Ends -->
+			</div>
 		</div>	
-	</section><!-- Team Section Ends -->
+	</section>-->
 	
 	
 	<!-- Recent Blog Begins -->
@@ -253,8 +227,6 @@ fejlec_letrehozas("");
 				<div class="col-md-12 header text-center">
 					<!-- Title --> 
 					<h2 class="title capitalize">Hírek</h2>
-					<!-- Description --> 
-					<p class="desc">We ensure quality & support. People love us & we love them. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 				</div>
 			</div><!-- Title & Desc Row Ends -->
 		
@@ -264,194 +236,41 @@ fejlec_letrehozas("");
 				<!-- Row 1 Begins -->						
 				<div class="row load-more active title-top">
 				
+
+					<?php 
+						$hircount = 0;
+						$hirsql = "SELECT * FROM hirek ORDER BY date DESC LIMIT 2";
+						$res = mysqli_query($connect, $hirsql);
+						while ($a = mysqli_fetch_assoc($res))
+						{
+					?>
+
+
 					<!-- Blog 1 Begins -->							
 					<div class="col-md-6 col-sm-6 animated" data-animation="fadeInLeft" data-animation-delay="400">					
 						<!-- Blog 1 Box -->
 						<div class="blog-box effects clearfix effect6">
-							<!-- Blog 1 image -->
-							<div class="blog-image img">
-								<img src="images/blog/1.jpg" width="260" height="350" alt="blog" class="img-responsive" />
-								<!-- Overlay Gallery -->										
-								<div class="overlay">
-									<a href="images/blog/1.jpg" data-rel="prettyPhoto[gallery1]" class="expand"><i class="fa fa-expand"></i></a>
-								</div>	
-							</div>
 							<!-- Blog 1 content -->
 							<div class="blog-content">
-								<h2>A Sample Blog Heading Goes Here</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute</p>
-								<a href="#" class="btn slide-btn">Read More <i class="flaticon-arrow209"></i></a>
+								<h2><?php echo $a['cim']; ?></h2>
+								<p><?php echo $a['leiras']; ?></p>
+								<a href="hirek?id=<?php echo $a['id']?> " class="btn slide-btn">Tovább >></a>
 							</div>
 						</div><!-- Blog 1 Box Ends -->					
 					</div><!-- Blog 1 Ends -->		
-					
-					<!-- Blog 2 Begins -->
-					<div class="col-md-6 col-sm-6 animated" data-animation="fadeInRight" data-animation-delay="400">
-						<!-- Blog 2 Box Begins -->
-						<div class="blog-box effects clearfix effect6">
-							<!-- Blog 2 image -->
-							<div class="blog-image img">
-								<img src="images/blog/2.jpg" width="260" height="350" alt="blog" class="img-responsive" />
-								<!-- Overlay Gallery -->										
-								<div class="overlay">
-									<a href="images/blog/2.jpg" data-rel="prettyPhoto[gallery1]" class="expand"><i class="fa fa-expand"></i></a>
-								</div>
-							</div>
-							<!-- Blog 2 content -->
-							<div class="blog-content">
-								<h2>A Sample Blog Heading Goes Here</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute </p>
-								<a href="#" class="btn slide-btn">Read More <i class="flaticon-arrow209"></i></a>
-							</div>
-						</div><!-- Blog 2 Box Ends -->
-					</div><!-- Blog 2 Begins -->
+
+					<?php 
+						}
+					?>
 					
 				</div><!-- Row 1 Ends -->
-				
-				<!-- Row 2 Begins -->
-				<div class="row load-more active title-top">
-								
-					<!-- Blog 3 Begins -->
-					<div class="col-md-6 col-sm-6 animated" data-animation="fadeInLeft" data-animation-delay="400">
-						<!-- Blog 3 Box Begins -->
-						<div class="blog-box effects clearfix effect6">
-							<!-- Blog 3 image -->
-							<div class="blog-image img">
-								<img src="images/blog/3.jpg" width="260" height="350" alt="blog" class="img-responsive" />
-								<!-- Overlay Gallery -->										
-								<div class="overlay">
-									<a href="images/blog/3.jpg" data-rel="prettyPhoto[gallery1]" class="expand"><i class="fa fa-expand"></i></a>
-								</div>
-							</div>
-							<!-- Blog 3 content -->
-							<div class="blog-content">
-								<h2>A Sample Blog Heading Goes Here</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute </p>
-								<a href="#" class="btn slide-btn">Read More <i class="flaticon-arrow209"></i></a>
-							</div>
-						</div><!-- Blog 3 Box Ends -->
-					</div><!-- Blog 3 Ends -->
-					
-					<!-- Blog 4 Begins -->
-					<div class="col-md-6 col-sm-6 animated" data-animation="fadeInRight" data-animation-delay="400">
-						<!-- Blog 4 Box Begins -->
-						<div class="blog-box effects clearfix effect6">
-							<!-- Blog 4 image -->
-							<div class="blog-image img">
-								<img src="images/blog/4.jpg" width="260" height="350" alt="blog" class="img-responsive" />
-								<!-- Overlay Gallery -->										
-								<div class="overlay">
-									<a href="images/blog/4.jpg" data-rel="prettyPhoto[gallery1]" class="expand"><i class="fa fa-expand"></i></a>
-								</div>
-							</div>
-							<!-- Blog 4 content -->
-							<div class="blog-content">
-								<h2>A Sample Blog Heading Goes Here</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute </p>
-								<a href="#" class="btn slide-btn">Read More <i class="flaticon-arrow209"></i></a>
-							</div>
-						</div><!-- Blog 4 Box Ends -->
-					</div><!-- Blog 4 Ends -->
-					
-				</div><!-- Row 2 Ends -->
-				
-				
-				<!-- Row 3 Begins/ Hidden Blogs -->
-				<div class="row load-more title-top">
-				
-					<!-- Blog 5 Begins -->
-					<div class="col-md-6 col-sm-6">
-						<!-- Blog 5 Box Begins -->
-						<div class="blog-box effects clearfix effect6">
-							<!-- Blog 5 image -->
-							<div class="blog-image img">
-								<img src="images/blog/1.jpg" width="260" height="350" alt="blog" class="img-responsive" />
-								<!-- Overlay Gallery -->										
-								<div class="overlay">
-									<a href="images/blog/1.jpg" data-rel="prettyPhoto[gallery1]" class="expand"><i class="fa fa-expand"></i></a>
-								</div>
-							</div>
-							<!-- Blog 5 content -->
-							<div class="blog-content">
-								<h2>A Sample Blog Heading Goes Here</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute </p>
-								<a href="#" class="btn slide-btn">Read More <i class="flaticon-arrow209"></i></a>
-							</div>
-						</div><!-- Blog 5 Box Ends -->
-					</div><!-- Blog 5 Ends -->
-					
-					<!-- Blog 6 Begins -->
-					<div class="col-md-6 col-sm-6">
-						<!-- Blog 6 Box Begins -->
-						<div class="blog-box effects clearfix effect6">
-							<!-- Blog 6 image -->
-							<div class="blog-image img">
-								<img src="images/blog/2.jpg" width="260" height="350" alt="blog" class="img-responsive" />
-								<!-- Overlay Gallery -->										
-								<div class="overlay">
-									<a href="images/blog/3.jpg" data-rel="prettyPhoto[gallery1]" class="expand"><i class="fa fa-expand"></i></a>
-								</div>
-							</div>
-							<!-- Blog 6 content -->
-							<div class="blog-content">
-								<h2>A Sample Blog Heading Goes Here</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute </p>
-								<a href="#" class="btn slide-btn">Read More <i class="flaticon-arrow209"></i></a>
-							</div>
-						</div><!-- Blog 6 Box Ends -->
-					</div><!-- Blog 6 Ends -->
-				</div><!-- Row 3 Ends / Hidden Blog Ends -->
-				
-		
-				<!-- Row 4 Begins/ Hidden Blogs -->
-				<div class="row load-more title-top">
-								
-					<!-- Blog 5 Begins -->
-					<div class="col-md-6 col-sm-6">
-						<!-- Blog 5 Box Begins -->
-						<div class="blog-box effects clearfix effect6">
-							<!-- Blog 5 image -->
-							<div class="blog-image img">
-								<img src="images/blog/3.jpg" width="260" height="350" alt="blog" class="img-responsive" />
-								<!-- Overlay Gallery -->										
-								<div class="overlay">
-									<a href="images/blog/1.jpg" data-rel="prettyPhoto[gallery1]" class="expand"><i class="fa fa-expand"></i></a>
-								</div>
-							</div>
-							<!-- Blog 5 content -->
-							<div class="blog-content">
-								<h2>A Sample Blog Heading Goes Here</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute </p>
-								<a href="#" class="btn slide-btn">Read More <i class="flaticon-arrow209"></i></a>
-							</div>
-						</div><!-- Blog 5 Box Ends -->
-					</div><!-- Blog 5 Ends -->
-					
-					<!-- Blog 6 Begins -->
-					<div class="col-md-6 col-sm-6">
-						<!-- Blog 6 Box Begins -->
-						<div class="blog-box effects clearfix effect6">
-							<!-- Blog 6 image -->
-							<div class="blog-image img">
-								<img src="images/blog/4.jpg" width="260" height="350" alt="blog" class="img-responsive" />
-								<!-- Overlay Gallery -->										
-								<div class="overlay">
-									<a href="images/blog/3.jpg" data-rel="prettyPhoto[gallery1]" class="expand"><i class="fa fa-expand"></i></a>
-								</div>
-							</div>
-							<!-- Blog 6 content -->
-							<div class="blog-content">
-								<h2>A Sample Blog Heading Goes Here</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute </p>
-								<a href="#" class="btn slide-btn">Read More <i class="flaticon-arrow209"></i></a>
-							</div>
-						</div><!-- Blog 6 Box Ends -->
-					</div><!-- Blog 6 Ends -->
-				</div><!-- Row 4 Ends / Hidden Blog Ends -->
+
 				
 				<!-- Load More Post Button -->
 				<div class="col-md-12 load-post text-center">
-					<button class="btn slide-btn load-posts" type="button">Load More Post <i class="flaticon-arrow209"></i></button>
+					<a href="hirek">
+						<button class="btn slide-btn load-posts" type="button">További hírek >></button>
+					</a>
 				</div><!-- Load More Button Ends -->					
 			</div><!-- Blog Inner Ends -->		
 		</div><!-- Container Ends -->

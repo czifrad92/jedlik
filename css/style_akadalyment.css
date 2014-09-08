@@ -1,12 +1,15 @@
+* {
+	background: #000;
+	color:#FFFF00;
+}
 
 body {
-	color:#333333;
+	
 	font-size:14px;
 	padding: 0;
 	font-family: 'Roboto', sans-serif;
 	-webkit-font-smoothing: antialiased !important;
 	margin-top: 100px;
-	overflow-x: hidden;
 }
 a, a:hover, a:focus, .btn:focus{
 	text-decoration: none;
@@ -63,12 +66,13 @@ canvas {
 }
 /* ------------- Page Loader Styles ------------- */
 #pageloader {
-	background-color: #FFFFFF;
+	background-color: #000;
 	height: 100%;
 	position: fixed;
 	top: 0;
 	width: 100%;
 	z-index: 9999;
+	display: none;
 } 
 .loader-item {
 	background: none repeat scroll 0 0 #FFFFFF;
@@ -267,9 +271,9 @@ a.expand {
 	left: 0;    
 	right: 0;
 	top: 0;
-	padding: 10px 40px 10px 45px;
+	padding: 10px 13px 10px;
 	z-index: 9999;
-	background-color: #3498db !important;
+	background-color: #000 !important;
 	position: fixed;
 }
 .site-logo a {
@@ -277,7 +281,7 @@ a.expand {
 	font-size: 27px;
 	font-style: normal;
 	font-weight: 300;
-	color: #FFFFFF;
+	color: #FFFF00;
 	text-transform: uppercase;
 	line-height: 56px;
 }
@@ -290,14 +294,15 @@ a.expand {
 }
 .top-navbar ul.nav a {
 	font-family: 'Roboto', sans-serif;
-	font-size: 14px;
+	font-size: 18px;
 	font-weight: 400;
 	font-style: normal;
-	color: #FFFFFF;
+	color: #FFFF00;
+	text-decoration: underline;
 }
 .top-navbar ul.nav a:hover, .top-navbar ul.nav a:focus {
-	background:none !important;
-	color: #2a3643;
+	background:#fff !important;
+	color: #000;
 }
 .navbar-toggle{
 	background-color:#2c3e50;
@@ -1163,9 +1168,8 @@ a.expand {
 }
 
 .footerbox {
-	width: 310px;
+	width: 410px;
 	float: left;
-	margin-left: 50px;
 }
 
 .footerbox a {
@@ -2471,7 +2475,7 @@ blockquote .author-name {
 }
 
 .logo-main {
-	width: 45%;
+	width: 40%;
 	float: left;
 }
 
@@ -2545,6 +2549,7 @@ blockquote .author-name {
 	height: 435px;
 	float: left;
 	margin-top: -24px;
+	display: none;
 }
 
 .slideimage {

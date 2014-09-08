@@ -14,6 +14,7 @@ include "../core/connect.php";
 
 						$_SESSION["currentuser"] = $user['felhasznalo'];
 						$_SESSION["admin"] = $user['admin'];
+						$_SESSION["iskola"] = $user['iskola'];
 						$_SESSION['belepve'] = 1;
 						ob_end_clean();
 						header("Location: kezdolap");
