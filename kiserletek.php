@@ -1,5 +1,6 @@
 <?php
 	include 'kimeneti_fuggvenyek.php';
+	session_start();
 	fejlec_letrehozas("Kísérletek");
 ?>
 

@@ -137,12 +137,7 @@ function login_content() {
          </button>
       </div>
       <div class="forget-password">
-         <h4>Elfelejtette a jelszavát ?</h4>
-         <p>
-            kattintson <a href="javascript:;" id="forget-password">
-            ide </a>
-            új jelszó kéréséhez.
-         </p>
+         <h4></h4>
       </div>
    </form>
    <!-- END LOGIN FORM -->

@@ -1,7 +1,7 @@
 <?php
 include 'kimeneti_fuggvenyek.php';
 include 'core/connect.php';
-
+session_start();
 fejlec_letrehozas("Partner iskolák");
 ?>
 	<div class="static-container">

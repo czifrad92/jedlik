@@ -103,10 +103,6 @@ License: You must have a valid license purchased only from themeforest(the above
 							 </a>
 							 <ul class="dropdown-menu">
 									<li>
-										 <a href="extra_profile.html">
-										 <i class="icon-user"></i> Profil </a>
-									</li>
-									<li>
 										 <a href="kijelentkezes">
 										 <i class="icon-key"></i> Kijelentkezés </a>
 									</li>
@@ -171,7 +167,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						<li>
 							 <a href="felhasznalok">
 							 <i class="icon-user"></i>
-							 <span class="title" title="Felhasználó létrehozás">Iskola hozzáadása</span>
+							 <span class="title" title="Felhasználó létrehozás">Felhasználó hozzáadása</span>
 							 </a>
 						</li>
 						<li>
@@ -992,13 +988,14 @@ include '../core/connect.php';
 }
 function felhasznalok_megjelenites() {
 include '../core/connect.php';
+$res = mysqli_query($connect,"SELECT * FROM felhasznalok ORDER BY felhasznalo");
 ?>
 	 <div class="page-content-wrapper">
 			<div class="page-content">
-				 <h3 class="page-title">Iskola hozzáadása</h3>
+				 <h3 class="page-title">Felhasználó,iskola hozzáadása</h3>
 									 <div class="tab-content">
-										 <div class="tab-pane active" id="tab_0">
-																			<div class="portlet light bordered">
+								<div class="tab-pane active" id="tab_0">
+								<div class="portlet light bordered">
 									<div class="portlet-body form">
 										<!-- BEGIN FORM-->
 										<form action="" class="horizontal-form" method="post">
@@ -1058,8 +1055,34 @@ include '../core/connect.php';
 										<!-- END FORM-->
 									</div>
 								</div>
-										 </div>
-									</div>
+					<?php while($a = mysqli_fetch_assoc($res)) { ?>
+					<div class="row thumbnails">
+				
+						<div class="col-md-5">
+							<div class="meet-our-team">
+								<h3><?php echo $a["felhasznalo"]; ?></h3>
+								 <div class="actions">
+												<a href="felhasznalo-modositas?id=<?php echo $a['id']; ?>" class="btn btn-default btn-sm">
+												<i class="fa fa-pencil"></i> Szerkesztés </a>
+												<a onclick="if(confirm('Biztosan törli a felhasznalót?')) window.location.href='felhasznalo-torles?id=<?php echo $a['id']; ?>'" href="#" class="btn btn-default btn-sm">
+												<i class="fa fa-times"></i> Törlés </a>
+								</div>
+								<div class="team-info">
+									<p>
+										 Iskola: <?php echo $a["iskola"]; ?>
+									</p>
+									<p>
+										 Email: <?php echo $a["email"]; ?>
+									</p>
+								</div>
+							</div>
+						</div>
+					
+					</div>
+					<?php } ?>	
+
+			</div>
+		</div>
 				 <!-- END PAGE CONTENT-->
 			</div>
 	 </div>
@@ -1076,7 +1099,9 @@ include '../core/connect.php';
 
 				 $sql = "INSERT INTO  felhasznalok (id, felhasznalo, password, email, admin, iskola)
 						VALUES (NULL ,'$username', '$pass','$email','$jogosultsag', '$iskola')";
-				 mysqli_query($connect,$sql);
+				 if(mysqli_query($connect,$sql)) {
+				 	header("Location: felhasznalok");
+				 }
 			}
 	}
 }
@@ -1086,150 +1111,191 @@ include '../core/connect.php';
 $sqlbiosz =   mysqli_query($connect,"SELECT nev FROM kiserletek WHERE tantargy='Biológia' order by id ASC");
 $sqlfizika =  mysqli_query($connect,"SELECT nev FROM kiserletek WHERE tantargy='Fizika' order by id ASC");
 $sqlkemia =   mysqli_query($connect,"SELECT nev FROM kiserletek WHERE tantargy='Kémia' order by id ASC");
-$iskola = mysqli_query($connect,"SELECT iskolanev FROM iskolak ORDER BY iskolanev ASC");
+$iskola =     mysqli_query($connect,"SELECT iskola FROM felhasznalok ORDER BY iskola ASC");
+$res =		  mysqli_query($connect,"SELECT * FROM videok ORDER BY cim");
+$data_biosz = array();
+  while ($row = mysqli_fetch_assoc($sqlbiosz)) {
+    $data_biosz[] = $row["nev"];
+  }
+
+$data_fizika = array();
+  while ($row = mysqli_fetch_assoc($sqlfizika)) {
+    $data_fizika[] = $row["nev"];
+  }
+
+$data_kemia = array();
+  while ($row = mysqli_fetch_assoc($sqlkemia)) {
+    $data_kemia[] = $row["nev"];
+  }
+
 ?>
-	 <div class="page-content-wrapper">
-			<div class="page-content">
-				 <h3 class="page-title">
-				 Videó feltöltése
-				 </h3>
-				 <div class="tab-content">
-							<div class="tab-pane active" id="tab_0">
-							 <div class="portlet light bordered">
-									<div class="portlet-body form">
-										<!-- BEGIN FORM-->
-										<form action="" class="horizontal-form" method="post">
-											<div class="form-body">
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group">
-															<label class="control-label">Youtube link</label>
-															<input type="text" id="felasznalonev" name="felhasznalonev" class="form-control" required>
-														</div>
-													</div>
-													<!--/span-->
-													<div class="col-md-6">
-														<div class="form-group">
-															<label class="control-label">Cím</label>
-															<input type="text" id="password" name="cim" class="form-control" required>
-														</div>
-													</div>
-													<!--/span-->
-												</div>
-												<div class="row">
-													<!--/span-->
-													<div class="col-md-6">
-														<div class="form-group">
-															<label class="control-label">Címke</label>
-															<input type="text" id="password" name="cimke" class="form-control" placeholder="címke 1,címke 2, ..." required>
-														</div>
-													</div>
-												</div>
-												<div class="form-actions right"></div>
-												 <div class="row">
-													<div class="col-md-4">
-														<div class="form-group">
-															<label class="control-label">Kisérlet - Biológia</label>
-															 <select class="form-control" name="jogosultsag">    
-																 
-															</select>
-														</div>
-													</div>
-													<!--/span-->
-													<div class="col-md-4">
-														<div class="form-group">
-															<label class="control-label">Kisérlet - Fizika</label>
-															 <select class="form-control" name="jogosultsag">  
-																 
-															</select>
-														</div>
-													</div>
-													 <div class="col-md-4">
-														<div class="form-group">
-															<label class="control-label">Kisérlet - Kémia</label>
-															<select class="form-control" name="jogosultsag">
-															 
-															</select>
-														</div>
-													</div>
-													<!--/span-->
-												</div>
-												<div class="row">
-													<div class="col-md-4">
-														<div class="form-group">
-															<label class="control-label">Kisérlet - Biológia</label>
-															 <select class="form-control" name="jogosultsag">    
-																	
-															</select>
-														</div>
-													</div>
-													<!--/span-->
-													<div class="col-md-4">
-														<div class="form-group">
-															<label class="control-label">Kisérlet - Fizika</label>
-															 <select class="form-control" name="jogosultsag">  
-																
-															</select>
-														</div>
-													</div>
-													 <div class="col-md-4">
-														<div class="form-group">
-															<label class="control-label">Kisérlet - Kémia</label>
-															<select class="form-control" name="jogosultsag">
-															 
-															</select>
-														</div>
-													</div>
-													<!--/span-->
-												</div>
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group">
-															<label class="control-label">Iskola</label>
-															<select class="form-control" name="jogosultsag">
-															 <?php while($a = mysqli_fetch_assoc($iskola)) {  ?>
-																<option value="<?php echo $a["iskolanev"]; ?>"><?php echo $a["iskolanev"]; ?></option>
-																<?php } ?>
-															</select>
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group">
-															<label class="control-label">Terem</label>
-															<select class="form-control" name="terem">
-																<option value="Labor I.">Labor I.</option>
-																<option value="Labor II.">Labor II.</option>
-															</select>
-														</div>
-													</div>
-													<!--/span-->
-												</div>
-												<!--/row-->
-											</div>
-											<div class="form-actions right">
-												<button type="submit" name="regsubmit" class="btn blue"><i class="fa fa-check"></i> Felvitel</button>
-											</div>
-										</form>
-										<!-- END FORM-->
-									</div>
+   <div class="page-content-wrapper">
+      <div class="page-content">
+         <h3 class="page-title">
+         Videó feltöltése
+         </h3>
+         <div class="tab-content">
+              <div class="tab-pane active" id="tab_0">
+               <div class="portlet light bordered">
+                  <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form action="" class="horizontal-form" method="POST">
+                      <div class="form-body">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Youtube link</label>
+                              <input type="text" name="link" class="form-control" required>
+                            </div>
+                          </div>
+                          <!--/span-->
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Cím</label>
+                              <input type="text" name="cim" class="form-control" required>
+                            </div>
+                          </div>
+                          <!--/span-->
+                        </div>
+                        <div class="row">
+                          <!--/span-->
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Címke</label>
+                              <input type="text" name="cimke" class="form-control" placeholder="címke 1,címke 2, ..." required>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-actions right"></div>
+                        <?php for($i=1; $i<=10; $i++) { ?>
+	                         <div class="row">
+	                          <div class="col-md-4">
+	                            <div class="form-group">
+	                              <label class="control-label"><b>Kisérlet - Biológia</b></label>
+	                               <select class="form-control" name="kiserletek[]">
+	                                <option value="">Kérjük válasszon kísérletet</option>
+	                                <?php foreach($data_biosz as $row) {  ?>
+	                                  <option value="<?php echo $row;?>"><?php echo $row;?></option>
+	                                <?php } ?>
+	                              </select>
+	                            </div>
+	                          </div>
+	                          <!--/span-->
+	                          <div class="col-md-4">
+	                            <div class="form-group">
+	                              <label class="control-label"><b>Kisérlet - Fizika</b></label>
+	                               <select class="form-control" name="kiserletek[]">  
+	                                 <option value="">Kérjük válasszon kísérletet</option>
+	                                <?php foreach($data_fizika as $row) {  ?>
+	                                  <option value="<?php echo $row;?>"><?php echo $row;?></option>
+	                                <?php } ?>
+	                              </select>
+	                            </div>
+	                          </div>
+	                           <div class="col-md-4">
+	                            <div class="form-group">
+	                              <label class="control-label"><b>Kisérlet - Kémia</b></label>
+	                              <select class="form-control" name="kiserletek[]">
+	                               <option value="">Kérjük válasszon kísérletet</option>
+	                                <?php foreach($data_kemia as $row) {  ?>
+	                                  <option value="<?php echo $row;?>"><?php echo $row;?></option>
+	                                <?php } ?>
+	                              </select>
+	                            </div>
+	                          </div>
+	                          <!--/span-->
+	                        </div>
+	                    <?php } ?>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Iskola</label>
+                              <select class="form-control" name="iskola">
+                               <?php while($a = mysqli_fetch_assoc($iskola)) {  ?>
+                                <option value="<?php echo $a["iskola"]; ?>"><?php echo $a["iskola"]; ?></option>
+                                <?php } ?>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Terem</label>
+                              <select class="form-control" name="terem">
+                                <option value="Labor I.">Labor I.</option>
+                                <option value="Labor II.">Labor II.</option>
+                              </select>
+                            </div>
+                          </div>
+                          <!--/span-->
+                        </div>
+                      <div class="form-actions right">
+                        <button type="submit" name="videosubmit" class="btn blue"><i class="fa fa-check"></i> Felvitel</button>
+                      </div>
+                    </form>
+                    <!-- END FORM-->
+                  </div>
+                </div>
+                	<?php while($b = mysqli_fetch_assoc($res)) { ?>
+					<div class="row thumbnails">
+				
+						<div class="col-md-7">
+							<div class="meet-our-team">
+								<h3><?php echo $b["cim"]; ?></h3>
+								 <div class="actions">
+												<a href="video-modositas?id=<?php echo $b['id']; ?>" class="btn btn-default btn-sm">
+												<i class="fa fa-pencil"></i> Szerkesztés </a>
+												<a onclick="if(confirm('Biztosan törli a videót?')) window.location.href='video-torles?id=<?php echo $b['id']; ?>'" href="#" class="btn btn-default btn-sm">
+												<i class="fa fa-times"></i> Törlés </a>
 								</div>
-										 </div>
-									</div>
-				 <!-- END PAGE CONTENT-->
-			</div>
-	 </div>
+								<div class="team-info">
+									<p>
+										 Link: <a target="_blank" href="<?php echo $b['link']; ?>"><?php echo $b["link"]; ?></a>
+									</p>
+									<p>
+										 Címke: <?php echo $b["tag"]; ?>
+									</p>
+									<p>
+										 Kísérlet: <?php echo $b["kiserlet"]; ?>
+									</p>
+								</div>
+							</div>
+						</div>
+					
+					</div>
+					<?php } ?>	
+                     </div>
+                  </div>
+         <!-- END PAGE CONTENT-->
+      </div>
+   </div>
 <?php
+   if(isset($_POST["videosubmit"])) {
 
-	 if(isset($_POST["iskolasubmit"])) {
-			if(!empty($_POST["iskolanev"])) {
-				 $iskolanev = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["iskolanev"]));
+      if(!empty($_POST["link"]) && !empty($_POST["cim"]) && !empty($_POST["cimke"])) {
 
-				 $sql = "INSERT INTO  `iskolak` (`id` ,`iskolanev`)
-						VALUES (NULL ,'$iskolanev')";
-				 mysqli_query($connect,$sql);
-			}
-	}
+         $link = mysqli_real_escape_string($connect,$_POST["link"]);
+         $cim = mysqli_real_escape_string($connect,$_POST["cim"]);
+         $cimke = mysqli_real_escape_string($connect,$_POST["cimke"]);
+         $iskola = mysqli_real_escape_string($connect,$_POST["iskola"]);
+         $tanterem = mysqli_real_escape_string($connect,$_POST["terem"]);
 
+         $kiserlettomb = array();
+				$string = "";
+					foreach ($_POST['kiserletek'] as $kiserlet) {
+						if ($kiserlet){
+						$kiserlet = $kiserlet . ", ";
+						$string = $string . $kiserlet;
+					}
+				}
+		$string = rtrim($string, ', ');
+
+		$sql = "INSERT INTO  `videok` (`id` ,`link` ,`cim`,`tag`,`iskola`,`tanterem`,`kiserlet`)
+						VALUES (NULL ,'$link', '$cim','$cimke','$iskola','$tanterem','$string')";
+        mysqli_query($connect,$sql);
+        header("Location: video-feltoltes");
+      }
+  }
 }
 function hirek_szerkesztese($id) {
 include '../core/connect.php';
@@ -1465,6 +1531,173 @@ while ($a = mysqli_fetch_assoc($res)) {
 						WHERE id='$id'";
 				 mysqli_query($connect,$sql);
 				 header('location: rolunk-irtak');
+			}
+	}
+
+}
+function felhasznalo_szerkesztese($id) {
+include '../core/connect.php';
+$sql = "SELECT * FROM felhasznalok WHERE id='$id' limit 1";
+$res = mysqli_query($connect,$sql) or die();
+while ($a = mysqli_fetch_assoc($res)) {
+?>
+	<div class="page-content-wrapper">
+			<div class="page-content">
+				 <h3 class="page-title">Felhasználó,iskola módosítása</h3>
+									 <div class="tab-content">
+								<div class="tab-pane active" id="tab_0">
+								<div class="portlet light bordered">
+									<div class="portlet-body form">
+										<!-- BEGIN FORM-->
+										<form action="" class="horizontal-form" method="post">
+											<div class="form-body">
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label">Felhasználónév</label>
+															<input type="text" id="felasznalonev" value="<?php echo $a["felhasznalo"]; ?>" name="felhasznalonev" class="form-control" required>
+														</div>
+													</div>
+													<!--/span-->
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label">Új jelszó</label>
+															<input type="password" id="password" name="password" class="form-control">
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label">Iskola</label>
+															<input type="text" id="iskola" name="iskola" value="<?php echo $a["iskola"]; ?>" class="form-control" required>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label">Email cím</label>
+															<input type="email" name="email" value="<?php echo $a["email"]; ?>" class="form-control" required>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="form-actions right">
+												<div class="col-md-offset-3 col-md-9">
+													<button type="submit" name="felhasznaloszerkesztes" class="btn btn-circle blue">Módosítás</button>
+													<a href="felhasznalok"><button type="button" class="btn btn-circle default">Vissza</button></a>
+												</div>
+											</div>
+										</form>
+										<!-- END FORM-->
+									</div>
+								</div>
+				 </div>
+		        </div>
+				 <!-- END PAGE CONTENT-->
+			</div>
+	</div>
+<?php
+}
+	 if(isset($_POST["felhasznaloszerkesztes"])) {
+			if(!empty($_POST["felhasznalonev"]) && !empty($_POST["iskola"]) && !empty($_POST["email"])) {
+
+				 $felhasznalonev = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["felhasznalonev"]));
+				 $iskola = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["iskola"]));
+				 $email = mysqli_real_escape_string($connect,$_POST["email"]);
+
+				if(!empty($_POST["password"])) {
+					$password = mysqli_real_escape_string($connect,md5($_POST["password"]));
+
+					$sql = "UPDATE  `felhasznalok` SET `felhasznalo` = '$felhasznalonev',`password` = '$password',`iskola` = '$iskola',`email`='$email'
+							WHERE id='$id'";
+					mysqli_query($connect,$sql);
+					header('location: felhasznalok');
+				} else {
+					$sql = "UPDATE  `felhasznalok` SET `felhasznalo` = '$felhasznalonev',`iskola` = '$iskola',`email`='$email'
+							WHERE id='$id'";
+					mysqli_query($connect,$sql);
+					header('location: felhasznalok');
+				}
+				 
+			}
+	}
+
+}
+function video_szerkesztese($id) {
+include '../core/connect.php';
+$sql = "SELECT * FROM videok WHERE id='$id' limit 1";
+$res = mysqli_query($connect,$sql) or die();
+while ($a = mysqli_fetch_assoc($res)) {
+?>
+   <div class="page-content-wrapper">
+      <div class="page-content">
+         <h3 class="page-title">
+         Videó szerkesztése
+         </h3>
+         <div class="tab-content">
+              <div class="tab-pane active" id="tab_0">
+               <div class="portlet light bordered">
+                  <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form action="" class="horizontal-form" method="POST">
+                      <div class="form-body">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Youtube link</label>
+                              <input type="text" name="link" value="<?php echo $a['link']; ?>" class="form-control" required>
+                            </div>
+                          </div>
+                          <!--/span-->
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Cím</label>
+                              <input type="text" name="cim" value="<?php echo $a['cim']; ?>" class="form-control" required>
+                            </div>
+                          </div>
+                          <!--/span-->
+                        </div>
+                        <div class="row">
+                          <!--/span-->
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Címke</label>
+                              <input type="text" name="cimke" value="<?php echo $a['tag']; ?>" class="form-control" required>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-actions right"></div>
+                      </div>
+                      <div class="form-actions right">
+                        <div class="col-md-offset-3 col-md-9">
+								<button type="submit" name="videoszerkesztes" class="btn btn-circle blue">Módosítás</button>
+								<a href="video-feltoltes"><button type="button" class="btn btn-circle default">Vissza</button></a>
+						</div>
+                      </div>
+                    </form>
+                    <!-- END FORM-->
+                  </div>
+                </div>	
+                     </div>
+                  </div>
+         <!-- END PAGE CONTENT-->
+      </div>
+   </div>	
+<?php
+}
+	 if(isset($_POST["videoszerkesztes"])) {
+			if(!empty($_POST["link"]) && !empty($_POST["cim"]) && !empty($_POST["cimke"])) {
+
+				$link = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["link"]));
+				$cim = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["cim"]));
+				$cimke = mysqli_real_escape_string($connect,$_POST["cimke"]);
+
+				$sql = "UPDATE  `videok` SET `link` = '$link',`cim` = '$cim',`tag` = '$cimke'
+							WHERE id='$id'";
+				mysqli_query($connect,$sql);
+				header('location: video-feltoltes');
+
+				 
 			}
 	}
 

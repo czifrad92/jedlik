@@ -11,38 +11,59 @@ function fejlec_letrehozas($title) {
 	<meta charset="utf-8">
 	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 	<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
-	<title><?php if (!empty($title)) echo $title . ' - '; ?>Természettudományi Labor</title>    	
+	<title><?php if (!empty($title)) echo $title . ' - '; ?>Természettudományi Labor</title>        
 	<!-- Title and Meta Tags Ends -->
 	
-	<!-- Google Font Begins -->	
+	<!-- Google Font Begins --> 
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700italic,700,900,900italic' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Armata' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-	<!-- Google Font Ends -->		
+	<!-- Google Font Ends -->       
 	
-	<!-- CSS Begins-->	
+	<!-- CSS Begins-->  
 	<link href='http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'/>
 
 	<link href="css/flaticon.css" rel="stylesheet" type="text/css" />
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="css/portfolio.css" rel="stylesheet" type="text/css" />
 	<link href="css/animate.min.css" rel="stylesheet" type="text/css"/>
-    <link href="css/prettyPhoto.css" rel="stylesheet" type="text/css" />
+	<link href="css/prettyPhoto.css" rel="stylesheet" type="text/css" />
 	<link href="css/flexslider.css" rel="stylesheet" type="text/css" />
 	<link href="css/YTPlayer.css" rel="stylesheet" type="text/css" />
 	<link href="css/tweet-carousel.css" rel="stylesheet" type="text/css" />
 	<!-- Main Style -->
-	<link href="css/style.css" rel="stylesheet" type="text/css" />
-
-
-
-
 	<link href="css/responsive.css" rel="stylesheet" type="text/css" />
 	<!-- Color Panel -->
-    <link href="css/color_panel.css" rel="stylesheet" type="text/css" /> 
+	<link href="css/color_panel.css" rel="stylesheet" type="text/css" /> 
 	<!-- Skin Colors -->
-	<link href="css/color-schemes/blue.css" id="changeable-colors" rel="stylesheet" type="text/css" /> 	
+	<link href="css/color-schemes/blue.css" id="changeable-colors" rel="stylesheet" type="text/css" />  
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+	<?php
+		
+
+		if (!isset($_SESSION['akadaly'])){
+			$css = '<link href="css/style.css" rel="stylesheet" type="text/css" />';
+		}
+
+		elseif ($_SESSION['akadaly'] == 1){
+			$css = '<link href="css/akadalymentes.css" rel="stylesheet" type="text/css" />';
+		}
+
+		elseif ($_SESSION['akadaly'] == 0){
+			$css = '<link href="css/style.css" rel="stylesheet" type="text/css" />';
+		}
+
+
+			echo $css;
+	?>
+
+	
+
+
+
+
+	
 </head>
 <body>
 
@@ -63,11 +84,11 @@ function fejlec_letrehozas($title) {
 							<!-- Logo Begins -->
 							<a href="index" class="logolink">
 								<div id="logo" class="site-logo no-padding logo-main">
-									<img src="images/logo.png" class="logoimg"><a title="Logo" href="index">Természettudományi Labor</a>
+									<a title="Logo" href="index">Természettudományi Labor</a>
 								</div><!-- Logo Ends -->
 							</a>
 							<!-- Navigation Menu Begins -->
-							<div id="navigation" class="no-padding navbar top-navbar fomenuholder">								
+							<div id="navigation" class="no-padding navbar top-navbar fomenuholder">                             
 								<!-- Menu Begins -->
 								<nav id="topnav" role="navigation" class="collapse navbar-collapse bs-navbar-collapse no-padding fomenu">
 									<ul class="nav navbar-nav navbar-right uppercase">
@@ -101,12 +122,19 @@ function fejlec_letrehozas($title) {
 											</ul><!-- DropDown Menu Ends -->
 										</li>
 										<li><a href="/admin" title="Időpontfoglalás" class="scroll">Időpontfoglalás</a></li>
-										<li><a href="/gyengenlato" class="scroll" title="Akadálymentesített nézet"><img src="images/vakbarat.png"></a></li>
+										<li><a href="
+										<?php if (!isset($_SESSION['akadaly']) || $_SESSION['akadaly'] == 0 ){
+											echo "/akadalymentes";
+										} else {
+											echo "/akadalymentesoff";
+										}
+
+										?>" class="scroll" title="Akadálymentesített nézet"><img src="images/vakbarat.png"></a></li>
 									</ul>
-								</nav><!-- Menu Ends -->						
+								</nav><!-- Menu Ends -->                        
 							</div><!-- Navigation Menu Ends -->
 						</div>
-					</div>			
+					</div>          
 				</div>
 			</div><!-- Top Section Ends -->
 		</div><!-- Background Slider Ends -->
@@ -144,7 +172,7 @@ function lablec_letrehozas() {
 				<a href="http://csepel.hu/">Budapest XXI. kerület Csepel Önkormányzata</a><br>
 				<a href="http://palyazat.gov.hu/">Új Széchenyi Terv</a><br>
 				<a href="http://palyazat.gov.hu/">Európai Szociális Alap</a>
-				<img src="images/piarsoft-logo.png" style="width: 220px; margin: 77px 0px 0px 140px;">
+				<img src="images/piarsoft-logo.png" class="piarsoftlogo">
 			</div>
 		</div><!-- Footer Inner Ends -->
 
@@ -154,12 +182,12 @@ function lablec_letrehozas() {
 	
 		
 	<!-- Script Begins -->
-	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>	   	
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>	
+	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>      
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>  
 	<script type="text/javascript" src="js/bootstrap-hover-dropdown.min.js"></script>
-	<script type="text/javascript" src="js/bootstrapValidator.min.js"></script>	
-	<script type="text/javascript" src="js/jquery.sticky.js"></script>	
-	<!-- Slider and Features Canvas -->	
+	<script type="text/javascript" src="js/bootstrapValidator.min.js"></script> 
+	<script type="text/javascript" src="js/jquery.sticky.js"></script>  
+	<!-- Slider and Features Canvas --> 
 	<script type="text/javascript" src="js/jquery.superslides.js"></script>
 	<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
 	<script type="text/javascript" src="js/kinetic.js"></script>
@@ -172,9 +200,9 @@ function lablec_letrehozas() {
 	<script type="text/javascript" src="js/jquery.fitvids.js"></script>
 	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 	<!-- Video -->
-	<script type="text/javascript" src="js/jquery.mb.YTPlayer.js"></script>		
+	<script type="text/javascript" src="js/jquery.mb.YTPlayer.js"></script>     
 	<!-- Counting Section -->
-	<script type="text/javascript" src="js/jquery.appear.js"></script>	
+	<script type="text/javascript" src="js/jquery.appear.js"></script>  
 	<!-- Expertise Circular Progress Bar -->
 	<script type="text/javascript" src="js/jquery.easypiechart.min.js"></script>
 	<script type="text/javascript" src="js/effect.js"></script>
@@ -182,8 +210,8 @@ function lablec_letrehozas() {
 	<script type="text/javascript" src="js/tweet/carousel.js"></script>
 	<script type="text/javascript" src="js/tweet/scripts.js"></script>
 	<script type="text/javascript" src="js/tweet/tweetie.min.js"></script>
-	<!-- Custom -->	
-	<script type="text/javascript" src="js/custom.js"></script>	
+	<!-- Custom --> 
+	<script type="text/javascript" src="js/custom.js"></script> 
 	<!-- Color -->
 	<script type="text/javascript" src="js/color-panel.js"></script>
 	<!-- Script Ends -->
@@ -196,7 +224,7 @@ function lablec_letrehozas() {
 function menu_letrehozas() {
 	// menu létrehozás
 ?>
-<div class="header">			
+<div class="header">            
 				<div class="hleft">
 					<div class="menu">
 						<ul class="menu">
@@ -238,7 +266,7 @@ function login_letrehozas() {
 						else {
 									echo '<p class="loggedas">Üdv ' . $_SESSION["currentuser"] . '!</p>'; ?>
 										<a href="kijelentkezes">Kijelentkezés</a>
-						<?php }	?>
+						<?php } ?>
 				</div>
 <?php
 }

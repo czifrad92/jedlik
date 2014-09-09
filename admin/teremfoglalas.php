@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+//session_start();
 // munkamenet indítása
 include 'kimeneti_fuggvenyek.php';
 include '../core/connect.php';
@@ -28,14 +28,33 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 
 	####################################################################
 
+$sqlbiosz =   mysqli_query($connect,"SELECT nev FROM kiserletek WHERE tantargy='Biológia' order by id ASC");
+$sqlfizika =  mysqli_query($connect,"SELECT nev FROM kiserletek WHERE tantargy='Fizika' order by id ASC");
+$sqlkemia =   mysqli_query($connect,"SELECT nev FROM kiserletek WHERE tantargy='Kémia' order by id ASC");
+$iskola =     mysqli_query($connect,"SELECT iskola FROM felhasznalok ORDER BY iskola ASC");
+
+$data_biosz = array();
+  while ($row = mysqli_fetch_assoc($sqlbiosz)) {
+    $data_biosz[] = $row["nev"];
+  }
+
+$data_fizika = array();
+  while ($row = mysqli_fetch_assoc($sqlfizika)) {
+    $data_fizika[] = $row["nev"];
+  }
+
+$data_kemia = array();
+  while ($row = mysqli_fetch_assoc($sqlkemia)) {
+    $data_kemia[] = $row["nev"];
+  }
+
 ?>
 
 
-		
-				
+	
+<div class="foglalasform">
 		
 
-<div class="idopontfoglalas-container">
 	<form method="POST" action="">
 		<div class="idopontfoglalas-container-label">
 			<label for="tantargy">Tantárgy</label><br>
@@ -63,16 +82,45 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 				<option value="11-12">11-12</option>
 			</select><br>
 
-			<select name="kiserletek" class="idopontfoglalas-kiserletek" id="kiserletek">
-					<?php 
-					$lekerdezes2 = "SELECT * FROM kiserletek ORDER BY kiserletek.nev";
-					$res2 = mysqli_query($connect, $lekerdezes2);
-					while ($i = mysqli_fetch_assoc($res2)) { ?>
-						<option value="<?php echo $i["id"] ?>"><?php echo $i["nev"]; ?></option>
-					<?php } ?>
-
-
-			</select><br>
+									<?php for($i=1; $i<=10; $i++) { ?>
+							 <div class="row">
+							  <div class="col-md-4">
+								<div class="form-group">
+								  <label class="control-label"><b>Kisérlet - Biológia</b></label>
+								   <select class="form-control" name="kiserletek[]">
+									<option value="">Kérjük válasszon kísérletet</option>
+									<?php foreach($data_biosz as $row) {  ?>
+									  <option value="<?php echo $row;?>"><?php echo $row;?></option>
+									<?php } ?>
+									</select>
+								</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-4">
+								<div class="form-group">
+									<label class="control-label"><b>Kisérlet - Fizika</b></label>
+									<select class="form-control" name="kiserletek[]">  
+									 <option value="">Kérjük válasszon kísérletet</option>
+									<?php foreach($data_fizika as $row) {  ?>
+									  <option value="<?php echo $row;?>"><?php echo $row;?></option>
+									<?php } ?>
+								  </select>
+								</div>
+								</div>
+								<div class="col-md-4">
+								<div class="form-group">
+									<label class="control-label"><b>Kisérlet - Kémia</b></label>
+									<select class="form-control" name="kiserletek[]">
+									<option value="">Kérjük válasszon kísérletet</option>
+									<?php foreach($data_kemia as $row) {  ?>
+									  <option value="<?php echo $row;?>"><?php echo $row;?></option>
+									<?php } ?>
+								  </select>
+								</div>
+							  </div>
+							  <!--/span-->
+							</div>
+						<?php } ?>
 			<textarea name="eszkozok" class="idopontfoglalas-eszkozok" id="eszkozok"></textarea><br>
 
 			<select name="ev" id="ido">
@@ -151,7 +199,7 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 			</select>
 		</div>
 
-		<input type="submit" name="bekuld"><br><br>
+		<input type="submit" name="bekuld" class="foglalassubmit"><br><br>
 		<?php 
 			
 		#formból küldött változók elmentése
@@ -161,7 +209,7 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 				$iskola = $_SESSION["iskola"];
 				$tantargy = $_POST["tantargy"];
 				$evfolyam = $_POST["evfolyam"];
-				$kiserlet = $_POST["kiserletek"];
+				//$kiserlet = $_POST["kiserletek"];
 				$eszkozok = $_POST["eszkozok"];
 				$terem = $_POST["terem"];
 				$ev = $_POST["ev"];
@@ -169,6 +217,19 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 				$nap = $_POST["nap"];
 				$felhasznaloid = "0";
 				$elfogadva = "0";
+
+				# kisérletek listázása és vesszővel való elválasztása a végső lista $string-be mentve
+				$kiserlettomb = array();
+				$string = "";
+					foreach ($_POST['kiserletek'] as $kiserlet) {
+						if ($kiserlet){
+						$kiserlet = $kiserlet . ", ";
+						$string = $string . $kiserlet;
+					}
+				}
+
+				$string = rtrim($string, ', ');
+				//echo $string;
 
 
 
@@ -197,18 +258,18 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 				echo $i . "<br>";
 				echo $count;
 			}*/
-		}
+		
 
 
 
 			#legelső foglalás a rendszerben
 
 			if (($done == false) && ($count == 0)){
-					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletid, eszkozok, iskola, title, terem, tantargy, elfogadva)
-					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$kiserlet', '$eszkozok', '$iskola', 'title', '$terem', '$tantargy' , '0')";
+					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletek, eszkozok, iskola, title, terem, tantargy, elfogadva)
+					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$string', '$eszkozok', '$iskola', 'title', '$terem', '$tantargy' , '0')";
 					mysqli_query($connect,$sql);
 					$done = true;
-					//echo "done0";
+					echo "done0";
 			}
 
 
@@ -217,8 +278,8 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 			if ($done == false){
 				//echo "1. ciklus";
 				if ( (strtotime($meddig) < strtotime($foglalasok[0]['start_time'])) || (!$foglalasok[0]['start_time']) ) {
-					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletid, eszkozok, iskola, title, terem, tantargy, elfogadva)
-					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$kiserlet', '$eszkozok', '$iskola', 'title', '$terem', '$tantargy' , '0')";
+					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletek, eszkozok, iskola, title, terem, tantargy, elfogadva)
+					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$string', '$eszkozok', '$iskola', 'title', '$terem', '$tantargy' , '0')";
 					mysqli_query($connect,$sql);
 					$done = true;
 					echo "done1";
@@ -231,8 +292,8 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 				$foglalasok[$count]['start_time'] = "24:00:00";
 				for ($i = 0; $i <= $count; $i++){
 					if (($foglalasok[$i]['end_time'] < $mettol) && ($foglalasok[$i+1]['start_time'] > $meddig)){
-					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletid, eszkozok, iskola, title, terem, tantargy, elfogadva)
-					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$kiserlet', '$eszkozok', '$iskola', NULL, '$terem', '$tantargy' , '0')";
+					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletek, eszkozok, iskola, title, terem, tantargy, elfogadva)
+					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$string', '$eszkozok', '$iskola', NULL, '$terem', '$tantargy' , '0')";
 					mysqli_query($connect,$sql);
 						$done = true;
 						echo "done2";
@@ -240,11 +301,11 @@ fejlec_letrehozas("Időpontfoglalás küldése");
 					}
 				}
 			}
-
+		}
 
 
 				
-			} #gomblenyomás vége
+			 #gomblenyomás vége
 ?>
 
 	</form>

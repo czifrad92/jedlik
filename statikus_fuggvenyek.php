@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 function statikus_oldal_letrehozas($page, $title) {
 	include('core/connect.php');
 	$sql = "SELECT cim,tartalom FROM `static` WHERE url='$page'";

@@ -7,48 +7,30 @@ include 'core/connect.php';
 
 fejlec_letrehozas("");
 
+$sql = "SELECT * FROM videok";
+
+$res = mysqli_query($connect,$sql);
+			while ($a = mysqli_fetch_assoc($res)) {
+
+			$code = str_replace('watch?v=', 'embed/', $a['link']);
+			
 ?>
-<section id="blog-outer" class="blog-outer blog-single">
-	 	<div class="container">			
-			
-			<!-- Title & Desc Row Begins -->
-			<div class="row title-row">
-				<div class="col-md-12 header text-center">
-					<!-- Title --> 
-					<h2 class="title capitalize">Videók</h2>
-				</div>
-			</div><!-- Title & Desc Row Ends -->
-			
-			<div class="row">
-				<!-- Blog Left Part -->
 
 
-
-				<div class="hircontainer">
-					<div class="blog-inner animated" data-animation="fadeInUp" data-animation-delay="300">
-						<div class="container blog-status">
-							<!-- Blog Date and Title -->
-							<div class="row blog-date">
-								<div class="hirdatum text-center">
-									<span class="bold span-inner"><?php echo $a['date']; ?></span>
-								</div>
-								<div class="hirtitle blog-title">
-									<a href="?id=<?php echo $a['id']; ?>"><?php echo $a['cim']; ?> </a>					
-								</div>
-							</div>							
-							<!-- Blog Description -->
-							<p><?php echo $a['leiras']; ?> </p>					
-						</div>											
-					</div>												
-				</div><!-- Blog Left Part Ends -->
+<div class="videocontainer">
+	<div class="videoleft"><iframe width="520" height="315" src="<?php echo $code; ?>"></iframe></div>
+	<div class="videoright">
+		<?php echo $a['cim']; ?>
+		<?php echo $a['tag']; ?>
+		<?php echo $a['iskola']; ?>
+		<?php echo $a['kiserlet']; ?>
+	</div>
+</div>
 
 
-				
-				
-	   		</div><!-- Blog Row Ends -->
-		</div><!-- Blog Container Ends -->
-	 </section><!-- Blog Ends -->
 	
-<?php 
+<?php
+	}
+
 	lablec_letrehozas();
  ?>
