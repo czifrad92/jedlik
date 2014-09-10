@@ -199,7 +199,7 @@ $data_kemia = array();
 			</select>
 		</div>
 
-		<input type="submit" name="bekuld" class="foglalassubmit"><br><br>
+		<input type="submit" name="bekuld" class="blue btn foglalassubmit" value="OK"><br><br>
 		<?php 
 			
 		#formból küldött változók elmentése

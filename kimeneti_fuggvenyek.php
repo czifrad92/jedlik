@@ -130,6 +130,7 @@ function fejlec_letrehozas($title) {
 										}
 
 										?>" class="scroll" title="Akadálymentesített nézet"><img src="images/vakbarat.png"></a></li>
+										<li><a href="/about" class="nyelv">EN</a></li>
 									</ul>
 								</nav><!-- Menu Ends -->                        
 							</div><!-- Navigation Menu Ends -->

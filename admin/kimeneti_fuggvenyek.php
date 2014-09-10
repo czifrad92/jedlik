@@ -247,6 +247,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- The template to display files available for download -->
 <script id="template-download" type="text/x-tmpl">
 				{% for (var i=0, file; file=o.files[i]; i++) { %}
+
 						<tr class="template-download fade">
 								<td>
 										<span class="preview">
@@ -257,8 +258,9 @@ License: You must have a valid license purchased only from themeforest(the above
 								</td>
 								<td>
 										<p class="name">
+
 												{% if (file.url) { %}
-														<img src="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" style="width:70px; height:70px;">
+														{% console.log(file); %}<img src="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" style="width:70px; height:70px;">
 												{% } else { %}
 
 														<span>{%=file.name%}</span>
@@ -768,16 +770,64 @@ $res = mysqli_query($connect,$sql);
 <?php
 }
 function feltoltes_megjelenites() {
+include '../core/connect.php';
+		if(isset($_POST["albumsubmit"])) {
+			$_SESSION["album"] = $_POST["albumnev"];
+		}
+		if(isset($_POST["ujalbum"])) {
+			$albumname = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["albumname"]));
+   				mkdir('style/plugins/jquery-file-upload/server/php/files/'.$albumname, 0777, true);
+   			header("Location: galeria");
+		}
 ?>
 	 <div class="page-content-wrapper">
 			<div class="page-content">
 				 <h3 class="page-title">
 				 Galéria
 				 </h3>
+				 <div class="note note-success">
+						<div class="actions">
+							<form action="" method="post">
+								<div class="col-md-2">
+									<input type="text" class="form-control" style="height:30px;" name="albumname" placeholder="Album neve..." required>
+								</div>
+									<a href="#" class="btn btn-default btn-sm">
+									<i class="fa fa-plus"></i> <button type="submit" name="ujalbum" style="background:none; border:none;">Új album hozzáadása</button></a>
+							</form>
+						</div>
+				 </div>
 				 <!-- END PAGE HEADER-->
 				 <!-- BEGIN PAGE CONTENT-->
 				 <div class="row">
+				 	 <?php
+							$dir = "style/plugins/jquery-file-upload/server/php/files/";
+
+								if ($dh = opendir($dir)){
+									$blacklist = array('.', '..');
+									while (false !== ($file = readdir($dh))) { 
+										if (!in_array($file, $blacklist)) { ?>
+											<div class="portlet box blue-hoki">
+												<div class="portlet-title">
+													<div class="caption">
+													<form action="" method="post">
+														<input type="hidden" name="albumnev" value="<?php echo $file; ?>">
+														<i class="fa fa-folder" style="margin-right:7px;"></i><button type="submit" name="albumsubmit" style="border:none; background: none; height: 23px;"><?php echo $file; ?></button>
+													</form>
+												
+													</div>
+													<!--<div class="actions">
+														<a href="" class="btn btn-default btn-sm">
+														<i class="fa fa-pencil"></i> Szerkesztés </a>
+													</div> -->
+												</div>
+										 	</div>
+								<?php }
+									}
+									closedir($dh);
+							}
+					?>
 						<div class="col-md-12">
+							 <?php if(isset($_SESSION["album"])) echo "<h4 class='page-title' style='margin-top:20px;'>".$_SESSION['album']."</h4>"; ?>
 							 <form id="fileupload" action="style/plugins/jquery-file-upload/server/php/index.php" method="POST" enctype="multipart/form-data">
 									<!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
 									<div class="row fileupload-buttonbar">
@@ -802,6 +852,7 @@ function feltoltes_megjelenites() {
 												<span class="fileupload-process">
 												</span>
 										 </div>
+										 <div style="clear:both;"></div>
 										 <!-- The global progress information -->
 										 <div class="col-lg-5 fileupload-progress fade">
 												<!-- The global progress bar -->

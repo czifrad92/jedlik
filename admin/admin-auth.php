@@ -17,8 +17,15 @@ include "../core/connect.php";
 						$_SESSION["iskola"] = $user['iskola'];
 						$_SESSION['belepve'] = 1;
 						ob_end_clean();
-						header("Location: kezdolap");
-						die();
+						if ($user['admin'] == 1){
+							header("Location: teremfoglalas");
+							die();
+						}
+						else {
+							header("Location: kezdolap");
+							die();
+						}
+
 				}
 				else
 				{

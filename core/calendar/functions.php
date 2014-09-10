@@ -334,9 +334,12 @@ function getFirstDayOfMonthPosition($month, $year)
 		if ($weekpos < WEEK_START) {
 			$weekpos = $weekpos + 7 - WEEK_START;
 		} else {
-			$weekpos = $weekpos - WEEK_START;
+			$weekpos = $weekpos - WEEK_START - 2;
 		}
 	}
+	//echo $weekpos;
+	//echo $month;
+	//echo $year;
 	return $weekpos;
 }
 

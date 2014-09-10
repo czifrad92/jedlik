@@ -6,8 +6,8 @@
 
 	<div class="calendar-form-holder">
 		<form name="monthYear">
-			<?php monthPullDown($m, $lang['months']); yearPullDown($y); ?>
-			<input class="calendarbutton" type="button" value="Kiválasztás" onClick="submitMonthYear()">
+			<?php yearPullDown($y); monthPullDown($m, $lang['months']); ?>
+			<input class="blue btn timeselectfix" type="button" value="Kiválasztás" onClick="submitMonthYear()">
 		</form>
 	</div>
 

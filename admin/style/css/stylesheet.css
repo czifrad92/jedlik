@@ -479,20 +479,13 @@ label[for=kiserletek] {
 }
 
 .foglalassubmit {
-	font-family: 'Segoe UI', 'Open Sans', Arial, sans-serif;
-	text-decoration: none;
-	text-align: center;
-	text-transform: uppercase;
-	background: #1bbc9b;
-	color: #FFF;
-	border: 0px none;
-	outline: 0px none;
-	padding: 0px 14px;
-	font-size: 23px;
-	height: 40px;
 	margin-left: 150px;
 }
 
 .foglalassubmit:hover {
 	background: #74A599;
+}
+
+.timeselectfix {
+	margin-bottom: 12px !important;
 }
