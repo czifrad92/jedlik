@@ -15,7 +15,6 @@ fejlec_letrehozas("");
 			<div class="row">
 				<div class="slidecenter">
 					
-
 					<div class="slideimage">
 						<div class="szechenyilogo">
 							<img src="images/szechenyilogo.png">

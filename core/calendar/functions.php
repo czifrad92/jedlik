@@ -169,10 +169,16 @@ function writeCalendar($month, $year)
 		: false;
 
 	# get number of days in month
-	$days = date("t", time(0,0,0,$month,1,$year));
+	$days = cal_days_in_month(CAL_GREGORIAN,$month,$year);
+	//echo 'days of ' . $month . ' ' . $days;
 
 	# initialize day variable to zero, unless $weekpos is zero
-	if ($weekpos == 0) $day = 1; else $day = 0;
+	if ($weekpos == 0){
+		$day = 1;
+	} 
+	else {
+		$day = 0;
+	}
 	
 	# initialize today's date variables for color change
 	$timestamp = time() + CURR_TIME_OFFSET * 3600;
@@ -218,9 +224,9 @@ function writeCalendar($month, $year)
 					
 					// write title link if day's postings 
 					for($j=0;$j < $eventcount;$j++) {
-						$str .= "
-						<div class=\"calendar-event-title\">#"
-						. $eventdata[$day]["id"][$j] . " foglalás <br>" . $eventdata[$day]["terem"] . "</div>"
+						$str .= '
+						<div class="calendar-event-title" title="'. $eventdata[$day]["terem"] . '">#'
+						. $eventdata[$day]["id"][$j] . " " . $eventdata[$day]["terem"] . "</div>"
 						. $eventdata[$day]["timestr"][$j];
 					}
 				}
@@ -325,23 +331,19 @@ function getEventDataArray($month, $year)
 
 # ###################################################################
 
-function getFirstDayOfMonthPosition($month, $year)
-{
-	$weekpos = date("w", time(0,0,0,$month,1,$year));
+	function getFirstDayOfMonthPosition($month, $year)
+	{
+		//$month = "2";
+		//$year = "2016";
+		$dd = date("Y d M", mktime(0, 0, 0, $month, 1, $year));
+		$string = "first day of " . str_replace(" 01 ", " ", $dd);
 
-	// adjust position if weekstart not Sunday
-	if (WEEK_START != 0) {
-		if ($weekpos < WEEK_START) {
-			$weekpos = $weekpos + 7 - WEEK_START;
-		} else {
-			$weekpos = $weekpos - WEEK_START - 2;
-		}
+		//echo $string . "<br>";
+		
+		$weekpos = date(('N'), strtotime("$string")) - 1;
+
+		return $weekpos;
 	}
-	//echo $weekpos;
-	//echo $month;
-	//echo $year;
-	return $weekpos;
-}
 
 # ###################################################################
 

@@ -2703,3 +2703,20 @@ blockquote .author-name {
 	padding: 6px 0px 0px 8px !important;
 	height: 35px;
 }
+
+.gallerybox {
+	border: 1px solid #2c3e50;
+	margin: 20px 0px 0px 50px;
+	border-radius: 3px;
+}
+
+.gallerybox-container {
+	width: 900px;
+	margin: 0px auto;
+}
+
+.gallerybacklink {
+	width: 100%;
+	text-align: center;
+	margin: 0px 0px 20px 0px;
+}

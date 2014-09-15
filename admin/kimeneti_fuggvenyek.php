@@ -61,6 +61,29 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="style/css/custom.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="style/img/favicon.ico" type="image/vnd.microsoft.icon"/>
+<script src="tinymce/tinymce.min.js"></script>
+	<script>
+	        tinymce.init({
+	        	selector: "textarea#text-editor", 
+				width: 730, 
+				height: 300,
+				language: 'hu_HU',
+				entity_encoding : "raw",
+				forced_root_block: false,
+				subfolder:"",
+				menubar: false,
+				statusbar: false,
+				plugins: [ 
+				"fullpage advlist autolink link image lists charmap print preview hr anchor pagebreak", 
+				"searchreplace wordcount visualblocks visualchars code insertdatetime media nonbreaking", 
+				"table contextmenu directionality emoticons paste textcolor filemanager" 
+				], 
+				image_advtab: true,
+				fullpage_default_encoding: "UTF-8",
+				toolbar: "fontsizeselect | bold italic underline | alignleft aligncenter alignright alignjustify | sizeselect | bullist numlist | forecolor backcolor | link | image  | code"
+
+		        });
+</script>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -399,117 +422,58 @@ jQuery(document).ready(function() {
 <?php
 }
 function statikus_megjelenites() {
+include '../core/connect.php';
+ob_start();
+
+		if(isset($_POST["ujoldal"])) {
+			$cim = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["oldalname"]));
+
+			// URL FORMÁZÁSA
+
+			$CHARMAP = array('ö' => 'o', 'Ö' => 'O', 'ó' => 'o','Ó' => 'O','ő' => 'o','Ő' => 'O','ú' => 'u','Ú' => 'U','ű' => 'u','Ű' => 'U',  
+			'ü' => 'u','Ü' => 'U','á' => 'a','Á' => 'A','é' => 'e','É' => 'E','í' => 'i','Í' => 'I',);  
+			$string = strtr($cim, $CHARMAP);     
+			$string = preg_replace('/[^a-zA-Z0-9]/','-',$string); 
+			$string = strtolower($string);
+   			
+   			// STATIKUS FÁJL LÉTREHOZÁSA
+   			$file = fopen("../".$string.".php", "w");
+			$txt = "<?php
+			include 'kimeneti_fuggvenyek.php';
+			include 'statikus_fuggvenyek.php';
+			fejlec_letrehozas('".$cim."');
+			statikus_oldal_letrehozas('".$string."', '".$cim."');
+			lablec_letrehozas();
+			?>";
+			fwrite($file, $txt);
+			fclose($file);
+
+
+			$sql = "INSERT INTO  `static` (`id`,`url`,`cim`,`tartalom`)
+					VALUES (NULL,'$string','$cim',' ')";
+			mysqli_query($connect,$sql);
+
+			ob_end_clean();
+			header("Location: statikus-oldalak");
+   			
+		}
 ?>
 	 <div class="page-content-wrapper">
 			<div class="page-content">
-				 <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-				 <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							 <div class="modal-content">
-									<div class="modal-header">
-										 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-										 <h4 class="modal-title">Modal title</h4>
-									</div>
-									<div class="modal-body">
-											Widget settings form goes here
-									</div>
-									<div class="modal-footer">
-										 <button type="button" class="btn blue">Save changes</button>
-										 <button type="button" class="btn default" data-dismiss="modal">Close</button>
-									</div>
-							 </div>
-							 <!-- /.modal-content -->
-						</div>
-						<!-- /.modal-dialog -->
-				 </div>
-				 <!-- /.modal -->
-				 <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-				 <!-- BEGIN STYLE CUSTOMIZER -->
-				 <div class="theme-panel hidden-xs hidden-sm">
-						<div class="toggler-close">
-						</div>
-						<div class="theme-options">
-							 <div class="theme-option theme-colors clearfix">
-									<span>
-									THEME COLOR </span>
-									<ul>
-										 <li class="color-default current tooltips" data-style="default" data-container="body" data-original-title="Default">
-										 </li>
-										 <li class="color-darkblue tooltips" data-style="darkblue" data-container="body" data-original-title="Dark Blue">
-										 </li>
-										 <li class="color-blue tooltips" data-style="blue" data-container="body" data-original-title="Blue">
-										 </li>
-										 <li class="color-grey tooltips" data-style="grey" data-container="body" data-original-title="Grey">
-										 </li>
-										 <li class="color-light tooltips" data-style="light" data-container="body" data-original-title="Light">
-										 </li>
-										 <li class="color-light2 tooltips" data-style="light2" data-container="body" data-html="true" data-original-title="Light 2">
-										 </li>
-									</ul>
-							 </div>
-							 <div class="theme-option">
-									<span>
-									Layout </span>
-									<select class="layout-option form-control input-small">
-										 <option value="fluid" selected="selected">Fluid</option>
-										 <option value="boxed">Boxed</option>
-									</select>
-							 </div>
-							 <div class="theme-option">
-									<span>
-									Header </span>
-									<select class="page-header-option form-control input-small">
-										 <option value="fixed" selected="selected">Fixed</option>
-										 <option value="default">Default</option>
-									</select>
-							 </div>
-							 <div class="theme-option">
-									<span>
-									Sidebar Mode</span>
-									<select class="sidebar-option form-control input-small">
-										 <option value="fixed">Fixed</option>
-										 <option value="default" selected="selected">Default</option>
-									</select>
-							 </div>
-							 <div class="theme-option">
-									<span>
-									Sidebar Menu </span>
-									<select class="sidebar-menu-option form-control input-small">
-										 <option value="accordion" selected="selected">Accordion</option>
-										 <option value="hover">Hover</option>
-									</select>
-							 </div>
-							 <div class="theme-option">
-									<span>
-									Sidebar Style </span>
-									<select class="sidebar-style-option form-control input-small">
-										 <option value="default" selected="selected">Default</option>
-										 <option value="light">Light</option>
-									</select>
-							 </div>
-							 <div class="theme-option">
-									<span>
-									Sidebar Position </span>
-									<select class="sidebar-pos-option form-control input-small">
-										 <option value="left" selected="selected">Left</option>
-										 <option value="right">Right</option>
-									</select>
-							 </div>
-							 <div class="theme-option">
-									<span>
-									Footer </span>
-									<select class="page-footer-option form-control input-small">
-										 <option value="fixed">Fixed</option>
-										 <option value="default" selected="selected">Default</option>
-									</select>
-							 </div>
-						</div>
-				 </div>
-				 <!-- END STYLE CUSTOMIZER -->
-				 <!-- BEGIN PAGE HEADER-->
 				 <h3 class="page-title">
 				 Statikus oldalak
 				 </h3>
+				 <div class="note note-success">
+						<div class="actions">
+							<form action="" method="post">
+								<div class="col-md-3">
+									<input type="text" class="form-control" style="height:30px;" name="oldalname" placeholder="A menü neve..." required>
+								</div>
+									<a href="#" class="btn btn-default btn-sm">
+									<i class="fa fa-plus"></i> <button type="submit" name="ujoldal" style="background:none; border:none;">Új oldal hozzáadása</button></a>
+							</form>
+						</div>
+				 </div>
 				 <?php statikus_oldal_listazas(); ?>
 			</div>
 	 </div>
@@ -517,7 +481,7 @@ function statikus_megjelenites() {
 }
 function statikus_oldal_listazas() {
 include '../core/connect.php';
-$sql = "SELECT id,cim FROM static";
+$sql = "SELECT id,cim,url FROM static";
 $res = mysqli_query($connect,$sql);
 while ($a = mysqli_fetch_assoc($res)) {
 ?>
@@ -529,9 +493,16 @@ while ($a = mysqli_fetch_assoc($res)) {
 									<div class="portlet-title">
 										 <div class="caption">
 												<form action="" method="post">
-													 <input type="submit" style="background: transparent;border:none; height: 25px;" name="staticsubmit" value="<?php echo $a["cim"]; ?>">
+													 <input type="submit" style="background: transparent;border:none; height: auto;
+													 padding-bottom: 3px;" name="staticsubmit" value="<?php echo $a["cim"]; ?>">
 													 <input type="hidden" name="id" value="<?php echo $a["id"]; ?>">
 												</form>
+										 </div>
+										 <div class="actions">
+												<a href="statikus-modositas?id=<?php echo $a['id']; ?>" class="btn btn-default btn-sm">
+												<i class="fa fa-pencil"></i> Szerkesztés </a>
+												<a onclick="if(confirm('Biztosan törli az oldalt?')) window.location.href='statikus-torles?id=<?php echo $a['id']; ?>&url=<?php echo $a['url']; ?>'" href="#" class="btn btn-default btn-sm">
+												<i class="fa fa-times"></i> Törlés </a>
 										 </div>
 									</div>
 							 </div>
@@ -544,53 +515,9 @@ while ($a = mysqli_fetch_assoc($res)) {
 <?php if(isset(
 			$_POST["staticsubmit"])) { 
 ?>
-			<div id="wysihtml5-editor-toolbar">
-			<header>
-				<ul class="commands">
-					<li data-wysihtml5-command="bold" class="command"></li>
-					<li data-wysihtml5-command="italic"  class="command"></li>
-					<li data-wysihtml5-command="insertUnorderedList"  class="command"></li>
-					<li data-wysihtml5-command="insertOrderedList"  class="command"></li>
-					<li data-wysihtml5-command="createLink" class="command"></li>
-					<li data-wysihtml5-command="insertImage" class="command"></li>
-					<li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" class="command"></li>
-					<li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" class="command"></li>
-					<li data-wysihtml5-command-group="foreColor" class="fore-color" class="command">
-						<ul>
-							<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="silver"></li>
-							<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="gray"></li>
-							<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="maroon"></li>
-							<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="red"></li>
-							<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="purple"></li>
-							<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="green"></li>
-							<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="olive"></li>
-							<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="navy"></li>
-							<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="blue"></li>
-						</ul>
-					</li>
-					<li data-wysihtml5-command="insertSpeech" class="command"></li>
-					<li data-wysihtml5-action="change_view" class="action"></li>
-				</ul>
-			</header>
-			<div data-wysihtml5-dialog="createLink" style="display: none;">
-				<label>
-					Link:
-					<input data-wysihtml5-dialog-field="href" value="http://">
-				</label>
-				<a data-wysihtml5-dialog-action="save">Ok</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Vissza</a>
-			</div>
-
-			<div data-wysihtml5-dialog="insertImage" style="display: none;">
-				<label>
-					Kép:
-					<input data-wysihtml5-dialog-field="src" value="http://">
-				</label>
-				<a data-wysihtml5-dialog-action="save">Ok</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Vissza</a>
-			</div>
-		</div>
 		<section>
 			<form action="" method="post">
-			<textarea id="wysihtml5-editor" name="content" spellcheck="false" wrap="off">
+			<textarea id="text-editor" name="content" spellcheck="false" wrap="off">
 				 <?php 
 						$id = intval($_POST["id"]);
 						$res2 = mysqli_query($connect,"SELECT tartalom FROM static WHERE id='$id' limit 1");
@@ -641,53 +568,9 @@ include '../core/connect.php';
 																		<div class="form-group">
 																				<label class="col-md-3 control-label">Tartalom:</label>
 																			 <div class="col-md-8">
-																							 <div id="wysihtml5-editor-toolbar">
-																								<header>
-																									<ul class="commands">
-																										<li data-wysihtml5-command="bold" class="command"></li>
-																										<li data-wysihtml5-command="italic"  class="command"></li>
-																										<li data-wysihtml5-command="insertUnorderedList"  class="command"></li>
-																										<li data-wysihtml5-command="insertOrderedList"  class="command"></li>
-																										<li data-wysihtml5-command="createLink" class="command"></li>
-																										<li data-wysihtml5-command="insertImage" class="command"></li>
-																										<li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" class="command"></li>
-																										<li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" class="command"></li>
-																										<li data-wysihtml5-command-group="foreColor" class="fore-color" class="command">
-																											<ul>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="silver"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="gray"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="maroon"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="red"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="purple"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="green"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="olive"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="navy"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="blue"></li>
-																											</ul>
-																										</li>
-																										<li data-wysihtml5-command="insertSpeech" class="command"></li>
-																										<li data-wysihtml5-action="change_view" style="display: none;"></li>
-																									</ul>
-																								</header>
-																								<div data-wysihtml5-dialog="createLink" style="display: none;">
-																									<label>
-																										Link:
-																										<input data-wysihtml5-dialog-field="href" value="http://">
-																									</label>
-																									<a data-wysihtml5-dialog-action="save">Ok</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Vissza</a>
-																								</div>
-
-																								<div data-wysihtml5-dialog="insertImage" style="display: none;">
-																									<label>
-																										Kép:
-																										<input data-wysihtml5-dialog-field="src" value="http://">
-																									</label>
-																									<a data-wysihtml5-dialog-action="save">Ok</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Vissza</a>
-																								</div>
-																							</div>
-																							<section>
+																						 <section>
 																								<form action="" method="post">
-																								<textarea id="wysihtml5-editor" name="content" spellcheck="false" wrap="off">
+																								<textarea id="text-editor" name="content" spellcheck="false" wrap="off">
 																								</textarea>
 																						 </section>
 																			 </div>
@@ -811,9 +694,15 @@ include '../core/connect.php';
 													<div class="caption">
 													<form action="" method="post">
 														<input type="hidden" name="albumnev" value="<?php echo $file; ?>">
-														<i class="fa fa-folder" style="margin-right:7px;"></i><button type="submit" name="albumsubmit" style="border:none; background: none; height: 23px;"><?php echo $file; ?></button>
+														<i class="fa fa-folder" style="margin-right:7px;"></i><button type="submit" name="albumsubmit" style="border:none; background: none; height: auto; padding-bottom: 3px;"><?php echo $file; ?></button>
 													</form>
 												
+													</div>
+													<div class="actions">
+														<a href="album-szerkesztes?name=<?php echo $file; ?>" class="btn btn-default btn-sm">
+														<i class="fa fa-pencil"></i> Szerkesztés </a>
+														<a onclick="if(confirm('Biztosan törli az albumot?')) window.location.href='album-torles?name=<?php echo $file; ?>'" href="#" class="btn btn-default btn-sm">
+														<i class="fa fa-times"></i> Törlés </a>
 													</div>
 													<!--<div class="actions">
 														<a href="" class="btn btn-default btn-sm">
@@ -954,53 +843,9 @@ include '../core/connect.php';
 																		<div class="form-group">
 																				<label class="col-md-3 control-label">Tartalom:</label>
 																			 <div class="col-md-8">
-																							 <div id="wysihtml5-editor-toolbar">
-																								<header>
-																									<ul class="commands">
-																										<li data-wysihtml5-command="bold" class="command"></li>
-																										<li data-wysihtml5-command="italic"  class="command"></li>
-																										<li data-wysihtml5-command="insertUnorderedList"  class="command"></li>
-																										<li data-wysihtml5-command="insertOrderedList"  class="command"></li>
-																										<li data-wysihtml5-command="createLink" class="command"></li>
-																										<li data-wysihtml5-command="insertImage" class="command"></li>
-																										<li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" class="command"></li>
-																										<li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" class="command"></li>
-																										<li data-wysihtml5-command-group="foreColor" class="fore-color" class="command">
-																											<ul>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="silver"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="gray"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="maroon"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="red"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="purple"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="green"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="olive"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="navy"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="blue"></li>
-																											</ul>
-																										</li>
-																										<li data-wysihtml5-command="insertSpeech" class="command"></li>
-																										<li data-wysihtml5-action="change_view" style="display: none;"></li>
-																									</ul>
-																								</header>
-																								<div data-wysihtml5-dialog="createLink" style="display: none;">
-																									<label>
-																										Link:
-																										<input data-wysihtml5-dialog-field="href" value="http://">
-																									</label>
-																									<a data-wysihtml5-dialog-action="save">Ok</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Vissza</a>
-																								</div>
-
-																								<div data-wysihtml5-dialog="insertImage" style="display: none;">
-																									<label>
-																										Kép:
-																										<input data-wysihtml5-dialog-field="src" value="http://">
-																									</label>
-																									<a data-wysihtml5-dialog-action="save">Ok</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Vissza</a>
-																								</div>
-																							</div>
 																							<section>
 																								<form action="" method="post">
-																								<textarea id="wysihtml5-editor" name="content" spellcheck="false" wrap="off">
+																								<textarea id="text-editor" name="content" spellcheck="false" wrap="off">
 																								</textarea>
 																						 </section>
 																			 </div>
@@ -1159,11 +1004,22 @@ $res = mysqli_query($connect,"SELECT * FROM felhasznalok ORDER BY felhasznalo");
 
 function video_feltoltes_megjelenites() {
 include '../core/connect.php';
+
+	if(isset($_POST["ujvideoalbum"])) {
+
+		$cim = mysqli_real_escape_string($connect, $_POST["videoalbumname"]);
+		$sql = "INSERT INTO  `videok_album` (`id` ,`cim`)
+						VALUES (NULL ,'$cim')";
+		mysqli_query($connect,$sql);
+		header("Location: video-feltoltes");
+	}
+
 $sqlbiosz =   mysqli_query($connect,"SELECT nev FROM kiserletek WHERE tantargy='Biológia' order by id ASC");
 $sqlfizika =  mysqli_query($connect,"SELECT nev FROM kiserletek WHERE tantargy='Fizika' order by id ASC");
 $sqlkemia =   mysqli_query($connect,"SELECT nev FROM kiserletek WHERE tantargy='Kémia' order by id ASC");
 $iskola =     mysqli_query($connect,"SELECT iskola FROM felhasznalok ORDER BY iskola ASC");
 $res =		  mysqli_query($connect,"SELECT * FROM videok ORDER BY cim");
+$res2 =		  mysqli_query($connect,"SELECT * FROM videok_album ORDER BY cim");
 $data_biosz = array();
   while ($row = mysqli_fetch_assoc($sqlbiosz)) {
     $data_biosz[] = $row["nev"];
@@ -1185,6 +1041,17 @@ $data_kemia = array();
          <h3 class="page-title">
          Videó feltöltése
          </h3>
+         <div class="note note-success">
+						<div class="actions">
+							<form action="" method="post">
+								<div class="col-md-2">
+									<input type="text" class="form-control" style="height:30px;" name="videoalbumname" placeholder="Album neve..." required>
+								</div>
+									<a href="#" class="btn btn-default btn-sm">
+									<i class="fa fa-plus"></i> <button type="submit" name="ujvideoalbum" style="background:none; border:none;">Új videó album hozzáadása</button></a>
+							</form>
+						</div>
+		 </div>
          <div class="tab-content">
               <div class="tab-pane active" id="tab_0">
                <div class="portlet light bordered">
@@ -1214,6 +1081,16 @@ $data_kemia = array();
                             <div class="form-group">
                               <label class="control-label">Címke</label>
                               <input type="text" name="cimke" class="form-control" placeholder="címke 1,címke 2, ..." required>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label">Album</label>
+                               <select class="form-control" name="album">  
+	                                <?php while($c = mysqli_fetch_assoc($res2)) {  ?>
+	                                  <option value="<?php echo $c["id"];?>"><?php echo $c["cim"];?></option>
+	                                <?php } ?>
+	                           </select>
                             </div>
                           </div>
                         </div>
@@ -1278,6 +1155,13 @@ $data_kemia = array();
                               </select>
                             </div>
                           </div>
+                          <div class="col-md-8">
+                          	<div class="form-group">
+                          		<label class="control-label">Egyéb tartalom</label>
+                          		<textarea id="text-editor" name="content" spellcheck="false" wrap="off">
+                          		</textarea>
+                            </div>
+                          </div>
                           <!--/span-->
                         </div>
                       <div class="form-actions right">
@@ -1330,6 +1214,8 @@ $data_kemia = array();
          $cimke = mysqli_real_escape_string($connect,$_POST["cimke"]);
          $iskola = mysqli_real_escape_string($connect,$_POST["iskola"]);
          $tanterem = mysqli_real_escape_string($connect,$_POST["terem"]);
+         $album = mysqli_real_escape_string($connect,$_POST["album"]);
+         $content = mysqli_real_escape_string($connect,$_POST["content"]);
 
          $kiserlettomb = array();
 				$string = "";
@@ -1341,8 +1227,8 @@ $data_kemia = array();
 				}
 		$string = rtrim($string, ', ');
 
-		$sql = "INSERT INTO  `videok` (`id` ,`link` ,`cim`,`tag`,`iskola`,`tanterem`,`kiserlet`)
-						VALUES (NULL ,'$link', '$cim','$cimke','$iskola','$tanterem','$string')";
+		$sql = "INSERT INTO  `videok` (`id`,`album_id`,`link` ,`cim`,`tag`,`iskola`,`tanterem`,`kiserlet`,`egyeb`)
+						VALUES (NULL,'$album','$link', '$cim','$cimke','$iskola','$tanterem','$string','$content')";
         mysqli_query($connect,$sql);
         header("Location: video-feltoltes");
       }
@@ -1395,53 +1281,10 @@ while($a = mysqli_fetch_assoc($res)) {
 																		<div class="form-group">
 																				<label class="col-md-3 control-label">Tartalom:</label>
 																			 <div class="col-md-8">
-																							 <div id="wysihtml5-editor-toolbar">
-																								<header>
-																									<ul class="commands">
-																										<li data-wysihtml5-command="bold" class="command"></li>
-																										<li data-wysihtml5-command="italic"  class="command"></li>
-																										<li data-wysihtml5-command="insertUnorderedList"  class="command"></li>
-																										<li data-wysihtml5-command="insertOrderedList"  class="command"></li>
-																										<li data-wysihtml5-command="createLink" class="command"></li>
-																										<li data-wysihtml5-command="insertImage" class="command"></li>
-																										<li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" class="command"></li>
-																										<li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" class="command"></li>
-																										<li data-wysihtml5-command-group="foreColor" class="fore-color" class="command">
-																											<ul>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="silver"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="gray"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="maroon"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="red"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="purple"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="green"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="olive"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="navy"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="blue"></li>
-																											</ul>
-																										</li>
-																										<li data-wysihtml5-command="insertSpeech" class="command"></li>
-																										<li data-wysihtml5-action="change_view" style="display: none;"></li>
-																									</ul>
-																								</header>
-																								<div data-wysihtml5-dialog="createLink" style="display: none;">
-																									<label>
-																										Link:
-																										<input data-wysihtml5-dialog-field="href" value="http://">
-																									</label>
-																									<a data-wysihtml5-dialog-action="save">Ok</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Vissza</a>
-																								</div>
-
-																								<div data-wysihtml5-dialog="insertImage" style="display: none;">
-																									<label>
-																										Kép:
-																										<input data-wysihtml5-dialog-field="src" value="http://">
-																									</label>
-																									<a data-wysihtml5-dialog-action="save">Ok</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Vissza</a>
-																								</div>
-																							</div>
+																							 
 																							<section>
 																								<form action="" method="post">
-																								<textarea id="wysihtml5-editor" name="content" spellcheck="false" wrap="off">
+																								<textarea id="text-editor" name="content" spellcheck="false" wrap="off">
 																								<?php echo $a['tartalom']; ?>
 																								</textarea>
 																						 </section>
@@ -1501,53 +1344,9 @@ while ($a = mysqli_fetch_assoc($res)) {
 																		<div class="form-group">
 																				<label class="col-md-3 control-label">Tartalom:</label>
 																			 <div class="col-md-8">
-																							 <div id="wysihtml5-editor-toolbar">
-																								<header>
-																									<ul class="commands">
-																										<li data-wysihtml5-command="bold" class="command"></li>
-																										<li data-wysihtml5-command="italic"  class="command"></li>
-																										<li data-wysihtml5-command="insertUnorderedList"  class="command"></li>
-																										<li data-wysihtml5-command="insertOrderedList"  class="command"></li>
-																										<li data-wysihtml5-command="createLink" class="command"></li>
-																										<li data-wysihtml5-command="insertImage" class="command"></li>
-																										<li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" class="command"></li>
-																										<li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" class="command"></li>
-																										<li data-wysihtml5-command-group="foreColor" class="fore-color" class="command">
-																											<ul>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="silver"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="gray"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="maroon"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="red"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="purple"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="green"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="olive"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="navy"></li>
-																												<li data-wysihtml5-command="foreColor" data-wysihtml5-command-value="blue"></li>
-																											</ul>
-																										</li>
-																										<li data-wysihtml5-command="insertSpeech" class="command"></li>
-																										<li data-wysihtml5-action="change_view" style="display: none;"></li>
-																									</ul>
-																								</header>
-																								<div data-wysihtml5-dialog="createLink" style="display: none;">
-																									<label>
-																										Link:
-																										<input data-wysihtml5-dialog-field="href" value="http://">
-																									</label>
-																									<a data-wysihtml5-dialog-action="save">Ok</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Vissza</a>
-																								</div>
-
-																								<div data-wysihtml5-dialog="insertImage" style="display: none;">
-																									<label>
-																										Kép:
-																										<input data-wysihtml5-dialog-field="src" value="http://">
-																									</label>
-																									<a data-wysihtml5-dialog-action="save">Ok</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Vissza</a>
-																								</div>
-																							</div>
 																							<section>
 																								<form action="" method="post">
-																								<textarea id="wysihtml5-editor" name="content" spellcheck="false" wrap="off">
+																								<textarea id="text-editor" name="content" spellcheck="false" wrap="off">
 																									<?php echo $a['tartalom']; ?>
 																								</textarea>
 																						 </section>
@@ -1752,5 +1551,138 @@ while ($a = mysqli_fetch_assoc($res)) {
 			}
 	}
 
+}
+
+function statikus_szerkesztese($id) {
+include '../core/connect.php';
+$sql = "SELECT * FROM static WHERE id='$id' limit 1";
+$res = mysqli_query($connect,$sql) or die();
+while ($a = mysqli_fetch_assoc($res)) {
+?>
+	<div class="page-content-wrapper">
+			<div class="page-content">
+				 <h3 class="page-title">Statikus oldal módosítása</h3>
+									 <div class="tab-content">
+								<div class="tab-pane active" id="tab_0">
+								<div class="portlet light bordered">
+									<div class="portlet-body form">
+										<!-- BEGIN FORM-->
+										<form action="" class="horizontal-form" method="post">
+											<div class="form-body">
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label">Az oldal neve:</label>
+															<input type="hidden" name="url" value="<?php echo $a["url"]; ?>">
+															<input type="text" id="cim" value="<?php echo $a["cim"]; ?>" name="cim" class="form-control" required>
+														</div>
+													</div>
+													<!--/span-->
+													
+												</div>
+											</div>
+											<div class="form-actions right">
+												<div class="col-md-offset-3 col-md-9">
+													<button type="submit" name="statikusszerkesztes" class="btn btn-circle blue">Módosítás</button>
+													<a href="statikus-oldalak"><button type="button" class="btn btn-circle default">Vissza</button></a>
+												</div>
+											</div>
+										</form>
+										<!-- END FORM-->
+									</div>
+								</div>
+				 </div>
+		        </div>
+				 <!-- END PAGE CONTENT-->
+			</div>
+	</div>
+<?php
+}
+	 if(isset($_POST["statikusszerkesztes"])) {
+			if(!empty($_POST["cim"])) {
+
+				$cim = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["cim"]));
+				$url = htmlspecialchars(mysqli_real_escape_string($connect,$_POST["url"]));
+
+				$CHARMAP = array('ö' => 'o', 'Ö' => 'O', 'ó' => 'o','Ó' => 'O','ő' => 'o','Ő' => 'O','ú' => 'u','Ú' => 'U','ű' => 'u','Ű' => 'U',  
+				'ü' => 'u','Ü' => 'U','á' => 'a','Á' => 'A','é' => 'e','É' => 'E','í' => 'i','Í' => 'I',);  
+				$string = strtr($cim, $CHARMAP);     
+				$string = preg_replace('/[^a-zA-Z0-9]/','-',$string); 
+				$string = strtolower($string);
+
+				rename('../'.$url.'.php' , '../'.$string.'.php');
+
+				$file = fopen("../".$string.".php", "w");
+				$txt = "<?php
+				include 'kimeneti_fuggvenyek.php';
+				include 'statikus_fuggvenyek.php';
+				fejlec_letrehozas('".$cim."');
+				statikus_oldal_letrehozas('".$string."', '".$cim."');
+				lablec_letrehozas();
+				?>";
+				fwrite($file, $txt);
+				fclose($file);
+			
+				$sql = "UPDATE  `static` SET `url` = '$string',`cim` = '$cim'
+						WHERE id='$id'";
+				mysqli_query($connect,$sql);
+				header('location: statikus-oldalak');	
+			}
+
+	}
+}
+function album_szerkesztese($nev) {
+?>
+	<div class="page-content-wrapper">
+			<div class="page-content">
+				 <h3 class="page-title">Galéria album szerkesztés</h3>
+									 <div class="tab-content">
+								<div class="tab-pane active" id="tab_0">
+								<div class="portlet light bordered">
+									<div class="portlet-body form">
+										<!-- BEGIN FORM-->
+										<form action="" class="horizontal-form" method="post">
+											<div class="form-body">
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label">Az album neve:</label>
+															<input type="hidden" name="oldaalbumnev" value="<?php echo $nev; ?>">
+															<input type="text" id="cim" value="<?php echo $nev; ?>" name="albumnev" class="form-control" required>
+														</div>
+													</div>
+													<!--/span-->
+													
+												</div>
+											</div>
+											<div class="form-actions right">
+												<div class="col-md-offset-3 col-md-9">
+													<button type="submit" name="galeriaszerkesztes" class="btn btn-circle blue">Módosítás</button>
+													<a href="galeria"><button type="button" class="btn btn-circle default">Vissza</button></a>
+												</div>
+											</div>
+										</form>
+										<!-- END FORM-->
+									</div>
+								</div>
+				 </div>
+		        </div>
+				 <!-- END PAGE CONTENT-->
+			</div>
+	</div>
+<?php
+
+	 if(isset($_POST["galeriaszerkesztes"])) {
+			if(!empty($_POST["albumnev"])) {
+
+				$albumnev = htmlspecialchars($_POST["albumnev"]);
+				$regialbum = htmlspecialchars($_POST["oldaalbumnev"]);
+				
+				rename('style/plugins/jquery-file-upload/server/php/files/'.$regialbum.'' , 'style/plugins/jquery-file-upload/server/php/files/'.$albumnev.'');
+
+				header('location: galeria');	
+			}
+
+	}
 }
 ?>

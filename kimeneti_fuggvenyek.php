@@ -11,7 +11,7 @@ function fejlec_letrehozas($title) {
 	<meta charset="utf-8">
 	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 	<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
-	<title><?php if (!empty($title)) echo $title . ' - '; ?>Természettudományi Labor</title>        
+	<title><?php if (!empty($title)) echo $title . ' - '; ?>Természettudományi Labor</title>
 	<!-- Title and Meta Tags Ends -->
 	
 	<!-- Google Font Begins --> 
@@ -22,7 +22,7 @@ function fejlec_letrehozas($title) {
 	
 	<!-- CSS Begins-->  
 	<link href='http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'/>
-
+	<link rel="alternate" href="/rss" title="Jedlik RSS" type="application/rss+xml" />
 	<link href="css/flaticon.css" rel="stylesheet" type="text/css" />
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="css/portfolio.css" rel="stylesheet" type="text/css" />

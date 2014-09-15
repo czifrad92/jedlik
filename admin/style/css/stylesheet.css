@@ -383,8 +383,8 @@ a.fork {
 .calendar-event-title {
 	text-align: center;
 	font-weight: bold;
-	height: 22px;
-	line-height: 13px;
+	height: 7px;
+	line-height: 7px;
 }
 
 .calendar-event-time {
