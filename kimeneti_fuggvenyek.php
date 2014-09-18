@@ -57,19 +57,16 @@ function fejlec_letrehozas($title) {
 
 			echo $css;
 	?>
-
-	
-
-
-
-
-	
 </head>
 <body>
 
 	<!-- Page Loader -->
 	<div id="pageloader">
-		<div class="loader-item fa fa-spin colored-border"></div>
+		<div class="pageloader-content">
+			<div class="loader-item fa fa-spin colored-border"></div>
+			<!-- <div class="loader-logo"></div> -->
+			<p>Természettudományi Labor</p>
+		</div>
 	</div>
 	
 	<!-- Header Begins -->
@@ -121,7 +118,7 @@ function fejlec_letrehozas($title) {
 												<li><a title="Galéria" href="galeria">Galéria</a></li>
 											</ul><!-- DropDown Menu Ends -->
 										</li>
-										<li><a href="/admin" title="Időpontfoglalás" class="scroll">Időpontfoglalás</a></li>
+										<li><a href="/admin" title="Időpontfoglalás" class="btn slide-btn-green">Időpontfoglalás</a></li>
 										<li><a href="
 										<?php if (!isset($_SESSION['akadaly']) || $_SESSION['akadaly'] == 0 ){
 											echo "/akadalymentes";

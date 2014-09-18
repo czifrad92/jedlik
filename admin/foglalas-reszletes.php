@@ -2,38 +2,31 @@
 	include 'kimeneti_fuggvenyek.php';
 	include '../core/connect.php';
 	fejlec_letrehozas();
+	$id = $_GET['foglalasid'];
 ?>
 
 <div class="page-content-wrapper">
 			<div class="page-content">
-				 <h3 class="page-title">
-				 Foglalások (részletes infoért kattintson a foglalás számára!)
-				 </h3>
 				 <div class="tab-content">
-				 	<table>
-				 		<thead>
-				 			<th style="width: 20px; text-align: center;">#</th>
-				 			<th style="width: 100px; text-align: center;">Foglalás napja</th>
-				 			<th style="width: 190px; text-align: center;">Foglalás időpontja</th>
-				 			<th style="width: 100px; text-align: center;">Terem</th>
-				 			<th style="width: 150px; text-align: center;">Elfogadás</th>
-				 		</thead>
+
 				 		<?php 
-				 			$sql = "SELECT * FROM jelentkezesek WHERE elfogadva = '0'";
+				 			$sql = "SELECT * FROM jelentkezesek WHERE elfogadva = '0' AND id = $id";
 				 			$res = mysqli_query($connect,$sql);
 				 			while ($a = mysqli_fetch_assoc($res)) {
 				 		?>
-				 			<tr>
-				 				<td style="text-align: center;"><?php echo $a['id']; ?></td>
-				 				<td style="text-align: center;"><?php echo $a['y'] . ". " . $a['m'] . ". " . $a['d'] . "."; ?></td>
-				 				<td style="text-align: center;"><?php echo $a['start_time'] . " - " . $a['end_time']; ?></td>
-				 				<td style="text-align: center;"><?php echo $a['terem'] ?></td>
-				 				<td style="text-align: center;"><a href="elfogadas.php?id=<?php echo $a['id']; ?>">Foglalás elfogadása!</a></td>
-				 			</tr>
+
+				 				<b>Foglalás napja:</b> <?php echo $a['y'] . ". " . $a['m'] . ". " . $a['d'] . "."; ?><br>
+				 				<b>Foglalás időpontja:</b> <?php echo $a['start_time'] . " - " . $a['end_time']; ?><br>
+				 				<b>Terem:</b> <?php echo $a['terem'] ?><br>
+				 				<b>Eszközök:</b> <?php echo $a['eszkozok'] ?><br>
+				 				<b>Kísérletek:</b> <?php echo $a['kiserletek'] ?><br>
+				 				<b>Megjegyzés:</b> <?php echo $a['megjegyzes'] ?><br>
+				 				<b>Elfogadás:</b> <a href="elfogadas.php?id=<?php echo $a['id']; ?>">Foglalás elfogadása</a>
+
 				 		<?php
 							}
 				 		?>
-				 	</table>
+
 				</div>
 			</div>
 				 <!-- END PAGE CONTENT-->

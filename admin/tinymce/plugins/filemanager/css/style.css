@@ -137,20 +137,7 @@ text-align: center;}
 }
 
 .grid figcaption {
-	text-align: center;
-	padding: 2px;
-	padding-top: 8px;
-	color: white;
-	height: 30px;
-	overflow: hidden;
-	width: 118px;
-	margin-left:2px;
-	margin-right: 2px;
-	position: absolute;
-	top: auto;
-	bottom: 0;
-	-webkit-box-shadow: inset 0px 0px 8px 0px rgba(41, 41, 41, 0.5);
-        box-shadow: inset 0px 0px 8px 0px rgba(41, 41, 41, 0.5);
+	display: none;
 }
 
 .grid figcaption a{

@@ -7,6 +7,9 @@ include 'core/connect.php';
 
 fejlec_letrehozas("");
 ?>
+
+<div class="parallax-theme"></div>
+
 	<!-- Features Section Begins -->
 	<section id="features" class="features-section">
 		<div class="container features-inner">
@@ -15,8 +18,15 @@ fejlec_letrehozas("");
 			<div class="row">
 				<div class="slidecenter">
 					
-					<div class="slideimage">
-						<div class="szechenyilogo">
+					<div class="slideimage" id="topDiv">
+
+						<div class="parallax-text">Jedlik Ányos Gimnázium <br>Természettudományi Labor</div>
+
+
+						<div style="position: absolute; width: 17%; top: 62%; margin-left: 44%; text-align: center; padding: 1em 0; background-color: #1bbc9b; border-radius: 4px; box-shadow: 3px 3px 4px rgba(64, 64, 64, 0.3);">
+								<a href="/admin" style="color: #FFFFFF; text-transform: uppercase">Időpontfoglalás</a>
+							</div>
+						<div class="szechenyilogo" >						
 							<img src="images/szechenyilogo.png">
 						</div>
 						
@@ -28,6 +38,17 @@ fejlec_letrehozas("");
 				</div>
 			</div><!-- Title & Desc Row Ends -->
 			
+<script>
+	var topDiv = document.getElementById("topDiv");
+	var speed = 2.5;
+
+	window.onscroll = function(){
+	var yOffset = window.pageYOffset;
+	topDiv.style.backgroundPosition = "0px "+ (yOffset / speed) + "px";
+	}
+</script>
+
+
 			<!-- First Row Begins -->
 			<div class="row">
 				<!-- Feature Box 1 Begins -->

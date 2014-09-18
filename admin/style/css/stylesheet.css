@@ -441,6 +441,11 @@ label[for=ig] {
 	margin-right: 15px;
 }
 
+label[for=megjegyzes] {
+	margin-top: 60px;
+}
+
+
 .static-container {
 	width: 95%;
 	margin: 0px auto;

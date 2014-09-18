@@ -24,7 +24,7 @@
 				 			while ($a = mysqli_fetch_assoc($res)) {
 				 		?>
 				 			<tr>
-				 				<td style="text-align: center;"><?php echo $a['id']; ?></td>
+				 				<td style="text-align: center;"><a href="/admin/foglalas-reszletes.php?foglalasid=<?php echo $a['id']; ?>"><?php echo $a['id']; ?></a></td>
 				 				<td style="text-align: center;"><?php echo $a['y'] . ". " . $a['m'] . ". " . $a['d'] . "."; ?></td>
 				 				<td style="text-align: center;"><?php echo $a['start_time'] . " - " . $a['end_time']; ?></td>
 				 				<td style="text-align: center;"><?php echo $a['terem'] ?></td>

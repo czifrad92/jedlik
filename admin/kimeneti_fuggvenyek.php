@@ -684,37 +684,44 @@ include '../core/connect.php';
 				 <div class="row">
 				 	 <?php
 							$dir = "style/plugins/jquery-file-upload/server/php/files/";
-
-								if ($dh = opendir($dir)){
+							$dirFiles = array();
+								if ($dh = opendir($dir))
+								{
 									$blacklist = array('.', '..');
-									while (false !== ($file = readdir($dh))) { 
-										if (!in_array($file, $blacklist)) { ?>
-											<div class="portlet box blue-hoki">
-												<div class="portlet-title">
-													<div class="caption">
-													<form action="" method="post">
-														<input type="hidden" name="albumnev" value="<?php echo $file; ?>">
-														<i class="fa fa-folder" style="margin-right:7px;"></i><button type="submit" name="albumsubmit" style="border:none; background: none; height: auto; padding-bottom: 3px;"><?php echo $file; ?></button>
-													</form>
-												
-													</div>
-													<div class="actions">
-														<a href="album-szerkesztes?name=<?php echo $file; ?>" class="btn btn-default btn-sm">
-														<i class="fa fa-pencil"></i> Szerkesztés </a>
-														<a onclick="if(confirm('Biztosan törli az albumot?')) window.location.href='album-torles?name=<?php echo $file; ?>'" href="#" class="btn btn-default btn-sm">
-														<i class="fa fa-times"></i> Törlés </a>
-													</div>
-													<!--<div class="actions">
-														<a href="" class="btn btn-default btn-sm">
-														<i class="fa fa-pencil"></i> Szerkesztés </a>
-													</div> -->
-												</div>
-										 	</div>
-								<?php }
+									while (false !== ($file = readdir($dh))) {
+										if (!in_array($file, $blacklist)) { 
+
+											$dirFiles[] = $file;
+										}
 									}
 									closedir($dh);
-							}
-					?>
+								}
+								natsort($dirFiles);
+
+								foreach($dirFiles as $file) 
+								{ ?>
+									<div class="portlet box blue-hoki">
+													<div class="portlet-title">
+														<div class="caption">
+														<form action="" method="post">
+															<input type="hidden" name="albumnev" value="<?php echo $file; ?>">
+															<i class="fa fa-folder" style="margin-right:7px;"></i><button type="submit" name="albumsubmit" style="border:none; background: none; height: auto; padding-bottom: 3px;"><?php echo $file; ?></button>
+														</form>
+													
+														</div>
+														<div class="actions">
+															<a href="album-szerkesztes?name=<?php echo $file; ?>" class="btn btn-default btn-sm">
+															<i class="fa fa-pencil"></i> Szerkesztés </a>
+															<a onclick="if(confirm('Biztosan törli az albumot?')) window.location.href='album-torles?name=<?php echo $file; ?>'" href="#" class="btn btn-default btn-sm">
+															<i class="fa fa-times"></i> Törlés </a>
+														</div>
+														<!--<div class="actions">
+															<a href="" class="btn btn-default btn-sm">
+															<i class="fa fa-pencil"></i> Szerkesztés </a>
+														</div> -->
+													</div>
+									</div>
+								<?php } ?>
 						<div class="col-md-12">
 							 <?php if(isset($_SESSION["album"])) echo "<h4 class='page-title' style='margin-top:20px;'>".$_SESSION['album']."</h4>"; ?>
 							 <form id="fileupload" action="style/plugins/jquery-file-upload/server/php/index.php" method="POST" enctype="multipart/form-data">
@@ -1680,7 +1687,8 @@ function album_szerkesztese($nev) {
 				
 				rename('style/plugins/jquery-file-upload/server/php/files/'.$regialbum.'' , 'style/plugins/jquery-file-upload/server/php/files/'.$albumnev.'');
 
-				header('location: galeria');	
+				header("Location: galeria");
+				
 			}
 
 	}

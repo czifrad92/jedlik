@@ -61,6 +61,7 @@ $data_kemia = array();
 			<label for="evfolyam">Évfolyam</label><br>
 			<label for="kiserletek">Kísérletek</label><br>
 			<label for="eszkozok">Eszközök</label><br>
+			<label for="megjegyzes">Megjegyzés</label><br>
 			<label for="ido">Előadás napja</label>
 			<label for="terem">Terem</label>
 		</div>
@@ -122,6 +123,7 @@ $data_kemia = array();
 							</div>
 						<?php } ?>
 			<textarea name="eszkozok" class="idopontfoglalas-eszkozok" id="eszkozok"></textarea><br>
+			<textarea name="megjegyzes" class="idopontfoglalas-eszkozok" id="megjegyzes"></textarea><br>
 
 			<select name="ev" id="ido">
 				<option value="<?php echo date("Y"); ?>"><?php echo date("Y"); ?></option>
@@ -211,6 +213,7 @@ $data_kemia = array();
 				$evfolyam = $_POST["evfolyam"];
 				//$kiserlet = $_POST["kiserletek"];
 				$eszkozok = $_POST["eszkozok"];
+				$megjegyzes = $_POST["megjegyzes"];
 				$terem = $_POST["terem"];
 				$ev = $_POST["ev"];
 				$honap = $_POST["honap"];
@@ -265,8 +268,8 @@ $data_kemia = array();
 			#legelső foglalás a rendszerben
 
 			if (($done == false) && ($count == 0)){
-					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletek, eszkozok, iskola, title, terem, tantargy, elfogadva)
-					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$string', '$eszkozok', '$iskola', 'title', '$terem', '$tantargy' , '0')";
+					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletek, eszkozok, iskola, title, terem, tantargy, elfogadva, megjegyzes)
+					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$string', '$eszkozok', '$iskola', 'title', '$terem', '$tantargy' , '0', '$megjegyzes')";
 					mysqli_query($connect,$sql);
 					$done = true;
 					echo "done0";
@@ -278,8 +281,8 @@ $data_kemia = array();
 			if ($done == false){
 				//echo "1. ciklus";
 				if ( (strtotime($meddig) < strtotime($foglalasok[0]['start_time'])) || (!$foglalasok[0]['start_time']) ) {
-					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletek, eszkozok, iskola, title, terem, tantargy, elfogadva)
-					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$string', '$eszkozok', '$iskola', 'title', '$terem', '$tantargy' , '0')";
+					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletek, eszkozok, iskola, title, terem, tantargy, elfogadva, megjegyzes)
+					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$string', '$eszkozok', '$iskola', 'title', '$terem', '$tantargy' , '0', '$megjegyzes')";
 					mysqli_query($connect,$sql);
 					$done = true;
 					echo "done1";
@@ -292,8 +295,8 @@ $data_kemia = array();
 				$foglalasok[$count]['start_time'] = "24:00:00";
 				for ($i = 0; $i <= $count; $i++){
 					if (($foglalasok[$i]['end_time'] < $mettol) && ($foglalasok[$i+1]['start_time'] > $meddig)){
-					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletek, eszkozok, iskola, title, terem, tantargy, elfogadva)
-					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$string', '$eszkozok', '$iskola', NULL, '$terem', '$tantargy' , '0')";
+					$sql = "INSERT INTO  jelentkezesek (id, m, d, y, start_time, end_time, felhasznaloid, kiserletek, eszkozok, iskola, title, terem, tantargy, elfogadva, megjegyzes)
+					VALUES (NULL ,'$honap', '$nap', '$ev', '$mettol', '$meddig', '$felhasznaloid', '$string', '$eszkozok', '$iskola', 'title', '$terem', '$tantargy' , '0', '$megjegyzes')";
 					mysqli_query($connect,$sql);
 						$done = true;
 						echo "done2";
